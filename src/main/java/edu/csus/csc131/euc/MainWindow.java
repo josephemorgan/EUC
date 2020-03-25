@@ -2,12 +2,13 @@ package edu.csus.csc131.euc;
 
 import javax.swing.*;
 
-public class MainWindow
+public class MainWindow extends JFrame
 {
-	public static void createWindow() {
-		JFrame f = new JFrame();
+	MainWindow() {
+		super("Electricity Usage Calculator");
+		this.setLayout(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		f.setLayout(null);
-		f.setVisible(true);
+		this.setVisible(true);
 	}
 }

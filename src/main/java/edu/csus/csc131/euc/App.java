@@ -5,6 +5,5 @@ public class App
     public static void main( String[] args )
     {
 		MainWindow testwindow = new MainWindow();
-		testwindow.createWindow();
     }
 }
