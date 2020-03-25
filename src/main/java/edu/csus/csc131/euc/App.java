@@ -11,8 +11,7 @@ public class App
 {
     public static void main( String[] args )
     {
-		MainWindow GUIWindow;
-		GUIWindow = new MainWindow();
+		MainWindow GUIWindow = new MainWindow();
 		GUIWindow.createWindow();
     }
 }
