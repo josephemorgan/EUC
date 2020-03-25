@@ -8,6 +8,7 @@
 package edu.csus.csc131.euc;
 
 import javax.swing.*;
+import java.awt.*;
 
 /* NEEDED:
  * Text Fields:
@@ -21,11 +22,12 @@ import javax.swing.*;
  */
 
 public class MainWindow {
-	public static void createWindow() {
-		//Create new object for Window Frame
-		JFrame f = new JFrame();
+	public static void createWindow() {  
 		
-		//Create new Text Field Object for electricty Usage
+		//Create new object for Window Frame
+		JFrame f = new JFrame("ELECTRICITY BOYS");
+		
+		//Create new Text Field Object for electricity Usage
 		JTextField electricityUsageTF;
 		electricityUsageTF = new JTextField("Enter Hours Here");
 		
@@ -64,6 +66,7 @@ public class MainWindow {
 		f.add(calculateDailyB);
 		f.add(calculateTotalB);
 		
+		//Set properties of the created window
 		f.setLayout(null);
 		f.setSize(700, 700);
 		f.setVisible(true);
