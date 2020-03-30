@@ -22,10 +22,10 @@ import java.awt.*;
  */
 
 public class MainWindow {
-	public static void createWindow() {  
+	public void createWindow() {  
 		
 		//Create new object for Window Frame
-		JFrame f = new JFrame("ELECTRICITY BOYS");
+		JFrame f = new JFrame("Electricity Project");
 		
 		//Create new Text Field Object for electricity Usage
 		JTextField electricityUsageTF;
