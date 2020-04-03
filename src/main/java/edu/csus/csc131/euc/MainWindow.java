@@ -8,7 +8,7 @@
 package edu.csus.csc131.euc;
 
 import javax.swing.*;
-import java.awt.*;
+import java.util.ArrayList;
 
 /* NEEDED:
  * Text Fields:
@@ -22,55 +22,45 @@ import java.awt.*;
  */
 
 public class MainWindow {
-	public void createWindow() {  
-		
+	private ArrayList<Day> listOfDays = new ArrayList<Day> ();
+
+    private JFrame mainFrame;
+
+	private JTextField electricityUsageTF, electricityRateTF, numOfDaysTF;
+
+	private JButton calculateDailyB, calculateTotalB;
+
+	public void createWindow() {
 		//Create new object for Window Frame
-		JFrame f = new JFrame("Electricity Project");
-
+		mainFrame = new JFrame ("Electricity Project");
 		//Create new Text Field Object for electricity Usage
-		JTextField electricityUsageTF;
-		electricityUsageTF = new JTextField("Enter Hours Here");
-		
+		electricityUsageTF = new JTextField ("Enter Hours Here");
 		//Create new Text Field Object for electricity rate
-		JTextField electricityRateTF;
-		electricityRateTF = new JTextField("Enter Rates Here");
-		
+		electricityRateTF = new JTextField ("Enter Rates Here");
 		//Create new Text Field Object for number of days
-		JTextField numOfDaysTF;
-		numOfDaysTF = new JTextField("Enter Days Here");
-
-		
-		
+		numOfDaysTF = new JTextField ("Enter Days Here");
 		//Create new Button Object for calculating daily rates and cost
-		JButton calculateDailyB;
-		calculateDailyB = new JButton("Calculate Daily");
-		
+		calculateDailyB = new JButton ("Calculate Daily");
 		//Create new Button Object for calculating total rates and cost
-		JButton calculateTotalB;
-		calculateTotalB = new JButton("Calculate Total");
-		
+		calculateTotalB = new JButton ("Calculate Total");
 		//Set bounds and location of text fields
-		electricityUsageTF.setBounds(0, 10, 100, 25);
-		electricityRateTF.setBounds(101, 10, 100, 25);
-		numOfDaysTF.setBounds(202, 10, 100, 25);
-		
+		electricityUsageTF.setBounds (0, 10, 100, 25);
+		electricityRateTF.setBounds (101, 10, 100, 25);
+		numOfDaysTF.setBounds (202, 10, 100, 25);
 		//Set bounds and location of buttons
-		calculateDailyB.setBounds(0, 45, 150, 25);
-		calculateTotalB.setBounds(151, 45, 150, 25);
-		
+		calculateDailyB.setBounds (0, 45, 150, 25);
+		calculateTotalB.setBounds (151, 45, 150, 25);
 		//Add Text Objects to Window UI
-		f.add(electricityUsageTF);
-		f.add(electricityRateTF);
-		f.add(numOfDaysTF);
-		
+		mainFrame.add (electricityUsageTF);
+		mainFrame.add (electricityRateTF);
+		mainFrame.add (numOfDaysTF);
 		//Add Button Objects to Window UI
-		f.add(calculateDailyB);
-		f.add(calculateTotalB);
-		
+		mainFrame.add (calculateDailyB);
+		mainFrame.add (calculateTotalB);
 		//Set properties of the created window
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setLayout(null);
-		f.setSize(700, 700);
-		f.setVisible(true);
+		mainFrame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+		mainFrame.setLayout (null);
+		mainFrame.setSize (700, 700);
+		mainFrame.setVisible (true);
 	}
 }
