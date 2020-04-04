@@ -65,10 +65,10 @@ public class MainWindow {
 		
 		
 		//Set bounds and location of text fields
-		dailyUsageText.setBounds(100, 230, 100, 25);
-		dailyRateText.setBounds(250, 230, 100, 25);
-		totalUsageText.setBounds(100, 260, 100, 25);
-		totalRateText.setBounds(250, 260, 100, 25);
+		dailyUsageText.setBounds(100, 260, 100, 25);
+		dailyRateText.setBounds(250, 260, 100, 25);
+		totalUsageText.setBounds(100, 290, 100, 25);
+		totalRateText.setBounds(250, 290, 100, 25);
 		
 		//Add Text Objects to Window UI
 		f.add(dailyUsageText);
@@ -95,10 +95,10 @@ public class MainWindow {
 		calculateB = new JButton ("Calculate");
 		
 		//Set bounds and location of buttons
-		enterHourlyRatesB.setBounds(35, 300, 300, 25);
-		enterHourlyUsageB.setBounds(35, 350, 300, 25);
-		readFromFileB.setBounds(35, 400, 300, 25);
-		calculateB.setBounds(35, 450, 300, 25);
+		enterHourlyRatesB.setBounds(35, 330, 300, 25);
+		enterHourlyUsageB.setBounds(35, 380, 300, 25);
+		readFromFileB.setBounds(35, 430, 300, 25);
+		calculateB.setBounds(35, 480, 300, 25);
 		
 		//Add Button Objects to Window UI
 		f.add(enterHourlyRatesB);
@@ -128,12 +128,12 @@ public class MainWindow {
 		JLabel dollarSign2;
 		dollarSign2 = new JLabel ("$");
 		
-		dailyUsage.setBounds(20, 230, 200, 25);
-		totalUsage.setBounds(20, 260, 200, 25);
-		kilowattLabel.setBounds(200, 230, 50, 25);
-		kilowattLabel2.setBounds(200, 260, 50, 25);
-		dollarSign1.setBounds(350, 230, 50, 25);
-		dollarSign2.setBounds(350, 260, 50, 25);
+		dailyUsage.setBounds(20, 260, 200, 25);
+		totalUsage.setBounds(20, 290, 200, 25);
+		kilowattLabel.setBounds(200, 260, 50, 25);
+		kilowattLabel2.setBounds(200, 290, 50, 25);
+		dollarSign1.setBounds(350, 260, 50, 25);
+		dollarSign2.setBounds(350, 290, 50, 25);
 		
 		f.add(dailyUsage);
 		f.add(totalUsage);
@@ -149,7 +149,7 @@ public class MainWindow {
 		//Set properties of the created window
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLayout(null);
-		f.setSize(700, 700);
+		f.setSize(400, 600);
 		f.setVisible(true);
 	}
 }
