@@ -9,6 +9,9 @@ package edu.csus.csc131.euc;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 /* NEEDED:
  * Text Fields:
@@ -48,20 +51,16 @@ public class MainWindow {
 		//#####################################################
 
 		//Create new Text Field Object for daily electricity Usage
-		JTextField dailyUsageText;
-		dailyUsageText = new JTextField("");
+		JTextField dailyUsageText = new JTextField("");
 		
 		//Create new Text Field Object for daily electricity rate
-		JTextField dailyRateText;
-		dailyRateText = new JTextField("");
+		JTextField dailyRateText = new JTextField("");
 		
 		//Create new Text Field Object for total electricity usage
-		JTextField totalUsageText;
-		totalUsageText = new JTextField("");
+		JTextField totalUsageText = new JTextField("");
 		
 		//Create new Text Field Object for total electricity rate
-		JTextField totalRateText;
-		totalRateText = new JTextField("");
+		JTextField totalRateText = new JTextField("");
 		
 		
 		//Set bounds and location of text fields
@@ -80,19 +79,13 @@ public class MainWindow {
 		//################### BUTTONS #########################
 		//#####################################################
 		
-		//Create new Button Object for calculating daily rates and cost
-		JButton enterHourlyRatesB;
-		enterHourlyRatesB = new JButton("Enter Hourly Rates");
+		JButton enterHourlyRatesB = new JButton("Enter Hourly Rates");
 		
-		//Create new Button Object for calculating total rates and cost
-		JButton enterHourlyUsageB;
-		enterHourlyUsageB = new JButton("Enter Hourly Usage");
+		JButton enterHourlyUsageB = new JButton("Enter Hourly Usage");
 		
-		JButton readFromFileB;
-		readFromFileB = new JButton("Read Usage from File");
+		JButton readFromFileB = new JButton("Read Usage from File");
 		
-		JButton calculateB;
-		calculateB = new JButton ("Calculate");
+		JButton calculateB = new JButton ("Calculate");
 		
 		//Set bounds and location of buttons
 		enterHourlyRatesB.setBounds(35, 330, 300, 25);
@@ -107,26 +100,58 @@ public class MainWindow {
 		f.add(calculateB);
 		
 		//#####################################################
-		//################### LABELS #########################
+		//################### Action Listeners ################
+		//#######################(Buttons)#####################
+		
+		enterHourlyRatesB.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent event) 
+			{
+				//What will occur when the button is clicked
+			}
+		});
+		
+		enterHourlyUsageB.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent event) 
+			{
+				//What will occur when the button is clicked
+			}
+		});
+		
+		readFromFileB.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent event) 
+			{
+				//What will occur when the button is clicked
+			}
+		});
+		
+		calculateB.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent event) 
+			{
+				//What will occur when the button is clicked
+			}
+		});
+		
+		
+		
+		//#####################################################
+		//################### LABELS ##########################
 		//#####################################################
 		
-		JLabel dailyUsage;
-		dailyUsage = new JLabel("Daily Usage:");
+		JLabel dailyUsage = new JLabel("Daily Usage:");
 		
-		JLabel totalUsage;
-		totalUsage = new JLabel("Total Usage:");
+		JLabel totalUsage = new JLabel("Total Usage:");
 		
-		JLabel kilowattLabel;
-		kilowattLabel = new JLabel("KW/h");
+		JLabel kilowattLabel = new JLabel("KW/h");
 		
-		JLabel kilowattLabel2;
-		kilowattLabel2 = new JLabel("KW/h");
+		JLabel kilowattLabel2 = new JLabel("KW/h");
 		
-		JLabel dollarSign1;
-		dollarSign1 = new JLabel ("$");
+		JLabel dollarSign1 = new JLabel ("$");
 		
-		JLabel dollarSign2;
-		dollarSign2 = new JLabel ("$");
+		JLabel dollarSign2 = new JLabel ("$");
 		
 		dailyUsage.setBounds(20, 260, 200, 25);
 		totalUsage.setBounds(20, 290, 200, 25);
