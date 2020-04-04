@@ -27,46 +27,127 @@ public class MainWindow {
 		//Create new object for Window Frame
 		JFrame f = new JFrame("Electricity Project");
 		
-		//Create new Text Field Object for electricity Usage
-		JTextField electricityUsageTF;
-		electricityUsageTF = new JTextField("Enter Hours Here");
 		
-		//Create new Text Field Object for electricity rate
-		JTextField electricityRateTF;
-		electricityRateTF = new JTextField("Enter Rates Here");
+		/*  Testing if Scroll Pane will work out
+		 *  I am still not so sure lol but we
+		 *  shall see
+		 */
+		JTextArea textArea = new JTextArea(20, 20);
+		JScrollPane scrollableTextArea = new JScrollPane(textArea);
 		
-		//Create new Text Field Object for number of days
-		JTextField numOfDaysTF;
-		numOfDaysTF = new JTextField("Enter Days Here");
+		scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);;
 		
+		scrollableTextArea.setBounds(20, 20, 330, 200);
 		
-		//Create new Button Object for calculating daily rates and cost
-		JButton calculateDailyB;
-		calculateDailyB = new JButton("Calculate Daily");
+		f.add(scrollableTextArea);
+
 		
-		//Create new Button Object for calculating total rates and cost
-		JButton calculateTotalB;
-		calculateTotalB = new JButton("Calculate Total");
+		//#####################################################
+		//################### Text Fields #####################
+		//#####################################################
+
+		//Create new Text Field Object for daily electricity Usage
+		JTextField dailyUsageText;
+		dailyUsageText = new JTextField("");
+		
+		//Create new Text Field Object for daily electricity rate
+		JTextField dailyRateText;
+		dailyRateText = new JTextField("");
+		
+		//Create new Text Field Object for total electricity usage
+		JTextField totalUsageText;
+		totalUsageText = new JTextField("");
+		
+		//Create new Text Field Object for total electricity rate
+		JTextField totalRateText;
+		totalRateText = new JTextField("");
+		
 		
 		//Set bounds and location of text fields
-		electricityUsageTF.setBounds(0, 10, 100, 25);
-		electricityRateTF.setBounds(101, 10, 100, 25);
-		numOfDaysTF.setBounds(202, 10, 100, 25);
-		
-		//Set bounds and location of buttons
-		calculateDailyB.setBounds(0, 45, 150, 25);
-		calculateTotalB.setBounds(151, 45, 150, 25);
+		dailyUsageText.setBounds(100, 230, 100, 25);
+		dailyRateText.setBounds(250, 230, 100, 25);
+		totalUsageText.setBounds(100, 260, 100, 25);
+		totalRateText.setBounds(250, 260, 100, 25);
 		
 		//Add Text Objects to Window UI
-		f.add(electricityUsageTF);
-		f.add(electricityRateTF);
-		f.add(numOfDaysTF);
+		f.add(dailyUsageText);
+		f.add(dailyRateText);
+		f.add(totalUsageText);
+		f.add(totalRateText);
+
+		//#####################################################
+		//################### BUTTONS #########################
+		//#####################################################
+		
+		//Create new Button Object for calculating daily rates and cost
+		JButton enterHourlyRatesB;
+		enterHourlyRatesB = new JButton("Enter Hourly Rates");
+		
+		//Create new Button Object for calculating total rates and cost
+		JButton enterHourlyUsageB;
+		enterHourlyUsageB = new JButton("Enter Hourly Usage");
+		
+		JButton readFromFileB;
+		readFromFileB = new JButton("Read Usage from File");
+		
+		JButton calculateB;
+		calculateB = new JButton ("Calculate");
+		
+		//Set bounds and location of buttons
+		enterHourlyRatesB.setBounds(35, 300, 300, 25);
+		enterHourlyUsageB.setBounds(35, 350, 300, 25);
+		readFromFileB.setBounds(35, 400, 300, 25);
+		calculateB.setBounds(35, 450, 300, 25);
 		
 		//Add Button Objects to Window UI
-		f.add(calculateDailyB);
-		f.add(calculateTotalB);
+		f.add(enterHourlyRatesB);
+		f.add(enterHourlyUsageB);
+		f.add(readFromFileB);
+		f.add(calculateB);
+		
+		//#####################################################
+		//################### LABELS #########################
+		//#####################################################
+		
+		JLabel dailyUsage;
+		dailyUsage = new JLabel("Daily Usage:");
+		
+		JLabel totalUsage;
+		totalUsage = new JLabel("Total Usage:");
+		
+		JLabel kilowattLabel;
+		kilowattLabel = new JLabel("KW/h");
+		
+		JLabel kilowattLabel2;
+		kilowattLabel2 = new JLabel("KW/h");
+		
+		JLabel dollarSign1;
+		dollarSign1 = new JLabel ("$");
+		
+		JLabel dollarSign2;
+		dollarSign2 = new JLabel ("$");
+		
+		dailyUsage.setBounds(20, 230, 200, 25);
+		totalUsage.setBounds(20, 260, 200, 25);
+		kilowattLabel.setBounds(200, 230, 50, 25);
+		kilowattLabel2.setBounds(200, 260, 50, 25);
+		dollarSign1.setBounds(350, 230, 50, 25);
+		dollarSign2.setBounds(350, 260, 50, 25);
+		
+		f.add(dailyUsage);
+		f.add(totalUsage);
+		f.add(kilowattLabel);
+		f.add(kilowattLabel2);
+		f.add(dollarSign1);
+		f.add(dollarSign2);
+		
+		//#####################################################
+		//################### Main Window #####################
+		//#####################################################
 		
 		//Set properties of the created window
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setLayout(null);
 		f.setSize(700, 700);
 		f.setVisible(true);
