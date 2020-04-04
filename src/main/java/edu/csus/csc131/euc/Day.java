@@ -6,11 +6,11 @@ import java.util.Arrays;
 public class Day {
 
     // Index represents hours with contents of array representing the kW/h usage and hourly usage rates respectively.
-    private final int hoursInDay = 24;
+    private static final int HOURS_IN_DAY = 24;
 
-    private float[] kWhUsed = new float[hoursInDay];
+    private double[] kWhUsed = new double[HOURS_IN_DAY];
 
-    private float[] hourlyRates = new float[hoursInDay];
+    private double[] hourlyRates = new double[HOURS_IN_DAY];
 
     private LocalDate date;
 
@@ -52,20 +52,20 @@ public class Day {
     }
 
     // Sets hourly usage in kWh.
-    public void setUsage(float kWh, int index) {
+    public void setUsage(double kWh, int index) {
         // TODO: EUC-8
         System.out.println("In setUsage(int index)");
     }
 
     // Calculates total usage for the day in kW/h.
-    public float calculateDailyUsage() {
+    public double calculateDailyUsage() {
         // TODO: EUC-12
         System.out.println("In calculateDailyUsage");
         return 0;
     }
 
     // Calculates total cost for the day in $ based on associated hourly usage and hourly rates.
-    public float calculateDailyCost() {
+    public double calculateDailyCost() {
         // TODO: EUC-13
         System.out.println("In calculateDailyCost");
         return 0;
@@ -74,7 +74,7 @@ public class Day {
     @Override
     public String toString() {
         return "Day{" +
-                "hoursInDay=" + hoursInDay +
+                "HOURS_IN_DAY=" + HOURS_IN_DAY +
                 ", kWhUsed=" + Arrays.toString(kWhUsed) +
                 ", hourlyRates=" + Arrays.toString(hourlyRates) +
                 ", date=" + date +
