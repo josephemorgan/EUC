@@ -22,45 +22,132 @@ import java.util.ArrayList;
  */
 
 public class MainWindow {
-	private ArrayList<Day> listOfDays = new ArrayList<Day> ();
-
-    private JFrame mainFrame;
-
-	private JTextField electricityUsageTF, electricityRateTF, numOfDaysTF;
-
-	private JButton calculateDailyB, calculateTotalB;
-
 	public void createWindow() {
-		//Create new object for Window Frame
-		mainFrame = new JFrame ("Electricity Project");
-		//Create new Text Field Object for electricity Usage
-		electricityUsageTF = new JTextField ("Enter Hours Here");
-		//Create new Text Field Object for electricity rate
-		electricityRateTF = new JTextField ("Enter Rates Here");
-		//Create new Text Field Object for number of days
-		numOfDaysTF = new JTextField ("Enter Days Here");
-		//Create new Button Object for calculating daily rates and cost
-		calculateDailyB = new JButton ("Calculate Daily");
-		//Create new Button Object for calculating total rates and cost
-		calculateTotalB = new JButton ("Calculate Total");
-		//Set bounds and location of text fields
-		electricityUsageTF.setBounds (0, 10, 100, 25);
-		electricityRateTF.setBounds (101, 10, 100, 25);
-		numOfDaysTF.setBounds (202, 10, 100, 25);
-		//Set bounds and location of buttons
-		calculateDailyB.setBounds (0, 45, 150, 25);
-		calculateTotalB.setBounds (151, 45, 150, 25);
-		//Add Text Objects to Window UI
-		mainFrame.add (electricityUsageTF);
-		mainFrame.add (electricityRateTF);
-		mainFrame.add (numOfDaysTF);
-		//Add Button Objects to Window UI
-		mainFrame.add (calculateDailyB);
-		mainFrame.add (calculateTotalB);
-		//Set properties of the created window
-		mainFrame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-		mainFrame.setLayout (null);
-		mainFrame.setSize (700, 700);
-		mainFrame.setVisible (true);
+		// Create new object for Window Frame
+
+		JFrame mainwindow = new JFrame("Electricity Project");
+
+		/*
+		 * Testing if Scroll Pane will work out I am still not so sure lol but we shall
+		 * see
+		 */
+		JTextArea textArea = new JTextArea(20, 20);
+		JScrollPane scrollableTextArea = new JScrollPane(textArea);
+
+		scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		;
+
+		scrollableTextArea.setBounds(20, 20, 330, 200);
+
+		mainwindow.add(scrollableTextArea);
+
+		// #####################################################
+		// ################### Text Fields #####################
+		// #####################################################
+
+		// Create new Text Field Object for daily electricity Usage
+		JTextField dailyUsageText;
+		dailyUsageText = new JTextField("");
+
+		// Create new Text Field Object for daily electricity rate
+		JTextField dailyRateText;
+		dailyRateText = new JTextField("");
+
+		// Create new Text Field Object for total electricity usage
+		JTextField totalUsageText;
+		totalUsageText = new JTextField("");
+
+		// Create new Text Field Object for total electricity rate
+		JTextField totalRateText;
+		totalRateText = new JTextField("");
+
+		// Set bounds and location of text fields
+		dailyUsageText.setBounds(100, 260, 100, 25);
+		dailyRateText.setBounds(250, 260, 100, 25);
+		totalUsageText.setBounds(100, 290, 100, 25);
+		totalRateText.setBounds(250, 290, 100, 25);
+
+		// Add Text Objects to Window UI
+		mainwindow.add(dailyUsageText);
+		mainwindow.add(dailyRateText);
+		mainwindow.add(totalUsageText);
+		mainwindow.add(totalRateText);
+
+		// #####################################################
+		// ################### BUTTONS #########################
+		// #####################################################
+
+		// Create new Button Object for calculating daily rates and cost
+		JButton enterHourlyRatesB;
+		enterHourlyRatesB = new JButton("Enter Hourly Rates");
+
+		// Create new Button Object for calculating total rates and cost
+		JButton enterHourlyUsageB;
+		enterHourlyUsageB = new JButton("Enter Hourly Usage");
+
+		JButton readFromFileB;
+		readFromFileB = new JButton("Read Usage from File");
+
+		JButton calculateB;
+		calculateB = new JButton("Calculate");
+
+		// Set bounds and location of buttons
+		enterHourlyRatesB.setBounds(35, 330, 300, 25);
+		enterHourlyUsageB.setBounds(35, 380, 300, 25);
+		readFromFileB.setBounds(35, 430, 300, 25);
+		calculateB.setBounds(35, 480, 300, 25);
+
+		// Add Button Objects to Window UI
+		mainwindow.add(enterHourlyRatesB);
+		mainwindow.add(enterHourlyUsageB);
+		mainwindow.add(readFromFileB);
+		mainwindow.add(calculateB);
+
+		// #####################################################
+		// ################### LABELS #########################
+		// #####################################################
+
+		JLabel dailyUsage;
+		dailyUsage = new JLabel("Daily Usage:");
+
+		JLabel totalUsage;
+		totalUsage = new JLabel("Total Usage:");
+
+		JLabel kilowattLabel;
+		kilowattLabel = new JLabel("KW/h");
+
+		JLabel kilowattLabel2;
+		kilowattLabel2 = new JLabel("KW/h");
+
+		JLabel dollarSign1;
+		dollarSign1 = new JLabel("$");
+
+		JLabel dollarSign2;
+		dollarSign2 = new JLabel("$");
+
+		dailyUsage.setBounds(20, 260, 200, 25);
+		totalUsage.setBounds(20, 290, 200, 25);
+		kilowattLabel.setBounds(200, 260, 50, 25);
+		kilowattLabel2.setBounds(200, 290, 50, 25);
+		dollarSign1.setBounds(350, 260, 50, 25);
+		dollarSign2.setBounds(350, 290, 50, 25);
+
+		mainwindow.add(dailyUsage);
+		mainwindow.add(totalUsage);
+		mainwindow.add(kilowattLabel);
+		mainwindow.add(kilowattLabel2);
+		mainwindow.add(dollarSign1);
+		mainwindow.add(dollarSign2);
+
+		// #####################################################
+		// ################### Main Window #####################
+		// #####################################################
+
+		// Set properties of the created window
+		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainwindow.setLayout(null);
+		mainwindow.setSize(400, 600);
+		mainwindow.setVisible(true);
 	}
 }
