@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 
 /* NEEDED:
@@ -28,7 +29,7 @@ public class MainWindow {
 	public void createWindow() {  
 		
 		//Create new object for Window Frame
-		JFrame f = new JFrame("Electricity Project");
+		JFrame mainwindow = new JFrame("Electricity Project");
 		
 		
 		/*  Testing if Scroll Pane will work out
@@ -43,7 +44,7 @@ public class MainWindow {
 		
 		scrollableTextArea.setBounds(20, 20, 330, 200);
 		
-		f.add(scrollableTextArea);
+		mainwindow.add(scrollableTextArea);
 
 		
 		//#####################################################
@@ -70,10 +71,10 @@ public class MainWindow {
 		totalRateText.setBounds(250, 290, 100, 25);
 		
 		//Add Text Objects to Window UI
-		f.add(dailyUsageText);
-		f.add(dailyRateText);
-		f.add(totalUsageText);
-		f.add(totalRateText);
+		mainwindow.add(dailyUsageText);
+		mainwindow.add(dailyRateText);
+		mainwindow.add(totalUsageText);
+		mainwindow.add(totalRateText);
 
 		//#####################################################
 		//################### BUTTONS #########################
@@ -94,10 +95,10 @@ public class MainWindow {
 		calculateB.setBounds(35, 480, 300, 25);
 		
 		//Add Button Objects to Window UI
-		f.add(enterHourlyRatesB);
-		f.add(enterHourlyUsageB);
-		f.add(readFromFileB);
-		f.add(calculateB);
+		mainwindow.add(enterHourlyRatesB);
+		mainwindow.add(enterHourlyUsageB);
+		mainwindow.add(readFromFileB);
+		mainwindow.add(calculateB);
 		
 		//#####################################################
 		//################### Action Listeners ################
@@ -123,7 +124,19 @@ public class MainWindow {
 		{
 			public void actionPerformed(ActionEvent event) 
 			{
-				//What will occur when the button is clicked
+				//Open a file browser, save file path
+				JFileChooser fileChooser = new JFileChooser();
+				
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				int result = fileChooser.showOpenDialog(mainwindow);
+				if (result == JFileChooser.APPROVE_OPTION) {
+					File selectedFile = fileChooser.getSelectedFile();
+					System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+				}
+				else
+				{
+					System.out.println("Failed to select a file or choose an approved file.");
+				}
 			}
 		});
 		
@@ -132,6 +145,13 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent event) 
 			{
 				//What will occur when the button is clicked
+				int dailyUsageAmount = Integer.parseInt(dailyUsageText.getText());
+				int dailyRate = Integer.parseInt(dailyRateText.getText());
+				
+				System.out.println("The Daily Usage is: " + dailyUsageAmount + " kw/h");
+				System.out.println("The Daily Rate is: " + dailyRate + " kw/h");
+
+				
 			}
 		});
 		
@@ -160,21 +180,21 @@ public class MainWindow {
 		dollarSign1.setBounds(350, 260, 50, 25);
 		dollarSign2.setBounds(350, 290, 50, 25);
 		
-		f.add(dailyUsage);
-		f.add(totalUsage);
-		f.add(kilowattLabel);
-		f.add(kilowattLabel2);
-		f.add(dollarSign1);
-		f.add(dollarSign2);
+		mainwindow.add(dailyUsage);
+		mainwindow.add(totalUsage);
+		mainwindow.add(kilowattLabel);
+		mainwindow.add(kilowattLabel2);
+		mainwindow.add(dollarSign1);
+		mainwindow.add(dollarSign2);
 		
 		//#####################################################
 		//################### Main Window #####################
 		//#####################################################
 		
 		//Set properties of the created window
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setLayout(null);
-		f.setSize(400, 600);
-		f.setVisible(true);
+		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainwindow.setLayout(null);
+		mainwindow.setSize(400, 600);
+		mainwindow.setVisible(true);
 	}
 }
