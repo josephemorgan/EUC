@@ -60,8 +60,11 @@ public class Day {
     // Calculates total usage for the day in kW/h.
     public double calculateDailyUsage() {
         // TODO: EUC-12
-        System.out.println("In calculateDailyUsage");
-        return 0;
+    	double totalUsage = 0;
+    	for(int i = 0; i < HOURS_IN_DAY; i++) {
+    		totalUsage += kWhUsed[i] * hourlyRates[i];
+    	}
+        return totalUsage;
     }
 
     // Calculates total cost for the day in $ based on associated hourly usage and hourly rates.
