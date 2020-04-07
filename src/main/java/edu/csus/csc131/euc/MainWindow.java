@@ -25,7 +25,7 @@ public class MainWindow {
 	public void createWindow() {
 	    
 	    long time = System.currentTimeMillis();
-		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss z");
+	    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss z");
 	    
 		// Create new object for Window Frame
 
@@ -75,6 +75,7 @@ public class MainWindow {
 		dailyRateText.setBounds(250, 260, 100, 25);
 		totalUsageText.setBounds(100, 290, 100, 25);
 		totalRateText.setBounds(250, 290, 100, 25);
+		currentTimeTF.setBounds(300, 260, 100, 25);
 
 		// Add Text Objects to Window UI
 		mainwindow.add(dailyUsageText);
@@ -140,7 +141,6 @@ public class MainWindow {
 		kilowattLabel2.setBounds(200, 290, 50, 25);
 		dollarSign1.setBounds(350, 260, 50, 25);
 		dollarSign2.setBounds(350, 290, 50, 25);
-		currentTimeTF.setBounds(303, 10, 100, 25);
 
 		mainwindow.add(dailyUsage);
 		mainwindow.add(totalUsage);
