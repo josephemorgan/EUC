@@ -24,8 +24,8 @@ import java.util.ArrayList;
 public class MainWindow {
 	public void createWindow() {
 	    
-	    long time = System.currentTimeMillis();
-	    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss z");
+	    //long time = System.currentTimeMillis();
+	    //SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss z");
 	    
 		// Create new object for Window Frame
 
@@ -67,15 +67,15 @@ public class MainWindow {
 		totalRateText = new JTextField("");
 		
 		//Create new Text Field Object for current time
-		JTextField currentTimeTF;
-		currentTimeTF = new JTextField(formatter.format(time));
+		//JTextField currentTimeTF;
+		//currentTimeTF = new JTextField(formatter.format(time));
 
 		// Set bounds and location of text fields
 		dailyUsageText.setBounds(100, 260, 100, 25);
 		dailyRateText.setBounds(250, 260, 100, 25);
 		totalUsageText.setBounds(100, 290, 100, 25);
 		totalRateText.setBounds(250, 290, 100, 25);
-		currentTimeTF.setBounds(300, 260, 100, 25);
+		//currentTimeTF.setBounds(300, 260, 100, 25);
 
 		// Add Text Objects to Window UI
 		mainwindow.add(dailyUsageText);
