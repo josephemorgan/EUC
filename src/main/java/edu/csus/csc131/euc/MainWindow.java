@@ -26,24 +26,49 @@ import java.io.File;
  */
 
 public class MainWindow {
+	//number of days (SHOULD BE CHANGED BY ADD DAYS BUTTON)
+	int numOfDays = 4;
+	
 	public void createWindow() {  
 		
 		//Create new object for Window Frame
 		JFrame mainwindow = new JFrame("Electricity Project");
 		
+		//Defaulted grid rows # of 1 because it cannot be 0
+		int gridRows = 1;
 		
-		/*  Testing if Scroll Pane will work out
-		 *  I am still not so sure lol but we
-		 *  shall see
-		 */
-		JTextArea textArea = new JTextArea(20, 20);
-		JScrollPane scrollableTextArea = new JScrollPane(textArea);
+		//create a gridLayout object in order to dynamically change rows
+		GridLayout gridLayout = new GridLayout(0, gridRows);
 		
-		scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);;
+		//create new scroll pane with grid layout to hold each Day in a Row
+		JPanel scrollPanel = new JPanel(gridLayout);
+		JScrollPane scrollableTextArea = new JScrollPane(scrollPanel);
 		
+		//scroll bars created and set to show up AS NEEDED
+		scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
+		//set the size of the scroll pane
 		scrollableTextArea.setBounds(20, 20, 330, 200);
 		
+		
+		//creating buttons depending on how many days have been added to the scrollPane
+		Button buttons[] = new Button[numOfDays];
+		
+		//for each day create a button (May need to change)
+		for(int i = 0; i < numOfDays; i++)
+		{
+			//create button to add with title of the Date
+			buttons[i] = new Button("Jan " + (i + 1) + ", 2020"); //(DATE NEEDS TO BE MADE BASED ON ACTUAL DATE)
+			
+			//increase amount of rows to add a Day
+			gridRows++;
+			
+			//add button to grid slot
+			scrollPanel.add(buttons[i]);
+		}
+		
+		//add scroll pane to the main window
 		mainwindow.add(scrollableTextArea);
 
 		
@@ -80,6 +105,8 @@ public class MainWindow {
 		//################### BUTTONS #########################
 		//#####################################################
 		
+		JButton addDayB = new JButton ("Add a Day");
+		
 		JButton enterHourlyRatesB = new JButton("Enter Hourly Rates");
 		
 		JButton enterHourlyUsageB = new JButton("Enter Hourly Usage");
@@ -89,12 +116,14 @@ public class MainWindow {
 		JButton calculateB = new JButton ("Calculate");
 		
 		//Set bounds and location of buttons
+		addDayB.setBounds(20, 220, 100, 25);
 		enterHourlyRatesB.setBounds(35, 330, 300, 25);
 		enterHourlyUsageB.setBounds(35, 380, 300, 25);
 		readFromFileB.setBounds(35, 430, 300, 25);
 		calculateB.setBounds(35, 480, 300, 25);
 		
 		//Add Button Objects to Window UI
+		mainwindow.add(addDayB);
 		mainwindow.add(enterHourlyRatesB);
 		mainwindow.add(enterHourlyUsageB);
 		mainwindow.add(readFromFileB);
@@ -104,6 +133,18 @@ public class MainWindow {
 		//################### Action Listeners ################
 		//#######################(Buttons)#####################
 		
+		//AddDay button action listener
+		addDayB.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent event)
+			{
+				numOfDays++;
+				System.out.println(numOfDays);
+			}
+	
+		});
+		
+		//Hourly Rates button action listener
 		enterHourlyRatesB.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent event) 
@@ -112,6 +153,7 @@ public class MainWindow {
 			}
 		});
 		
+		//Hourly Usage button action listener
 		enterHourlyUsageB.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent event) 
@@ -120,6 +162,7 @@ public class MainWindow {
 			}
 		});
 		
+		//Read from file button action listener
 		readFromFileB.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent event) 
@@ -127,10 +170,17 @@ public class MainWindow {
 				//Open a file browser, save file path
 				JFileChooser fileChooser = new JFileChooser();
 				
+				//default the directory to the users home directory
 				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+				
+				//variable to store the result of the dialog menu
 				int result = fileChooser.showOpenDialog(mainwindow);
+				
+				//if the result is an approved option (a file)
 				if (result == JFileChooser.APPROVE_OPTION) {
+					//new file object to hold the file
 					File selectedFile = fileChooser.getSelectedFile();
+					
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 				}
 				else
@@ -144,14 +194,7 @@ public class MainWindow {
 		{
 			public void actionPerformed(ActionEvent event) 
 			{
-				//What will occur when the button is clicked
-				int dailyUsageAmount = Integer.parseInt(dailyUsageText.getText());
-				int dailyRate = Integer.parseInt(dailyRateText.getText());
-				
-				System.out.println("The Daily Usage is: " + dailyUsageAmount + " kw/h");
-				System.out.println("The Daily Rate is: " + dailyRate + " kw/h");
-
-				
+				//When the calculate button is clicked
 			}
 		});
 		
