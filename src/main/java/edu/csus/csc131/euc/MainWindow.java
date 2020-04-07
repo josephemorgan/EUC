@@ -23,6 +23,10 @@ import java.util.ArrayList;
 
 public class MainWindow {
 	public void createWindow() {
+	    
+	    long time = System.currentTimeMillis();
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss z");
+	    
 		// Create new object for Window Frame
 
 		JFrame mainwindow = new JFrame("Electricity Project");
@@ -61,6 +65,10 @@ public class MainWindow {
 		// Create new Text Field Object for total electricity rate
 		JTextField totalRateText;
 		totalRateText = new JTextField("");
+		
+		//Create new Text Field Object for current time
+		JTextField currentTimeTF;
+		currentTimeTF = new JTextField(formatter.format(time));
 
 		// Set bounds and location of text fields
 		dailyUsageText.setBounds(100, 260, 100, 25);
@@ -132,6 +140,7 @@ public class MainWindow {
 		kilowattLabel2.setBounds(200, 290, 50, 25);
 		dollarSign1.setBounds(350, 260, 50, 25);
 		dollarSign2.setBounds(350, 290, 50, 25);
+		currentTimeTF.setBounds(303, 10, 100, 25);
 
 		mainwindow.add(dailyUsage);
 		mainwindow.add(totalUsage);
