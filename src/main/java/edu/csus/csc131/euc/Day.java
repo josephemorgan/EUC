@@ -52,9 +52,14 @@ public class Day {
     }
 
     // Sets hourly usage in kWh.
+    public void setUsage(double kWh[]) {
+        // TODO: EUC-8
+        System.out.println("In setUsage(double kWh)");
+    }
+
     public void setUsage(double kWh, int index) {
         // TODO: EUC-8
-        System.out.println("In setUsage(int index)");
+        System.out.println("In setUsage(double kWh, int index)");
     }
 
     // Calculates total usage for the day in kW/h.
