@@ -15,6 +15,10 @@ public class Usage {
         return u.get(i);
     }
 
+    public void setUsage(Double[] u) {
+
+    }
+
     public void setUsage(int i, double r) {
         u.replace(i, r);
     }
