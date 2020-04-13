@@ -31,7 +31,7 @@ public class ParserTest {
 
         ArrayList values = parser.getValuesString();
 
-        DoubleNode single = values.get(1);
+        //DoubleNode single = values.get(1);
 
         System.out.println("Type: " + values.get(1).getClass());
     }
