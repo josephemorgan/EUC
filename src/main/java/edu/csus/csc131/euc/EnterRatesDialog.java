@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
 public class EnterRatesDialog extends JFrame implements ActionListener {
     protected Rates r;
     protected Season s;
@@ -81,7 +80,7 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
                 }
                 System.out.println(temp.toString());
             }
-        } else if ( s == Season.SUMMER) {
+        } else if (s == Season.SUMMER) {
             if (validateSummerComboBox()) {
                 // Break this up into 4 loops because there are 4 blocks
                 for (int i = 0; i < summerPanel.getOffPeakToBox(); i++) {

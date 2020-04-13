@@ -32,6 +32,5 @@ public class Rates {
             m.put(i, 0.0);
         }
         return m;
-    };
-
+    }
 }

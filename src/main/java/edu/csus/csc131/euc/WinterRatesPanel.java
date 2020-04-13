@@ -30,7 +30,7 @@ public class WinterRatesPanel extends JPanel {
         // Init Elements
         offPeakRatesField = new JTextField(8);
         onPeakRatesField = new JTextField(8);
-        secondOffPeakRatesField= new JTextField(8);
+        secondOffPeakRatesField = new JTextField(8);
         offPeakFromBox = new JComboBox<String>();
         offPeakFromBox.addItem("00:00");
         offPeakToBox = new JComboBox<String>(TIMES_KEYS);

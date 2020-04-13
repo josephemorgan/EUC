@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Usage {
-
     private static final int HOURS_IN_DAY = 24;
     private Map<Integer, Double> u;
 
@@ -33,6 +32,5 @@ public class Usage {
             m.put(i, 0.0);
         }
         return m;
-    };
-
+    }
 }
