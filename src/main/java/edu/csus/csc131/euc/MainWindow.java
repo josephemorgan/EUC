@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 
-
 /* NEEDED:
  * Text Fields:
  * 		Electricity Rates [x]
@@ -149,10 +148,16 @@ public class MainWindow {
 		//Add Button Objects to Window UI
 		mainwindow.add(addDayB);
 		mainwindow.add(enterHourlyRatesB);
+		enterHourlyRatesB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+			ReadRatesFromFilePrompt r = new ReadRatesFromFilePrompt();
+			}
+		});
 		mainwindow.add(enterHourlyUsageB);
 		mainwindow.add(readFromFileB);
 		mainwindow.add(calculateB);
-		
+
 		//#####################################################
 		//################### Action Listeners ################
 		//#######################(Buttons)#####################
@@ -207,7 +212,7 @@ public class MainWindow {
 		{
 			public void actionPerformed(ActionEvent event) 
 			{
-				//What will occur when the button is clicked
+			    JFrame F = new ReadRatesFromFilePrompt();
 			}
 		});
 		
