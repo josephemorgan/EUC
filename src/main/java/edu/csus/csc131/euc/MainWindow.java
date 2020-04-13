@@ -33,6 +33,7 @@ public class MainWindow {
 		
 		//Create new object for Window Frame
 		JFrame mainwindow = new JFrame("Electricity Project");
+		mainwindow.pack();
 		
 		//Defaulted grid rows # of 1 because it cannot be 0
 		int gridRows = 1;
@@ -138,8 +139,31 @@ public class MainWindow {
 		{
 			public void actionPerformed(ActionEvent event)
 			{
-				numOfDays++;
-				System.out.println(numOfDays);
+				
+				String hour1 = JOptionPane.showInputDialog("Usage from 12am-1am (number of hours)");
+				String hour2 = JOptionPane.showInputDialog("Usage from 1am-2am (number of hours)");
+				String hour3 = JOptionPane.showInputDialog("Usage from 2am-3am (number of hours)");
+				String hour4 = JOptionPane.showInputDialog("Usage from 3am-4am (number of hours)");
+				String hour5 = JOptionPane.showInputDialog("Usage from 4am-5am (number of hours)");
+				String hour6 = JOptionPane.showInputDialog("Usage from 5am-6am (number of hours)");
+				String hour7 = JOptionPane.showInputDialog("Usage from 6am-7am (number of hours)");
+				String hour8 = JOptionPane.showInputDialog("Usage from 7am-8am (number of hours)");
+				String hour9 = JOptionPane.showInputDialog("Usage from 8am-9am (number of hours)");
+				String hour10 = JOptionPane.showInputDialog("Usage from 9am-10am (number of hours)");
+				String hour11 = JOptionPane.showInputDialog("Usage from 10am-11am (number of hours)");
+				String hour12 = JOptionPane.showInputDialog("Usage from 11am-12pm (number of hours)");
+				String hour13 = JOptionPane.showInputDialog("Usage from 12pm-1pm (number of hours)");
+				String hour14 = JOptionPane.showInputDialog("Usage from 1pm-2pm (number of hours)");
+				String hour15 = JOptionPane.showInputDialog("Usage from 2pm-3pm (number of hours)");
+				String hour16 = JOptionPane.showInputDialog("Usage from 3pm-4pm (number of hours)");
+				String hour17 = JOptionPane.showInputDialog("Usage from 4pm-5pm (number of hours)");
+				String hour18 = JOptionPane.showInputDialog("Usage from 5pm-6pm (number of hours)");
+				String hour19 = JOptionPane.showInputDialog("Usage from 6pm-7pm (number of hours)");
+				String hour20 = JOptionPane.showInputDialog("Usage from 7pm-8pm (number of hours)");
+				String hour21 = JOptionPane.showInputDialog("Usage from 8pm-9pm (number of hours)");
+				String hour22 = JOptionPane.showInputDialog("Usage from 9pm-10pm (number of hours)");
+				String hour23 = JOptionPane.showInputDialog("Usage from 10pm-11pm (number of hours)");
+				String hour24 = JOptionPane.showInputDialog("Usage from 11pm-12pm (number of hours)");
 			}
 	
 		});
@@ -239,5 +263,6 @@ public class MainWindow {
 		mainwindow.setLayout(null);
 		mainwindow.setSize(400, 600);
 		mainwindow.setVisible(true);
+		mainwindow.setLocationRelativeTo(null);
 	}
 }
