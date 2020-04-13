@@ -9,6 +9,9 @@ package edu.csus.csc131.euc;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /* NEEDED:
  * Text Fields:
@@ -87,13 +90,11 @@ public class MainWindow {
 		// ################### BUTTONS #########################
 		// #####################################################
 
-		// Create new Button Object for calculating daily rates and cost
-		JButton enterHourlyRatesB;
-		enterHourlyRatesB = new JButton("Enter Hourly Rates");
-
-		// Create new Button Object for calculating total rates and cost
 		JButton enterHourlyUsageB;
 		enterHourlyUsageB = new JButton("Enter Hourly Usage");
+
+		JButton enterHourlyRatesB;
+		enterHourlyRatesB = new JButton("Enter Hourly Rates");
 
 		JButton readFromFileB;
 		readFromFileB = new JButton("Read Usage from File");
@@ -109,6 +110,12 @@ public class MainWindow {
 
 		// Add Button Objects to Window UI
 		mainwindow.add(enterHourlyRatesB);
+		enterHourlyRatesB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+			ReadRatesFromFilePrompt r = new ReadRatesFromFilePrompt();
+			}
+		});
 		mainwindow.add(enterHourlyUsageB);
 		mainwindow.add(readFromFileB);
 		mainwindow.add(calculateB);
@@ -116,7 +123,6 @@ public class MainWindow {
 		// #####################################################
 		// ################### LABELS #########################
 		// #####################################################
-
 		JLabel dailyUsage;
 		dailyUsage = new JLabel("Daily Usage:");
 
