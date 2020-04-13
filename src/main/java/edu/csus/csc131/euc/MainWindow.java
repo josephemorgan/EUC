@@ -192,43 +192,6 @@ public class MainWindow {
 				String hour22 = JOptionPane.showInputDialog("Usage from 9pm-10pm (number of hours)");
 				String hour23 = JOptionPane.showInputDialog("Usage from 10pm-11pm (number of hours)");
 				String hour24 = JOptionPane.showInputDialog("Usage from 11pm-12pm (number of hours)");
-				
-				//create new frame for rates
-				JFrame dialogueFrame = new JFrame("Add a Day");
-				
-				//set properties of the new popup frame
-				dialogueFrame.setBounds(0, 0, 500, 700);
-				dialogueFrame.setLocationRelativeTo(mainwindow); //defaults to middle of opened program
-				dialogueFrame.setVisible(true);
-				
-				//create Labels to tell user which hours they are entering usage for
-				JLabel hour1Label = new JLabel("Usage from 12:00 am - 1:00 am: ");
-				/*JLabel hour2Label = new JLabel("Usage from 1:00 am - 2:00 am: ", JLabel.LEFT);
-				JLabel hour3Label = new JLabel("Usage from 2:00 am - 3:00 am: ", JLabel.LEFT);
-				JLabel hour4Label = new JLabel("Usage from 3:00 am - 4:00 am: ", JLabel.LEFT);
-				JLabel hour5Label = new JLabel("Usage from 4:00 am - 5:00 am: ", JLabel.LEFT);
-				JLabel hour6Label = new JLabel("Usage from 5:00 am - 6:00 am: ", JLabel.LEFT);
-				JLabel hour7Label = new JLabel("Usage from 6:00 am - 7:00 am: ", JLabel.LEFT);
-				JLabel hour8Label = new JLabel("Usage from 7:00 am - 8:00 am: ", JLabel.LEFT);*/
-				
-				//set the location inside the popup window
-				hour1Label.setBounds(10, 10, 200, 10);
-				
-				//create text fields to enter the number of hours
-				JTextField hour1TF = new JTextField("0");
-				
-				//set location inside the popup window
-				hour1TF.setBounds(10, 10, 10, 10);
-				dialogueFrame.add(hour1TF);
-				
-				dialogueFrame.add(hour1Label);
-				/*dialogueFrame.add(hour2Label);
-				dialogueFrame.add(hour3Label);
-				dialogueFrame.add(hour4Label);
-				dialogueFrame.add(hour5Label);
-				dialogueFrame.add(hour6Label);
-				dialogueFrame.add(hour7Label);
-				dialogueFrame.add(hour8Label);*/
 			}
 	
 		});
