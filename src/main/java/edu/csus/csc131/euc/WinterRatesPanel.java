@@ -23,16 +23,22 @@ public class WinterRatesPanel extends JPanel {
         System.out.println("In WinterRatesPanel()");
         initTimes();
 
+        buildPanel();
+    }
+
+    public void buildPanel() {
         // Init Elements
         offPeakRatesField = new JTextField(8);
         onPeakRatesField = new JTextField(8);
         secondOffPeakRatesField= new JTextField(8);
-        offPeakFromBox = new JComboBox<String>(TIMES_KEYS);
+        offPeakFromBox = new JComboBox<String>();
+        offPeakFromBox.addItem("00:00");
         offPeakToBox = new JComboBox<String>(TIMES_KEYS);
         onPeakFromBox = new JComboBox<String>(TIMES_KEYS);
         onPeakToBox = new JComboBox<String>(TIMES_KEYS);
         secondOffPeakFromBox = new JComboBox<String>(TIMES_KEYS);
-        secondOffPeakToBox = new JComboBox<String>(TIMES_KEYS);
+        secondOffPeakToBox = new JComboBox<String>();
+        secondOffPeakToBox.addItem("00:00");
 
         ////// Build Panels //////
         int ratesLabelIndex = 0;
@@ -217,6 +223,42 @@ public class WinterRatesPanel extends JPanel {
         add(secondOffPeakToBox, c);
         c.insets = def;
         c.anchor = GridBagConstraints.CENTER;
+    }
+
+    public Double getOffPeakRatesField() {
+        return Double.valueOf(offPeakRatesField.getText());
+    }
+
+    public Double getOnPeakRatesField() {
+        return Double.valueOf(onPeakRatesField.getText());
+    }
+
+    public Double getSecondOffPeakRatesField() {
+        return Double.valueOf(secondOffPeakRatesField.getText());
+    }
+
+    public int getOffPeakFromBox() {
+        return TIMES.get(offPeakFromBox.getSelectedItem().toString());
+    }
+
+    public int getOffPeakToBox() {
+        return TIMES.get(offPeakToBox.getSelectedItem().toString());
+    }
+
+    public int getOnPeakFromBox() {
+        return TIMES.get(onPeakFromBox.getSelectedItem().toString());
+    }
+
+    public int getOnPeakToBox() {
+        return TIMES.get(onPeakToBox.getSelectedItem().toString());
+    }
+
+    public int getSecondOffPeakFromBox() {
+        return TIMES.get(secondOffPeakFromBox.getSelectedItem().toString());
+    }
+
+    public int getSecondOffPeakToBox() {
+        return TIMES.get(secondOffPeakToBox.getSelectedItem().toString());
     }
 
     private static void initTimes() {
