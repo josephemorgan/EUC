@@ -3,3 +3,7 @@
 .project
 .settings/
 bin/
+euc.iml
+.idea/
+/src/main/main.iml
+/src/test/test.iml
