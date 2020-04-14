@@ -37,7 +37,8 @@ public class MainWindow {
 
 		//Create new object for Window Frame
 		JFrame mainwindow = new JFrame("Electricity Project");
-
+		
+		mainwindow.pack();
 		//#####################################################
 		//################### Main Window #####################
 		//#####################################################
@@ -169,42 +170,30 @@ public class MainWindow {
 		{
 			public void actionPerformed(ActionEvent event)
 			{
-				//create new frame for rates
-				JFrame dialogueFrame = new JFrame("Add a Day");
-
-				//set properties of the new popup frame
-				dialogueFrame.setBounds(0, 0, 500, 700);
-				dialogueFrame.setLocationRelativeTo(mainwindow); //defaults to middle of opened program
-				dialogueFrame.setVisible(true);
-
-				//create Labels to tell user which hours they are entering usage for
-				JLabel hour1Label = new JLabel("Usage from 12:00 am - 1:00 am: ");
-				/*JLabel hour2Label = new JLabel("Usage from 1:00 am - 2:00 am: ", JLabel.LEFT);
-				JLabel hour3Label = new JLabel("Usage from 2:00 am - 3:00 am: ", JLabel.LEFT);
-				JLabel hour4Label = new JLabel("Usage from 3:00 am - 4:00 am: ", JLabel.LEFT);
-				JLabel hour5Label = new JLabel("Usage from 4:00 am - 5:00 am: ", JLabel.LEFT);
-				JLabel hour6Label = new JLabel("Usage from 5:00 am - 6:00 am: ", JLabel.LEFT);
-				JLabel hour7Label = new JLabel("Usage from 6:00 am - 7:00 am: ", JLabel.LEFT);
-				JLabel hour8Label = new JLabel("Usage from 7:00 am - 8:00 am: ", JLabel.LEFT);*/
-
-				//set the location inside the popup window
-				hour1Label.setBounds(10, 10, 200, 10);
-
-				//create text fields to enter the number of hours
-				JTextField hour1TF = new JTextField("0");
-
-				//set location inside the popup window
-				hour1TF.setBounds(10, 10, 10, 10);
-				dialogueFrame.add(hour1TF);
-
-				dialogueFrame.add(hour1Label);
-				/*dialogueFrame.add(hour2Label);
-				dialogueFrame.add(hour3Label);
-				dialogueFrame.add(hour4Label);
-				dialogueFrame.add(hour5Label);
-				dialogueFrame.add(hour6Label);
-				dialogueFrame.add(hour7Label);
-				dialogueFrame.add(hour8Label);*/
+				String hour1 = JOptionPane.showInputDialog("Usage from 12am-1am (number of Kilowatts)");
+				String hour2 = JOptionPane.showInputDialog("Usage from 1am-2am (number of Kilowatts)");
+				String hour3 = JOptionPane.showInputDialog("Usage from 2am-3am (number of Kilowatts)");
+				String hour4 = JOptionPane.showInputDialog("Usage from 3am-4am (number of Kilowatts)");
+				String hour5 = JOptionPane.showInputDialog("Usage from 4am-5am (number of Kilowatts)");
+				String hour6 = JOptionPane.showInputDialog("Usage from 5am-6am (number of Kilowatts)");
+				String hour7 = JOptionPane.showInputDialog("Usage from 6am-7am (number of Kilowatts)");
+				String hour8 = JOptionPane.showInputDialog("Usage from 7am-8am (number of Kilowatts)");
+				String hour9 = JOptionPane.showInputDialog("Usage from 8am-9am (number of Kilowatts)");
+				String hour10 = JOptionPane.showInputDialog("Usage from 9am-10am (number of Kilowatts)");
+				String hour11 = JOptionPane.showInputDialog("Usage from 10am-11am (number of Kilowatts)");
+				String hour12 = JOptionPane.showInputDialog("Usage from 11am-12pm (number of Kilowatts)");
+				String hour13 = JOptionPane.showInputDialog("Usage from 12pm-1pm (number of Kilowatts)");
+				String hour14 = JOptionPane.showInputDialog("Usage from 1pm-2pm (number of Kilowatts)");
+				String hour15 = JOptionPane.showInputDialog("Usage from 2pm-3pm (number of Kilowatts)");
+				String hour16 = JOptionPane.showInputDialog("Usage from 3pm-4pm (number of Kilowatts)");
+				String hour17 = JOptionPane.showInputDialog("Usage from 4pm-5pm (number of Kilowatts)");
+				String hour18 = JOptionPane.showInputDialog("Usage from 5pm-6pm (number of Kilowatts)");
+				String hour19 = JOptionPane.showInputDialog("Usage from 6pm-7pm (number of Kilowatts)");
+				String hour20 = JOptionPane.showInputDialog("Usage from 7pm-8pm (number of Kilowatts)");
+				String hour21 = JOptionPane.showInputDialog("Usage from 8pm-9pm (number of Kilowatts)");
+				String hour22 = JOptionPane.showInputDialog("Usage from 9pm-10pm (number of Kilowatts)");
+				String hour23 = JOptionPane.showInputDialog("Usage from 10pm-11pm (number of Kilowatts)");
+				String hour24 = JOptionPane.showInputDialog("Usage from 11pm-12pm (number of Kilowatts)");
 			}
 
 		});
@@ -290,8 +279,17 @@ public class MainWindow {
 		mainwindow.add(kilowattLabel2);
 		mainwindow.add(dollarSign1);
 		mainwindow.add(dollarSign2);
-
+		
+		//#####################################################
+		//################### Main Window #####################
+		//#####################################################
+		
+		//Set properties of the created window
+		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainwindow.setLayout(null);
+		mainwindow.setSize(400, 600);
 		mainwindow.setVisible(true);
+		mainwindow.setLocationRelativeTo(null);
 	}
 
 }
