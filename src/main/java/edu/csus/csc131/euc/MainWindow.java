@@ -115,38 +115,6 @@ public class MainWindow {
 		//add scroll pane to the main window
 		mainwindow.add(scrollableTextArea);
 
-		// #####################################################
-		// ################### Text Fields #####################
-		// #####################################################
-
-		//Create new Text Field Object for daily electricity Usage
-		JTextField dailyUsageText = new JTextField("");
-
-		//Create new Text Field Object for daily electricity rate
-		JTextField dailyRateText = new JTextField("");
-
-		//Create new Text Field Object for total electricity usage
-		JTextField totalUsageText = new JTextField("");
-
-		//Create new Text Field Object for total electricity rate
-		JTextField totalRateText = new JTextField("");
-
-
-		//Set bounds and location of text fields
-
-		dailyUsageText.setBounds(100, 260, 100, 25);
-		dailyRateText.setBounds(250, 260, 100, 25);
-		totalUsageText.setBounds(100, 290, 100, 25);
-		totalRateText.setBounds(250, 290, 100, 25);
-
-
-		//Add Text Objects to Window UI
-
-		mainwindow.add(dailyUsageText);
-		mainwindow.add(dailyRateText);
-		mainwindow.add(totalUsageText);
-		mainwindow.add(totalRateText);
-
 		//#####################################################
 		//################### BUTTONS #########################
 		//#####################################################
@@ -181,6 +149,41 @@ public class MainWindow {
 		mainwindow.add(enterHourlyUsageB);
 		mainwindow.add(readFromFileB);
 		mainwindow.add(calculateB);
+
+		//#####################################################
+		//################### LABELS ##########################
+		//#####################################################
+
+		JLabel dailyUsage = new JLabel("Daily Usage:");
+		JLabel totalUsage = new JLabel("Total Usage:");
+		JLabel kilowattLabel = new JLabel("KW/h");
+		JLabel kilowattLabel2 = new JLabel("KW/h");
+		JLabel dollarSign1 = new JLabel ("$");
+		JLabel dollarSign2 = new JLabel ("$");
+		JLabel dailyUsageLabel = new JLabel ("");
+		JLabel dailyRateLabel = new JLabel ("");
+		JLabel totalUsageLabel = new JLabel ("");
+		JLabel totalRateLabel = new JLabel ("");
+
+
+		dailyUsage.setBounds(20, 260, 200, 25);
+		totalUsage.setBounds(20, 290, 200, 25);
+		kilowattLabel.setBounds(200, 260, 50, 25);
+		kilowattLabel2.setBounds(200, 290, 50, 25);
+		dollarSign1.setBounds(350, 260, 50, 25);
+		dollarSign2.setBounds(350, 290, 50, 25);
+		dailyUsageLabel.setBounds(100, 260, 100, 25);
+		dailyRateLabel.setBounds(250, 260, 100, 25);
+		totalUsageLabel.setBounds(100, 290, 100, 25);
+		totalRateLabel.setBounds(250, 290, 100, 25);
+
+
+		mainwindow.add(dailyUsage);
+		mainwindow.add(totalUsage);
+		mainwindow.add(kilowattLabel);
+		mainwindow.add(kilowattLabel2);
+		mainwindow.add(dollarSign1);
+		mainwindow.add(dollarSign2);
 
 		//#####################################################
 		//################### Action Listeners ################
@@ -269,46 +272,15 @@ public class MainWindow {
 				totalCost = week.getTotalCost();
 				totalUsage = week.getTotalUsage();
 
+				totalRateLabel.setText(Double.toString(totalCost));
+				totalUsageLabel.setText(Double.toString(totalUsage));
+
 				System.out.println("cost: " + totalCost + "\n" + "usage: " + totalUsage);
 
 				
 			}
 		});
 
-
-
-		//#####################################################
-		//################### LABELS ##########################
-		//#####################################################
-
-		JLabel dailyUsage = new JLabel("Daily Usage:");
-
-		JLabel totalUsage = new JLabel("Total Usage:");
-
-		JLabel kilowattLabel = new JLabel("KW/h");
-
-		JLabel kilowattLabel2 = new JLabel("KW/h");
-
-		JLabel dollarSign1 = new JLabel ("$");
-
-		JLabel dollarSign2 = new JLabel ("$");
-
-
-		dailyUsage.setBounds(20, 260, 200, 25);
-		totalUsage.setBounds(20, 290, 200, 25);
-		kilowattLabel.setBounds(200, 260, 50, 25);
-		kilowattLabel2.setBounds(200, 290, 50, 25);
-		dollarSign1.setBounds(350, 260, 50, 25);
-		dollarSign2.setBounds(350, 290, 50, 25);
-
-
-		mainwindow.add(dailyUsage);
-		mainwindow.add(totalUsage);
-		mainwindow.add(kilowattLabel);
-		mainwindow.add(kilowattLabel2);
-		mainwindow.add(dollarSign1);
-		mainwindow.add(dollarSign2);
-		
 		//#####################################################
 		//################### Main Window #####################
 		//#####################################################
