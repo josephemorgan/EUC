@@ -47,6 +47,7 @@ public class MainWindow {
 
 		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainwindow.setLayout(null);
+		mainwindow.setLocationRelativeTo(null);
 		mainwindow.setSize(400, 600);
 
 
@@ -243,6 +244,7 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent event)
 			{
 				//When the calculate button is clicked
+				
 			}
 		});
 
