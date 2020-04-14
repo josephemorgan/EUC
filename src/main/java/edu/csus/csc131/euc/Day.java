@@ -78,7 +78,7 @@ public class Day {
     	double totalCost = 0;
         for (int i = 0; i < HOURS_IN_DAY; i++) 
         {
-            totalUsage += usage.getUsage(i) * rates.getRate(i);
+            totalCost += usage.getUsage(i) * rates.getRate(i);
         }
         return totalCost;
     }
