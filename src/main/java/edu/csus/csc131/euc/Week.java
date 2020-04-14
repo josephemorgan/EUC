@@ -40,8 +40,8 @@ public class Week {
     }
 
 
-    public double getTotalUsage(){
-
+    public double getTotalUsage()
+    {
         double totalUsage = 0.0;
 
         for(Day day : days){
@@ -49,6 +49,15 @@ public class Week {
         }
 
         return totalUsage;
+    }
+    
+    public double getTotalCost()
+    {
+        double totalCost = 0.0;
+        for(Day day : days){
+            totalUsage += day.getDailyCost();
+        }
+        return totalCost;
     }
 
 
