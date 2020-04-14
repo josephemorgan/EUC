@@ -28,6 +28,8 @@ import java.io.File;
 
 public class MainWindow {
 
+	private Week week = new Week();
+
 	//number of days (SHOULD BE CHANGED BY ADD DAYS BUTTON)
 	int numOfDays = 4; //test
 
@@ -45,7 +47,7 @@ public class MainWindow {
 		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainwindow.setLayout(null);
 		mainwindow.setSize(400, 600);
-		mainwindow.setVisible(true);
+
 
 		//centers the app when opened, allowing for dialogue to be center also
 		mainwindow.setLocationRelativeTo(null);
@@ -235,6 +237,9 @@ public class MainWindow {
 					//new file object to hold the file
 					File selectedFile = fileChooser.getSelectedFile();
 
+					//Fetch data from file and add a day to week collection
+					week.fetchDayFromFile(selectedFile.getAbsolutePath());
+
 					System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 				}
 				else
@@ -286,6 +291,7 @@ public class MainWindow {
 		mainwindow.add(dollarSign1);
 		mainwindow.add(dollarSign2);
 
+		mainwindow.setVisible(true);
 	}
 
 }
