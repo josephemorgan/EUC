@@ -66,12 +66,13 @@ public class Day {
 
     // Calculates total usage for the day in kW/h.
     public double calculateDailyUsage() {
-        // Refactored because of creation or Rates and Usage class.
+
         double totalUsage = 0;
         for (int i = 0; i < HOURS_IN_DAY; i++) {
             totalUsage += usage.getUsage(i);
         }
         return totalUsage;
+
     }
 
     // Calculates total cost for the day in $ based on associated hourly usage and hourly rates.

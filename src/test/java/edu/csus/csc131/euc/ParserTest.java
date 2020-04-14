@@ -28,12 +28,6 @@ public class ParserTest {
         LocalDate first = start.get(1);
 
         System.out.println(first.getDayOfMonth());
-
-        ArrayList values = parser.getValuesString();
-
-        //DoubleNode single = values.get(1);
-
-        System.out.println("Type: " + values.get(1).getClass());
     }
 
 
