@@ -13,11 +13,11 @@ import static java.time.ZoneId.systemDefault;
 public class ParserTest {
 
     public static void main(String[] args) {
-        run();
+
     }
 
 
-    public static void run(){
+    public static void testParser(){
 
         Parser parser = new Parser();
 

@@ -8,32 +8,37 @@ public class Day {
     private static final int HOURS_IN_DAY = 24;
     private LocalDate date;
     private Rates rates;
-    private Usage usage;
+    private Usage usage = new Usage();
 
     // Constructors
+
     // Basic constructor sets the date to today.
     public Day(Rates r) {
-        date = LocalDate.now();
-        rates = r;
+        this.date = LocalDate.now();
+        this.rates = r;
     }
 
     // Sets date to today minus offset number of days.
     public Day(Rates r, long offset) {
-        date = LocalDate.now().minusDays(offset);
-        rates = r;
+        this.date = LocalDate.now().minusDays(offset);
+        this.rates = r;
     }
 
     // Creates Day class with explicit date.
     public Day(Rates r, LocalDate date) {
-        date = date;
-        rates = r;
+        this.date = date;
+        this.rates = r;
     }
 
     // Creates Date class with specific date as a string formatted as yyyy-mm-dd
     public Day(Rates r, CharSequence dayString) {
-        date = LocalDate.parse(dayString);
-        rates = r;
+        this.date = LocalDate.parse(dayString);
+        this.rates = r;
     }
+
+
+
+
 
     public void setDate(LocalDate date) {
         this.date = date;
@@ -51,15 +56,12 @@ public class Day {
         return this.date.toString();
     }
 
-    // Sets hourly usage in kWh.
-    public void setUsage(double kWh[]) {
-        // TODO: EUC-8
-        System.out.println("In setUsage(double kWh)");
+    public void setUsage(double[] kWh) {
+        usage.setUsage(kWh);
     }
 
-    public void setUsage(double kWh, int index) {
-        // TODO: EUC-8
-        System.out.println("In setUsage(double kWh, int index)");
+    public void setUsage(int index, double kWh) {
+        usage.setUsage(index, kWh);
     }
 
     // Calculates total usage for the day in kW/h.

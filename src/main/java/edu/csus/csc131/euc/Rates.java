@@ -15,6 +15,15 @@ public class Rates {
         return rates.get(i);
     }
 
+
+    //Copy values from double array into usage map
+    public void setUsage(double[] in) {
+        for(int i = 0; i < in.length; i++){
+            this.rates.replace(i, in[i]);
+        }
+    }
+
+    //Place one value r at the given key i
     public void setRate(int i, double r) {
         rates.replace(i, r);
     }

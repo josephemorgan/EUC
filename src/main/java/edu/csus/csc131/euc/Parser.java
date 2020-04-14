@@ -41,6 +41,8 @@ public class Parser {
 
     private double[] values = new double[HOURS_IN_DAY];
 
+    private LocalDate date;
+
     public Parser() {
     }
 
@@ -123,6 +125,10 @@ public class Parser {
 
             //Assigns the value of the date to the LocalDate object, uses local time zone
             out = date.toInstant().atZone(systemDefault()).toLocalDate();
+
+            //Assign overall date of this file to the value above
+            this.date = out;
+
         } catch (ParseException e) {
             System.out.println("Time String parsing exception.");
             e.printStackTrace();
@@ -166,5 +172,9 @@ public class Parser {
 
     public double[] getValues() {
         return values;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 }
