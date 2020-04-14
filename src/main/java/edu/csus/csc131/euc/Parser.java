@@ -19,7 +19,7 @@ import static java.time.ZoneId.systemDefault;
  * fetchData method to retrieve data from a new file, with the file path as the argument.
  *
  * @author Amrin Sandhar
- * @version 4 April 2020
+ * @version 13 April 2020
  */
 
 public class Parser {
@@ -40,6 +40,8 @@ public class Parser {
     private ArrayList<LocalDate> endTimes = new ArrayList();
 
     private double[] values = new double[HOURS_IN_DAY];
+
+    private LocalDate date;
 
     public Parser() {
     }
@@ -123,6 +125,10 @@ public class Parser {
 
             //Assigns the value of the date to the LocalDate object, uses local time zone
             out = date.toInstant().atZone(systemDefault()).toLocalDate();
+
+            //Assign overall date of this file to the value above
+            this.date = out;
+
         } catch (ParseException e) {
             System.out.println("Time String parsing exception.");
             e.printStackTrace();
@@ -160,11 +166,11 @@ public class Parser {
         return endTimes;
     }
 
-    public ArrayList<String> getValuesString() {
-        return valuesString;
-    }
-
     public double[] getValues() {
         return values;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 }

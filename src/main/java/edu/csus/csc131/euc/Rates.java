@@ -11,11 +11,25 @@ public class Rates {
         rates = initMap();
     }
 
+    public Rates(double[] in){
+        rates = initMap();
+        setRates(in);
+    }
+
     public double getRate(int i) {
         return rates.get(i);
     }
 
-    public void setRate(int i, double r) {
+
+    //Copy values from double array into usage map
+    public void setRates(double[] in) {
+        for(int i = 0; i < in.length; i++){
+            this.rates.replace(i, in[i]);
+        }
+    }
+
+    //Place one value r at the given key i
+    public void setRates(int i, double r) {
         rates.replace(i, r);
     }
 
