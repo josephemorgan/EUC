@@ -73,10 +73,14 @@ public class Day {
     }
 
     // Calculates total cost for the day in $ based on associated hourly usage and hourly rates.
-    public double calculateDailyCost() {
-        // TODO: EUC-13 Assigned: Kelly
-        System.out.println("In calculateDailyCost");
-        return 0;
+    public double calculateDailyCost() 
+    {
+    	double totalCost = 0;
+        for (int i = 0; i < HOURS_IN_DAY; i++) 
+        {
+            totalUsage += usage.getUsage(i) * rates.getRate(i);
+        }
+        return totalCost;
     }
 
     @Override
