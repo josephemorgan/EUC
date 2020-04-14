@@ -28,12 +28,32 @@ import java.io.File;
 
 public class MainWindow {
 
-	private Week week = new Week();
-
+	//TODO: UNCOMMENT THIS
+	//private Week week = new Week();
+	
 	//number of days (SHOULD BE CHANGED BY ADD DAYS BUTTON)
 	int numOfDays = 4; //test
 
 	public void createWindow() {
+
+		//TODO: REMOVE THIS CODE
+		//THIS IS TEMPORARY CODE FOR TESTING
+		double[] summerRates = new double[24];
+		double[] winterRates = new double[24];
+
+		for(int i = 0; i < summerRates.length; i++){
+			summerRates[i] = 4.0;
+		}
+		for(int i = 0; i < winterRates.length; i++){
+			winterRates[i] = 2.0;
+		}
+
+		Rates summer = new Rates(summerRates);
+		Rates winter = new Rates(winterRates);
+
+		Week week = new Week(summer, winter);
+		//THIS IS TEMPORARY CODE FOR TESTING
+		//TODO: REMOVE THIS CODE
 
 		//Create new object for Window Frame
 		JFrame mainwindow = new JFrame("Electricity Project");
