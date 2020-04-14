@@ -73,7 +73,7 @@ public class Day {
     }
 
     // Calculates total cost for the day in $ based on associated hourly usage and hourly rates.
-    public double calculateDailyCost() 
+    public double getDailyCost() 
     {
     	double totalCost = 0;
         for (int i = 0; i < HOURS_IN_DAY; i++) 
