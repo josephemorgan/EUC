@@ -37,18 +37,6 @@ public class Day {
     }
 
 
-    public void fetchDataFromFile(String filePath){
-
-        Parser parser = new Parser();
-
-        parser.fetchData(filePath);
-
-        setUsage(parser.getValues());
-
-    }
-
-
-
     public void setDate(LocalDate date) {
         this.date = date;
     }
