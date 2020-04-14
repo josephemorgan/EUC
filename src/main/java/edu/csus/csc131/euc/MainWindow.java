@@ -69,7 +69,6 @@ public class MainWindow {
 		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainwindow.setLayout(null);
 		mainwindow.setSize(400, 600);
-		mainwindow.setVisible(true);
 		mainwindow.setLocationRelativeTo(null);
 
 
@@ -137,6 +136,10 @@ public class MainWindow {
 
 		//Add Button Objects to Window UI
 		mainwindow.add(addDayB);
+		addDayB.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {JFrame a = new AddDayDialog();}
+		});
 		mainwindow.add(enterHourlyRatesB);
 		enterHourlyRatesB.addActionListener(new ActionListener() {
 			@Override
@@ -196,7 +199,7 @@ public class MainWindow {
 		{
 			public void actionPerformed(ActionEvent event)
 			{
-				String hour1 = JOptionPane.showInputDialog("Usage from 12am-1am (number of Kilowatts)");
+				/*String hour1 = JOptionPane.showInputDialog("Usage from 12am-1am (number of Kilowatts)");
 				String hour2 = JOptionPane.showInputDialog("Usage from 1am-2am (number of Kilowatts)");
 				String hour3 = JOptionPane.showInputDialog("Usage from 2am-3am (number of Kilowatts)");
 				String hour4 = JOptionPane.showInputDialog("Usage from 3am-4am (number of Kilowatts)");
@@ -219,7 +222,7 @@ public class MainWindow {
 				String hour21 = JOptionPane.showInputDialog("Usage from 8pm-9pm (number of Kilowatts)");
 				String hour22 = JOptionPane.showInputDialog("Usage from 9pm-10pm (number of Kilowatts)");
 				String hour23 = JOptionPane.showInputDialog("Usage from 10pm-11pm (number of Kilowatts)");
-				String hour24 = JOptionPane.showInputDialog("Usage from 11pm-12pm (number of Kilowatts)");
+				String hour24 = JOptionPane.showInputDialog("Usage from 11pm-12pm (number of Kilowatts)");*/
 			}
 
 		});
@@ -276,12 +279,11 @@ public class MainWindow {
 
 				totalCostLabel.setText(Double.toString(totalCost));
 				totalUsageLabel.setText(Double.toString(totalUsage));
-
-				//System.out.println("cost: " + totalCost + "\n" + "usage: " + totalUsage); //DEBUG
-
 				
 			}
 		});
+
+		mainwindow.setVisible(true);
 	}
 
 }
