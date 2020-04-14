@@ -27,33 +27,12 @@ import java.io.File;
  */
 
 public class MainWindow {
-	private JLabel dailyUsage = new JLabel("Daily Usage:");
-	private JLabel totalUsage = new JLabel("Total Usage:");
-	private JLabel kilowattLabel = new JLabel("KW/h");
-	private JLabel kilowattLabel2 = new JLabel("KW/h");
-	private JLabel dollarSign1 = new JLabel ("$");
-	private JLabel dollarSign2 = new JLabel ("$");
-	private JLabel dailyUsageDollarsLabel = new JLabel ("0");
-	private JLabel dailyUsageKwhLabel = new JLabel ("0");
-	private JLabel totalUsageDollarsLabel = new JLabel ("0");
-	private JLabel totalUsageKwhLabel = new JLabel ("0");
-	JButton addDayB = new JButton ("Add a Day");
-
-	JButton enterHourlyRatesB = new JButton("Enter Hourly Rates");
-
-	JButton enterHourlyUsageB = new JButton("Enter Hourly Usage");
-
-	JButton readFromFileB = new JButton("Read Usage from File");
-
-	JButton calculateB = new JButton ("Calculate");
 
 	//TODO: UNCOMMENT THIS
 	//private Week week = new Week();
-	
+
 	//number of days (SHOULD BE CHANGED BY ADD DAYS BUTTON)
 	int numOfDays = 4; //test
-	//Create new object for Window Frame
-	JFrame mainwindow = new JFrame("Electricity Project");
 
 	public void createWindow() {
 
@@ -76,6 +55,8 @@ public class MainWindow {
 		//THIS IS TEMPORARY CODE FOR TESTING
 		//TODO: REMOVE THIS CODE
 
+		//Create new object for Window Frame
+		JFrame mainwindow = new JFrame("Electricity Project");
 
 		mainwindow.pack();
 		//#####################################################
@@ -138,6 +119,15 @@ public class MainWindow {
 		//################### BUTTONS #########################
 		//#####################################################
 
+		JButton addDayB = new JButton ("Add a Day");
+
+		JButton enterHourlyRatesB = new JButton("Enter Hourly Rates");
+
+		JButton enterHourlyUsageB = new JButton("Enter Hourly Usage");
+
+		JButton readFromFileB = new JButton("Read Usage from File");
+
+		JButton calculateB = new JButton ("Calculate");
 
 		//Set bounds and location of buttons
 		addDayB.setBounds(20, 220, 100, 25);
@@ -164,6 +154,16 @@ public class MainWindow {
 		//################### LABELS ##########################
 		//#####################################################
 
+		JLabel dailyUsage = new JLabel("Daily Usage:");
+		JLabel totalUsage = new JLabel("Total Usage:");
+		JLabel kilowattLabel = new JLabel("KW/h");
+		JLabel kilowattLabel2 = new JLabel("KW/h");
+		JLabel dollarSign1 = new JLabel ("$");
+		JLabel dollarSign2 = new JLabel ("$");
+		JLabel dailyUsageLabel = new JLabel ("");
+		JLabel dailyCostLabel = new JLabel ("");
+		JLabel totalUsageLabel = new JLabel ("", SwingConstants.RIGHT);
+		JLabel totalCostLabel = new JLabel ("", SwingConstants.RIGHT);
 
 
 		dailyUsage.setBounds(20, 260, 200, 25);
@@ -172,10 +172,10 @@ public class MainWindow {
 		kilowattLabel2.setBounds(200, 290, 50, 25);
 		dollarSign1.setBounds(350, 260, 50, 25);
 		dollarSign2.setBounds(350, 290, 50, 25);
-		dailyUsageDollarsLabel.setBounds(160, 260, 100, 25);
-		dailyUsageKwhLabel.setBounds(310, 260, 100, 25);
-		totalUsageDollarsLabel.setBounds(160, 290, 100, 25);
-		totalUsageKwhLabel.setBounds(310, 290, 100, 25);
+		dailyUsageLabel.setBounds(100, 260, 100, 25);
+		dailyCostLabel.setBounds(250, 260, 100, 25);
+		totalUsageLabel.setBounds(100, 290, 100, 25);
+		totalCostLabel.setBounds(250, 290, 100, 25);
 
 
 		mainwindow.add(dailyUsage);
@@ -184,10 +184,10 @@ public class MainWindow {
 		mainwindow.add(kilowattLabel2);
 		mainwindow.add(dollarSign1);
 		mainwindow.add(dollarSign2);
-		mainwindow.add(dailyUsageDollarsLabel);
-		mainwindow.add(dailyUsageKwhLabel);
-		mainwindow.add(totalUsageDollarsLabel);
-		mainwindow.add(totalUsageKwhLabel);
+		mainwindow.add(totalUsageLabel);
+		mainwindow.add(totalCostLabel);
+		mainwindow.add(dailyCostLabel);
+		mainwindow.add(dailyUsageLabel);
 
 		//#####################################################
 		//################### Action Listeners ################
@@ -273,29 +273,14 @@ public class MainWindow {
 				//When the calculate button is clicked
 
 				double totalCost, totalUsage;
-				mainwindow.remove(dailyUsageDollarsLabel);
-				mainwindow.remove(dailyUsageKwhLabel);
-				// totalCost = week.getTotalCost();
-				// totalUsage = week.getTotalUsage();
-				totalCost = 500; // Dummy values for testing, the above two lines should work otherwise
-				totalUsage = 4000;
-				dailyUsageDollarsLabel = new JLabel(String.valueOf(totalCost));
-				dailyUsageKwhLabel = new JLabel(String.valueOf(totalCost));
-				dailyUsageDollarsLabel.setBounds(160, 260, 100, 25);
-				dailyUsageKwhLabel.setBounds(310, 260, 100, 25);
-				mainwindow.add(dailyUsageDollarsLabel);
-				mainwindow.add(dailyUsageKwhLabel);
+				totalCost = week.getTotalCost();
+				totalUsage = week.getTotalUsage();
 
-				mainwindow.getContentPane().validate();
-				mainwindow.getContentPane().repaint();
+				totalCostLabel.setText(Double.toString(totalCost));
+				totalUsageLabel.setText(Double.toString(totalUsage));
 
 				System.out.println("cost: " + totalCost + "\n" + "usage: " + totalUsage);
 
-				// Just an example, this would benefit greatly from being refactored
-				// into something that uses a layout manager. I had to move a bunch
-				// of declarations out of the constructor so that the components could
-				// be accessed in this function. We should move all declarations outside
-				// of the constructor, and initialize in the constructor.
 				
 			}
 		});
