@@ -37,6 +37,15 @@ public class Day {
     }
 
 
+    public void fetchDataFromFile(String filePath){
+
+        Parser parser = new Parser();
+
+        parser.fetchData(filePath);
+
+        setUsage(parser.getValues());
+
+    }
 
 
 
@@ -65,7 +74,7 @@ public class Day {
     }
 
     // Calculates total usage for the day in kW/h.
-    public double calculateDailyUsage() {
+    public double getDailyUsage() {
 
         double totalUsage = 0;
         for (int i = 0; i < HOURS_IN_DAY; i++) {

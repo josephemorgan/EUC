@@ -70,13 +70,13 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
             if (validateWinterComboBox()) {
                 // Break this up into 3 loops because there are 3 blocks
                 for (int i = winterPanel.getOffPeakFromBox(); i < winterPanel.getOffPeakToBox(); i++) {
-                    temp.setRate(i, winterPanel.getOffPeakRatesField());
+                    temp.setRates(i, winterPanel.getOffPeakRatesField());
                 }
                 for (int i = winterPanel.getOnPeakFromBox(); i < winterPanel.getOnPeakToBox(); i++) {
-                    temp.setRate(i, winterPanel.getOnPeakRatesField());
+                    temp.setRates(i, winterPanel.getOnPeakRatesField());
                 }
                 for (int i = winterPanel.getSecondOffPeakFromBox(); i < 24; i++) {
-                    temp.setRate(i, winterPanel.getSecondOffPeakRatesField());
+                    temp.setRates(i, winterPanel.getSecondOffPeakRatesField());
                 }
                 System.out.println(temp.toString());
             }
@@ -84,16 +84,16 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
             if (validateSummerComboBox()) {
                 // Break this up into 4 loops because there are 4 blocks
                 for (int i = 0; i < summerPanel.getOffPeakToBox(); i++) {
-                    temp.setRate(i, summerPanel.getOffPeakRatesField());
+                    temp.setRates(i, summerPanel.getOffPeakRatesField());
                 }
                 for (int i = summerPanel.getMidPeakFromBox(); i < summerPanel.getMidPeakToBox(); i++) {
-                    temp.setRate(i, summerPanel.getMidPeakRatesField());
+                    temp.setRates(i, summerPanel.getMidPeakRatesField());
                 }
                 for (int i = summerPanel.getOnPeakFromBox(); i < summerPanel.getOnPeakToBox(); i++) {
-                    temp.setRate(i, summerPanel.getOnPeakRatesField());
+                    temp.setRates(i, summerPanel.getOnPeakRatesField());
                 }
                 for (int i = summerPanel.getSecondMidPeakFromBox(); i < 24; i++) {
-                    temp.setRate(i, summerPanel.getSecondMidPeakRatesField());
+                    temp.setRates(i, summerPanel.getSecondMidPeakRatesField());
                 }
                 System.out.println(temp.toString());
             }
