@@ -13,6 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Arrays;
 
 
 /* NEEDED:
@@ -55,20 +56,21 @@ public class MainWindow {
 		//THIS IS TEMPORARY CODE FOR TESTING
 		//TODO: REMOVE THIS CODE
 
-		//Create new object for Window Frame
-		JFrame mainwindow = new JFrame("Electricity Project");
-
-		mainwindow.pack();
 		//#####################################################
 		//################### Main Window #####################
 		//#####################################################
 
-		//Set properties of the created window
+		//Create new object for Window Frame
+		JFrame mainwindow = new JFrame("Electricity Project");
 
+		mainwindow.pack();
+
+		//Set properties of the created window
 		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainwindow.setLayout(null);
-		mainwindow.setLocationRelativeTo(null);
 		mainwindow.setSize(400, 600);
+		mainwindow.setVisible(true);
+		mainwindow.setLocationRelativeTo(null);
 
 
 		//centers the app when opened, allowing for dialogue to be center also
@@ -120,13 +122,9 @@ public class MainWindow {
 		//#####################################################
 
 		JButton addDayB = new JButton ("Add a Day");
-
 		JButton enterHourlyRatesB = new JButton("Enter Hourly Rates");
-
 		JButton enterHourlyUsageB = new JButton("Enter Hourly Usage");
-
 		JButton readFromFileB = new JButton("Read Usage from File");
-
 		JButton calculateB = new JButton ("Calculate");
 
 		//Set bounds and location of buttons
@@ -279,22 +277,11 @@ public class MainWindow {
 				totalCostLabel.setText(Double.toString(totalCost));
 				totalUsageLabel.setText(Double.toString(totalUsage));
 
-				System.out.println("cost: " + totalCost + "\n" + "usage: " + totalUsage);
+				//System.out.println("cost: " + totalCost + "\n" + "usage: " + totalUsage); //DEBUG
 
 				
 			}
 		});
-
-		//#####################################################
-		//################### Main Window #####################
-		//#####################################################
-		
-		//Set properties of the created window
-		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainwindow.setLayout(null);
-		mainwindow.setSize(400, 600);
-		mainwindow.setVisible(true);
-		mainwindow.setLocationRelativeTo(null);
 	}
 
 }
