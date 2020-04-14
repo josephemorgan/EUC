@@ -4,17 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 
 public class AddDayDialog extends JFrame implements ActionListener {
 
     private JPanel leftPanel;
     private JPanel rightPanel;
-    private JLabel hour1UsageLabel;
-    private JLabel hour2UsageLabel;
-    private JTextField hour1UsageTF;
-    private JTextField hour2UsageTF;
     private JButton finalizeButton;
     private JButton cancelButton;
+    private JTextField usageTextFields[] = new JTextField[HOURS_IN_DAY];
+    public double[] hoursInDayUsage = new double[HOURS_IN_DAY];
+    private int focusCounter = 0;
     private static int HOURS_IN_DAY = 24;
     private static Dimension TF_DIMENSION = new Dimension(100, 25);
     private static Dimension BUTTON_DIMENSION = new Dimension(150, 25);
@@ -22,6 +23,8 @@ public class AddDayDialog extends JFrame implements ActionListener {
 
     public AddDayDialog() {
         super("Enter Usage in KW/h [Ex: 12.32]");
+
+
         setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
         setLocationRelativeTo(null);
 
@@ -65,9 +68,20 @@ public class AddDayDialog extends JFrame implements ActionListener {
         //add a text field for each hour
         for (int i = 0; i < HOURS_IN_DAY; i++)
         {
-            JTextField usageTF = new JTextField("0.0");
-            usageTF.setPreferredSize(TF_DIMENSION);
-            rightPanel.add(usageTF);
+            usageTextFields[i] = new JTextField("0.0");
+            usageTextFields[i].setPreferredSize(TF_DIMENSION);
+
+            usageTextFields[i].addKeyListener(new KeyAdapter() {
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                        usageTextFields[focusCounter + 1].requestFocusInWindow();
+                        usageTextFields[focusCounter + 1].selectAll();
+                        focusCounter++;
+                    }
+                }
+            });
+
+            rightPanel.add(usageTextFields[i]);
         }
 
         finalizeButton = new JButton ("Finalize Usage");
@@ -90,6 +104,12 @@ public class AddDayDialog extends JFrame implements ActionListener {
         add(rightPanel, BorderLayout.CENTER);
 
         pack ();
+
+        //setting focus initially for new frame must be after pack() according to stack overflow
+        usageTextFields[focusCounter].requestFocusInWindow();
+        usageTextFields[focusCounter].selectAll();
+
+        //must be last or bugggggggs
         setVisible(true);
     }
 
@@ -97,10 +117,26 @@ public class AddDayDialog extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         Object source = actionEvent.getSource();
         if (source == finalizeButton) {
+            for (JTextField textfield : usageTextFields)
+            {
+                //TODO: save the value of each text box to an hour of a day object
+                hoursInDayUsage[textfield.getComponentCount()] = Double.parseDouble(textfield.getText());
+                System.out.println(textfield.getText());
+            }
+            for (int i = 0; i < HOURS_IN_DAY; i++)
+            {
+                System.out.println(hoursInDayUsage[i]);
+            }
             this.dispose();
         }
         else if (source == cancelButton) {
             this.dispose();
+        }
+    }
+
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            usageTextFields[focusCounter + 1].requestFocus();
         }
     }
 }

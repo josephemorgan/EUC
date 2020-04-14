@@ -32,6 +32,7 @@ public class MainWindow {
 	//TODO: UNCOMMENT THIS
 	//private Week week = new Week();
 
+	//TODO: probably remove with UI changes
 	//number of days (SHOULD BE CHANGED BY ADD DAYS BUTTON)
 	int numOfDays = 4; //test
 
@@ -69,7 +70,6 @@ public class MainWindow {
 		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainwindow.setLayout(null);
 		mainwindow.setSize(400, 600);
-		mainwindow.setLocationRelativeTo(null);
 
 
 		//centers the app when opened, allowing for dialogue to be center also
@@ -78,6 +78,9 @@ public class MainWindow {
 		//#####################################################
 		//################### Scroll Pane #####################
 		//#####################################################
+
+		//TODO: Either determine a new way to show all Days in a list of some sort or implement this in
+		// a way that the Scroll Pane will dynamically grow
 
 		//Defaulted grid rows # of 1 because it cannot be 0
 		int gridRows = 1;
@@ -138,7 +141,9 @@ public class MainWindow {
 		mainwindow.add(addDayB);
 		addDayB.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent actionEvent) {JFrame a = new AddDayDialog();}
+			public void actionPerformed(ActionEvent actionEvent) {
+				JFrame a = new AddDayDialog();
+			}
 		});
 		mainwindow.add(enterHourlyRatesB);
 		enterHourlyRatesB.addActionListener(new ActionListener() {
