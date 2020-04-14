@@ -120,6 +120,9 @@ public class AddDayDialog extends JFrame implements ActionListener {
             for (JTextField textfield : usageTextFields)
             {
                 //TODO: save the value of each text box to an hour of a day object
+                //      validate each text field and make sure its a double
+                //          Dialog window prompting user to change invalid hour before continuing
+                //      Did you mean to leave them at 0? (confirm)
                 hoursInDayUsage[textfield.getComponentCount()] = Double.parseDouble(textfield.getText());
                 System.out.println(textfield.getText());
             }
