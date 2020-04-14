@@ -66,6 +66,11 @@ public class Parser {
             unit = root.get("unit").asText();
             siteTimeZoneId = root.get("siteTimeZoneId").asText();
 
+            //Clear Array Lists to avoid out of bounds exceptions
+            startTimesString.clear();
+            endTimesString.clear();
+            valuesString.clear();
+
             //Assignment of array valuesString under the "reads" object
             root.findValuesAsText("startTime", startTimesString);
             root.findValuesAsText("endTime", endTimesString);
