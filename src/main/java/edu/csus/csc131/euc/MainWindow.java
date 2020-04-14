@@ -244,6 +244,13 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent event)
 			{
 				//When the calculate button is clicked
+
+				double totalCost, totalUsage;
+				totalCost = week.getTotalCost();
+				totalUsage = week.getTotalUsage();
+
+				System.out.println("cost: " + totalCost + "\n" + "usage: " + totalUsage);
+
 				
 			}
 		});
