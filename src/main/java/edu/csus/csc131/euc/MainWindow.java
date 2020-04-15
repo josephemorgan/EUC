@@ -288,7 +288,7 @@ public class MainWindow {
 				
 			}
 		});
-		
+
 		//must be at the end to avoid bug
 		mainwindow.setVisible(true);
 	}
