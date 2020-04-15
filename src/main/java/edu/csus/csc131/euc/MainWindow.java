@@ -70,6 +70,7 @@ public class MainWindow {
 		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainwindow.setLayout(null);
 		mainwindow.setSize(400, 600);
+		mainwindow.setLocationRelativeTo(null);
 
 
 		//centers the app when opened, allowing for dialogue to be center also
@@ -287,7 +288,8 @@ public class MainWindow {
 				
 			}
 		});
-
+		
+		//must be at the end to avoid bug
 		mainwindow.setVisible(true);
 	}
 
