@@ -86,7 +86,7 @@ class DayTest {
         assertEquals(26.8152 * 2, day.getDailyCost());
     }
 
-    
+
     Rates getSampleRates(){
         Rates rates = new Rates();
 
