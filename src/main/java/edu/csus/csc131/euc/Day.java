@@ -45,6 +45,16 @@ public class Day {
         return this.date;
     }
 
+    public String getDateAsString(){
+        String out = "";
+        out += this.date.getYear();
+        out += "-";
+        out += String.format("%02d", this.date.getMonthValue());
+        out += "-";
+        out += String.format("%02d", this.date.getDayOfMonth());
+        return out;
+    }
+
 
     public void setUsage(double[] kWh) {
         this.usage.setUsage(kWh);
