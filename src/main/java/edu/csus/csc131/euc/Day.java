@@ -7,7 +7,7 @@ public class Day {
     // Index represents hours with contents of array representing the kW/h usage and hourly usage rates respectively.
     private static final int HOURS_IN_DAY = 24;
     private LocalDate date;
-    private Rates rates;
+    private Rates rates = new Rates();
     private Usage usage = new Usage();
 
     // Constructors
@@ -41,20 +41,13 @@ public class Day {
         this.date = date;
     }
 
-    public void setDate(CharSequence dayString) {
-        this.date = LocalDate.parse(dayString);
-    }
-
     public LocalDate getDate() {
         return this.date;
     }
 
-    public String getDateAsString() {
-        return this.date.toString();
-    }
 
     public void setUsage(double[] kWh) {
-        usage.setUsage(kWh);
+        this.usage.setUsage(kWh);
     }
 
     public void setUsage(int index, double kWh) {

@@ -19,7 +19,7 @@ import static java.time.ZoneId.systemDefault;
  * fetchData method to retrieve data from a new file, with the file path as the argument.
  *
  * @author Amrin Sandhar
- * @version 13 April 2020
+ * @version 18 April 2020
  */
 
 public class Parser {
