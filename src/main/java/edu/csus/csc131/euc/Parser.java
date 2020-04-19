@@ -82,6 +82,7 @@ public class Parser {
 
         convertTimeArrays();
         convertValueArray();
+        convertTimeString(startTimesString.get(0)); //Sets the date of the Parser class to date described in file
     }
 
     /**
@@ -163,14 +164,6 @@ public class Parser {
         return siteTimeZoneId;
     }
 
-    public ArrayList<LocalDate> getStartTimes() {
-        return startTimes;
-    }
-
-    public ArrayList<LocalDate> getEndTimes() {
-        return endTimes;
-    }
-
     public double[] getValues() {
         return values;
     }
@@ -178,4 +171,15 @@ public class Parser {
     public LocalDate getDate() {
         return date;
     }
+
+    //No longer needed
+    /*
+    public ArrayList<LocalDate> getStartTimes() {
+        return startTimes;
+    }
+
+    public ArrayList<LocalDate> getEndTimes() {
+        return endTimes;
+    }
+     */
 }
