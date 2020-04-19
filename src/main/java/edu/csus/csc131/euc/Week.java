@@ -20,6 +20,22 @@ public class Week {
         this.winterRates = winterRates;
     }
 
+    public Day getDay(int i) {
+        return days.get(i);
+    }
+
+    public Day getDay(String date) {
+        for (Day day : days) {
+            if (date == day.getDate().toString()) {
+                return day;
+            }
+        }
+        return null;
+    }
+
+    public void addDay(Day dayToAdd) {
+        days.add(dayToAdd);
+    }
 
     public void fetchDayFromFile(String filePath){
 
