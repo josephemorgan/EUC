@@ -1,57 +1,80 @@
 package edu.csus.csc131.euc;
 
-import com.fasterxml.jackson.databind.node.DoubleNode;
+import org.junit.jupiter.api.Test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.time.LocalDate;
 
-import static java.time.ZoneId.systemDefault;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class ParserTest {
+class ParserTest {
 
-    public static void main(String[] args) {
+    Parser parser = new Parser();
 
+    private static final int HOURS_IN_DAY = 24;
+    private static final String TEST_FILE_PATH = "import\\dailyElectricityUsage_2020_02_28.json";
+
+    @Test
+    void getUserId() {
+        parser.fetchData(TEST_FILE_PATH);
+        assertEquals(1, parser.getUserId());
     }
 
-
-    public static void testParser(){
-
-        Parser parser = new Parser();
-
-        parser.fetchData("C:\\Users\\amrin\\Documents\\CSC131\\EUC\\euc\\import\\dailyElectricityUsage_2020_02_28.json");
-
-        ArrayList<LocalDate> start = parser.getStartTimes();
-
-        LocalDate first = start.get(1);
-
-        System.out.println(first.getDayOfMonth());
+    @Test
+    void getUnit() {
+        parser.fetchData(TEST_FILE_PATH);
+        assertEquals("KWH", parser.getUnit());
     }
 
+    @Test
+    void getSiteTimeZoneId() {
+        parser.fetchData(TEST_FILE_PATH);
+        assertEquals("America/Los_Angeles", parser.getSiteTimeZoneId());
+    }
 
-    public static void timeTest() {
+    @Test
+    void getValues() {
+        parser.fetchData(TEST_FILE_PATH);
 
-        String timeString = "2020-02-28T01:00:00.000-08:00";
-        timeString = timeString.substring(0, 19);
+        double[] expectedValues = {
+                0.4272,
+                0.3768,
+                0.3888,
+                0.3888,
+                0.5604,
+                0.4152,
+                0.5952,
+                1.5900,
+                1.2336,
+                1.1556,
+                3.4824,
+                2.8968,
+                1.0452,
+                0.4044,
+                0.4452,
+                0.5088,
+                0.5580,
+                0.8592,
+                1.8720,
+                2.2704,
+                1.7436,
+                1.2960,
+                1.1472,
+                1.1544
+        };
+        double[] realValues = parser.getValues();
 
-        SimpleDateFormat format = new SimpleDateFormat(
-                "yyyy-MM-dd'T'HH:mm:ss"
-        );
-
-        LocalDate localdate = null;
-
-        try {
-            Date date = format.parse(timeString);
-            localdate = date.toInstant().atZone(systemDefault()).toLocalDate();
+        for(int i = 0; i < HOURS_IN_DAY; i++){
+            assertEquals(expectedValues[i], realValues[i]);
         }
-        catch (ParseException e) {
-            System.out.println("Parse exception");
-        }
+    }
 
-        System.out.println(localdate.toString());
+    @Test
+    void getDate() {
+        parser.fetchData(TEST_FILE_PATH);
+        LocalDate date = parser.getDate();
 
-        System.out.println(localdate.getMonthValue());
+        assertEquals(2020, date.getYear());
+        assertEquals(2, date.getMonthValue());
+        assertEquals(28, date.getDayOfMonth());
     }
 }
