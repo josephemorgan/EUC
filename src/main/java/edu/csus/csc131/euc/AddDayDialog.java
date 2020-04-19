@@ -6,13 +6,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import java.io.File;
 
 public class AddDayDialog extends JFrame implements ActionListener {
 
     private JPanel leftPanel;
     private JPanel rightPanel;
     private JButton finalizeButton;
+    private JButton readFromFileButton;
     private JButton cancelButton;
+    private Week week;
     private JTextField usageTextFields[] = new JTextField[HOURS_IN_DAY];
     public double[] hoursInDayUsage = new double[HOURS_IN_DAY];
     private int focusCounter = 0;
@@ -21,9 +24,9 @@ public class AddDayDialog extends JFrame implements ActionListener {
     private static Dimension BUTTON_DIMENSION = new Dimension(150, 25);
     private static Dimension LABEL_DIMENSION = new Dimension(180, 25);
 
-    public AddDayDialog() {
+    public AddDayDialog(Week wk) {
         super("Enter Usage in KW/h [Ex: 12.32]");
-
+        this.week = wk;
 
         setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
         setLocationRelativeTo(null);
@@ -85,15 +88,19 @@ public class AddDayDialog extends JFrame implements ActionListener {
         }
 
         finalizeButton = new JButton ("Finalize Usage");
+        readFromFileButton = new JButton ("Read From File");
         cancelButton = new JButton("Cancel");
 
         finalizeButton.setPreferredSize(BUTTON_DIMENSION);
+        readFromFileButton.setPreferredSize(BUTTON_DIMENSION);
         cancelButton.setPreferredSize(BUTTON_DIMENSION);
 
         finalizeButton.addActionListener(this);
+        readFromFileButton.addActionListener(this);
         cancelButton.addActionListener(this);
 
         leftPanel.add(finalizeButton);
+        leftPanel.add(readFromFileButton);
         rightPanel.add(cancelButton);
 
         leftPanel.setBorder(BorderFactory.createTitledBorder("Times"));
@@ -134,6 +141,32 @@ public class AddDayDialog extends JFrame implements ActionListener {
         }
         else if (source == cancelButton) {
             this.dispose();
+        }
+        else if (source == readFromFileButton)
+        {
+            //Open a file browser, save file path
+            JFileChooser fileChooser = new JFileChooser();
+
+            //default the directory to the users home directory
+            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+
+            //variable to store the result of the dialog menu
+            int result = fileChooser.showOpenDialog(this);
+
+            //if the result is an approved option (a file)
+            if (result == JFileChooser.APPROVE_OPTION) {
+                //new file object to hold the file
+                File selectedFile = fileChooser.getSelectedFile();
+
+                //Fetch data from file and add a day to week collection
+                week.fetchDayFromFile(selectedFile.getAbsolutePath());
+
+                System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            }
+            else
+            {
+                System.out.println("Failed to select a file or choose an approved file.");
+            }
         }
     }
 

@@ -69,7 +69,7 @@ public class MainWindow {
 		//Set properties of the created window
 		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainwindow.setLayout(null);
-		mainwindow.setSize(400, 600);
+		mainwindow.setSize(400, 260);
 		mainwindow.setLocationRelativeTo(null);
 
 
@@ -77,85 +77,64 @@ public class MainWindow {
 		mainwindow.setLocationRelativeTo(null);
 
 		//#####################################################
-		//################### Scroll Pane #####################
+		//################### Combo Box #######################
 		//#####################################################
 
-		//TODO: Either determine a new way to show all Days in a list of some sort or implement this in
-		// a way that the Scroll Pane will dynamically grow
+		String dayEntry[] = {"1/1/2020", "1/2/2020", "1/3/2020"};
+		JComboBox comboBox = new JComboBox(dayEntry);
 
-		//Defaulted grid rows # of 1 because it cannot be 0
-		int gridRows = 1;
+		comboBox.setFont(new Font("Times New Roman", Font.BOLD, 20));
 
-		//create a gridLayout object in order to dynamically change rows
-		GridLayout gridLayout = new GridLayout(0, gridRows);
-
-		//create new scroll pane with grid layout to hold each Day in a Row
-		JPanel scrollPanel = new JPanel(gridLayout);
-		JScrollPane scrollableTextArea = new JScrollPane(scrollPanel);
-
-		//scroll bars created and set to show up AS NEEDED
-		scrollableTextArea.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollableTextArea.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-		//set the size of the scroll pane
-		scrollableTextArea.setBounds(20, 20, 330, 200);
-
-
-		//creating buttons depending on how many days have been added to the scrollPane
-		Button buttons[] = new Button[numOfDays];
-
-		//for each day create a button (May need to change)
-		for(int i = 0; i < numOfDays; i++)
-		{
-			//create button to add with title of the Date
-			buttons[i] = new Button("Jan " + (i + 1) + ", 2020"); //(DATE NEEDS TO BE MADE BASED ON ACTUAL DATE)
-
-			//increase amount of rows to add a Day
-			gridRows++;
-
-			//add button to grid slot
-			scrollPanel.add(buttons[i]);
-		}
-
-		//add scroll pane to the main window
-		mainwindow.add(scrollableTextArea);
+		comboBox.setBounds(25, 25, 335, 50);
+		mainwindow.add(comboBox);
 
 		//#####################################################
 		//################### BUTTONS #########################
 		//#####################################################
 
 		JButton addDayB = new JButton ("Add a Day");
+		JButton removeDayB = new JButton ("Remove a Day");
 		JButton enterHourlyRatesB = new JButton("Enter Hourly Rates");
-		JButton enterHourlyUsageB = new JButton("Enter Hourly Usage");
 		JButton readFromFileB = new JButton("Read Usage from File");
-		JButton calculateB = new JButton ("Calculate");
 
 		//Set bounds and location of buttons
-		addDayB.setBounds(20, 220, 100, 25);
-		enterHourlyRatesB.setBounds(35, 330, 300, 25);
-		enterHourlyUsageB.setBounds(35, 380, 300, 25);
+		addDayB.setBounds(25, 85, 165, 25);
+		removeDayB.setBounds(195, 85, 165, 25);
+		enterHourlyRatesB.setBounds(25, 120, 335, 25);
 		readFromFileB.setBounds(35, 430, 300, 25);
-		calculateB.setBounds(35, 480, 300, 25);
 
 
-		//Add Button Objects to Window UI
-		mainwindow.add(addDayB);
-		addDayB.addActionListener(new ActionListener() {
+		//Add Button Objects & Action Listeners to Window UI
+
+		//add day
+		mainwindow.add(addDayB); // add day button added
+		addDayB.addActionListener(new ActionListener() { //action listener for button being clicked
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				JFrame a = new AddDayDialog();
+				JFrame a = new AddDayDialog(week);
+
 			}
 		});
-		mainwindow.add(enterHourlyRatesB);
-		enterHourlyRatesB.addActionListener(new ActionListener() {
+
+		//remove day
+		mainwindow.add(removeDayB);// remove day button added
+		removeDayB.addActionListener(new ActionListener() { //action listener for button being clicked
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				JFrame a = new RemoveDayDialog(week);
+			}
+		});
+
+		//hourly rates
+		mainwindow.add(enterHourlyRatesB);//hourly rates button added
+		enterHourlyRatesB.addActionListener(new ActionListener() { //action listener for button being clicked
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 			    JFrame f = new EnterRatesDialog();
 			}
 		});
-		mainwindow.add(enterHourlyUsageB);
+
 		mainwindow.add(readFromFileB);
-		mainwindow.add(calculateB);
 
 		//#####################################################
 		//################### LABELS ##########################
@@ -173,16 +152,16 @@ public class MainWindow {
 		JLabel totalCostLabel = new JLabel ("", SwingConstants.RIGHT);
 
 
-		dailyUsage.setBounds(20, 260, 200, 25);
-		totalUsage.setBounds(20, 290, 200, 25);
-		kilowattLabel.setBounds(200, 260, 50, 25);
-		kilowattLabel2.setBounds(200, 290, 50, 25);
-		dollarSign1.setBounds(350, 260, 50, 25);
-		dollarSign2.setBounds(350, 290, 50, 25);
-		dailyUsageLabel.setBounds(100, 260, 100, 25);
-		dailyCostLabel.setBounds(250, 260, 100, 25);
-		totalUsageLabel.setBounds(100, 290, 100, 25);
-		totalCostLabel.setBounds(250, 290, 100, 25);
+		dailyUsage.setBounds(20, 155, 200, 25);
+		totalUsage.setBounds(20, 185, 200, 25);
+		kilowattLabel.setBounds(200, 155, 50, 25);
+		kilowattLabel2.setBounds(200, 185, 50, 25);
+		dollarSign1.setBounds(350, 155, 50, 25);
+		dollarSign2.setBounds(350, 185, 50, 25);
+		dailyUsageLabel.setBounds(100, 155, 100, 25);
+		dailyCostLabel.setBounds(250, 155, 100, 25);
+		totalUsageLabel.setBounds(100, 185, 100, 25);
+		totalCostLabel.setBounds(250, 185, 100, 25);
 
 
 		mainwindow.add(dailyUsage);
@@ -195,52 +174,6 @@ public class MainWindow {
 		mainwindow.add(totalCostLabel);
 		mainwindow.add(dailyCostLabel);
 		mainwindow.add(dailyUsageLabel);
-
-		//#####################################################
-		//################### Action Listeners ################
-		//#######################(Buttons)#####################
-
-		//AddDay button action listener
-		addDayB.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent event)
-			{
-				/*String hour1 = JOptionPane.showInputDialog("Usage from 12am-1am (number of Kilowatts)");
-				String hour2 = JOptionPane.showInputDialog("Usage from 1am-2am (number of Kilowatts)");
-				String hour3 = JOptionPane.showInputDialog("Usage from 2am-3am (number of Kilowatts)");
-				String hour4 = JOptionPane.showInputDialog("Usage from 3am-4am (number of Kilowatts)");
-				String hour5 = JOptionPane.showInputDialog("Usage from 4am-5am (number of Kilowatts)");
-				String hour6 = JOptionPane.showInputDialog("Usage from 5am-6am (number of Kilowatts)");
-				String hour7 = JOptionPane.showInputDialog("Usage from 6am-7am (number of Kilowatts)");
-				String hour8 = JOptionPane.showInputDialog("Usage from 7am-8am (number of Kilowatts)");
-				String hour9 = JOptionPane.showInputDialog("Usage from 8am-9am (number of Kilowatts)");
-				String hour10 = JOptionPane.showInputDialog("Usage from 9am-10am (number of Kilowatts)");
-				String hour11 = JOptionPane.showInputDialog("Usage from 10am-11am (number of Kilowatts)");
-				String hour12 = JOptionPane.showInputDialog("Usage from 11am-12pm (number of Kilowatts)");
-				String hour13 = JOptionPane.showInputDialog("Usage from 12pm-1pm (number of Kilowatts)");
-				String hour14 = JOptionPane.showInputDialog("Usage from 1pm-2pm (number of Kilowatts)");
-				String hour15 = JOptionPane.showInputDialog("Usage from 2pm-3pm (number of Kilowatts)");
-				String hour16 = JOptionPane.showInputDialog("Usage from 3pm-4pm (number of Kilowatts)");
-				String hour17 = JOptionPane.showInputDialog("Usage from 4pm-5pm (number of Kilowatts)");
-				String hour18 = JOptionPane.showInputDialog("Usage from 5pm-6pm (number of Kilowatts)");
-				String hour19 = JOptionPane.showInputDialog("Usage from 6pm-7pm (number of Kilowatts)");
-				String hour20 = JOptionPane.showInputDialog("Usage from 7pm-8pm (number of Kilowatts)");
-				String hour21 = JOptionPane.showInputDialog("Usage from 8pm-9pm (number of Kilowatts)");
-				String hour22 = JOptionPane.showInputDialog("Usage from 9pm-10pm (number of Kilowatts)");
-				String hour23 = JOptionPane.showInputDialog("Usage from 10pm-11pm (number of Kilowatts)");
-				String hour24 = JOptionPane.showInputDialog("Usage from 11pm-12pm (number of Kilowatts)");*/
-			}
-
-		});
-
-		//Hourly Usage button action listener
-		enterHourlyUsageB.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent event)
-			{
-				//What will occur when the button is clicked
-			}
-		});
 
 		//Read from file button action listener
 		readFromFileB.addActionListener(new ActionListener()
@@ -270,22 +203,6 @@ public class MainWindow {
 				{
 					System.out.println("Failed to select a file or choose an approved file.");
 				}
-			}
-		});
-
-		calculateB.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent event)
-			{
-				//When the calculate button is clicked
-
-				double totalCost, totalUsage;
-				totalCost = week.getTotalCost();
-				totalUsage = week.getTotalUsage();
-
-				totalCostLabel.setText(Double.toString(totalCost));
-				totalUsageLabel.setText(Double.toString(totalUsage));
-				
 			}
 		});
 
