@@ -52,6 +52,13 @@ class DayTest {
         assertEquals(2, date.getDayOfMonth());
     }
 
+    @Test
+    void getDateAsString(){
+        Day altDay = new Day(getSampleRates(), "2020-03-02");
+
+        assertEquals("2020-03-02", altDay.getDateAsString());
+    }
+
 
     @Test
     void getDailyUsage() {
