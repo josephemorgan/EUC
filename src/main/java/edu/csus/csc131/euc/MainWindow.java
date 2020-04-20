@@ -29,6 +29,8 @@ import java.util.Arrays;
 
 public class MainWindow {
 
+	Week listOfDays;
+
 	//TODO: UNCOMMENT THIS
 	//private Week week = new Week();
 
@@ -50,20 +52,16 @@ public class MainWindow {
 			winterRates[i] = 2.0;
 		}
 
-		Rates summer = new Rates(summerRates);
-		Rates winter = new Rates(winterRates);
-
-		Week week = new Week(summer, winter);
 		//THIS IS TEMPORARY CODE FOR TESTING
 		//TODO: REMOVE THIS CODE
 
 		//#####################################################
 		//################### Main Window #####################
 		//#####################################################
+		listOfDays = new Week(new Rates(), new Rates());
 
 		//Create new object for Window Frame
 		JFrame mainwindow = new JFrame("Electricity Project");
-
 		mainwindow.pack();
 
 		//Set properties of the created window
@@ -111,7 +109,7 @@ public class MainWindow {
 		addDayB.addActionListener(new ActionListener() { //action listener for button being clicked
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				JFrame a = new AddDayDialog(week);
+				JFrame a = new AddDayDialog(listOfDays);
 
 			}
 		});
@@ -121,7 +119,7 @@ public class MainWindow {
 		removeDayB.addActionListener(new ActionListener() { //action listener for button being clicked
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				JFrame a = new RemoveDayDialog(week);
+				JFrame a = new RemoveDayDialog(listOfDays);
 			}
 		});
 
@@ -130,7 +128,7 @@ public class MainWindow {
 		enterHourlyRatesB.addActionListener(new ActionListener() { //action listener for button being clicked
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-			    JFrame f = new EnterRatesDialog();
+			    JFrame f = new EnterRatesDialog(listOfDays);
 			}
 		});
 
@@ -195,7 +193,7 @@ public class MainWindow {
 					File selectedFile = fileChooser.getSelectedFile();
 
 					//Fetch data from file and add a day to week collection
-					week.fetchDayFromFile(selectedFile.getAbsolutePath());
+					listOfDays.fetchDayFromFile(selectedFile.getAbsolutePath());
 				}
 				else
 				{

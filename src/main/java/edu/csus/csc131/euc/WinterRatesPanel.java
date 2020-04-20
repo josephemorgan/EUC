@@ -11,7 +11,6 @@ public class WinterRatesPanel extends JPanel {
     private static String[] TIMES_KEYS;
     private JTextField offPeakRatesField;
     private JTextField onPeakRatesField;
-    private JTextField secondOffPeakRatesField;
     private JComboBox<String> offPeakToBox;
     private JComboBox<String> onPeakToBox;
 
@@ -143,10 +142,6 @@ public class WinterRatesPanel extends JPanel {
 
     public Double getOnPeakRatesField() {
         return Double.valueOf(onPeakRatesField.getText());
-    }
-
-    public Double getSecondOffPeakRatesField() {
-        return Double.valueOf(secondOffPeakRatesField.getText());
     }
 
     public int getOffPeakToBox() {
