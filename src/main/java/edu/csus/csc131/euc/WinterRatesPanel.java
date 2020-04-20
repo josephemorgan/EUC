@@ -12,15 +12,10 @@ public class WinterRatesPanel extends JPanel {
     private JTextField offPeakRatesField;
     private JTextField onPeakRatesField;
     private JTextField secondOffPeakRatesField;
-    private JComboBox<String> offPeakFromBox;
     private JComboBox<String> offPeakToBox;
-    private JComboBox<String> onPeakFromBox;
     private JComboBox<String> onPeakToBox;
-    private JComboBox<String> secondOffPeakFromBox;
-    private JComboBox<String> secondOffPeakToBox;
 
     public WinterRatesPanel() {
-        System.out.println("In WinterRatesPanel()");
         initTimes();
 
         buildPanel();
@@ -30,15 +25,12 @@ public class WinterRatesPanel extends JPanel {
         // Init Elements
         offPeakRatesField = new JTextField(8);
         onPeakRatesField = new JTextField(8);
-        secondOffPeakRatesField = new JTextField(8);
-        offPeakFromBox = new JComboBox<String>();
-        offPeakFromBox.addItem("00:00");
         offPeakToBox = new JComboBox<String>(TIMES_KEYS);
-        onPeakFromBox = new JComboBox<String>(TIMES_KEYS);
         onPeakToBox = new JComboBox<String>(TIMES_KEYS);
-        secondOffPeakFromBox = new JComboBox<String>(TIMES_KEYS);
-        secondOffPeakToBox = new JComboBox<String>();
-        secondOffPeakToBox.addItem("00:00");
+        offPeakRatesField.setText("0.1006");
+        onPeakRatesField.setText("0.1338");
+        offPeakToBox.setSelectedIndex(17);
+        onPeakToBox.setSelectedIndex(20);
 
         ////// Build Panels //////
         int ratesLabelIndex = 0;
@@ -57,6 +49,7 @@ public class WinterRatesPanel extends JPanel {
         c.insets = def;
 
         // Row One
+        c.anchor = GridBagConstraints.LINE_START;
         c.gridx = 0;
         c.gridy = 0;
         c.gridheight = 2;
@@ -84,35 +77,23 @@ public class WinterRatesPanel extends JPanel {
 
         c.gridx = 4;
         c.gridy = 0;
-        c.gridheight = 1;
+        c.gridheight = 2;
         c.gridwidth = 1;
         c.insets = right;
         c.anchor = GridBagConstraints.LINE_END;
-        add(new JLabel("From:"), c);
-
-        c.gridx = 4;
-        c.gridy = 1;
-        c.gridheight = 1;
-        c.gridwidth = 1;
-        add(new JLabel("To:"), c);
+        add(new JLabel("Ends at:"), c);
 
         c.gridx = 5;
         c.gridy = 0;
-        c.gridheight = 1;
+        c.gridheight = 2;
         c.gridwidth = 1;
         c.insets = left;
         c.anchor = GridBagConstraints.LINE_START;
-        add(offPeakFromBox, c);
-
-        c.gridx = 5;
-        c.gridy = 1;
-        c.gridheight = 1;
-        c.gridwidth = 1;
         add(offPeakToBox, c);
-        c.insets = def;
-        c.anchor = GridBagConstraints.CENTER;
 
         // Row Two
+        c.anchor = GridBagConstraints.LINE_START;
+        c.insets = def;
         c.gridx = 0;
         c.gridy = 2;
         c.gridheight = 2;
@@ -140,89 +121,20 @@ public class WinterRatesPanel extends JPanel {
 
         c.gridx = 4;
         c.gridy = 2;
-        c.gridheight = 1;
+        c.gridheight = 2;
         c.gridwidth = 1;
         c.insets = right;
         c.anchor = GridBagConstraints.LINE_END;
-        add(new JLabel("From:"), c);
-
-        c.gridx = 4;
-        c.gridy = 3;
-        c.gridheight = 1;
-        c.gridwidth = 1;
-        add(new JLabel("To:"), c);
+        add(new JLabel("Ends at:"), c);
 
         c.gridx = 5;
         c.gridy = 2;
-        c.gridheight = 1;
+        c.gridheight = 2;
         c.gridwidth = 1;
         c.insets = left;
         c.anchor = GridBagConstraints.LINE_START;
-        add(onPeakFromBox, c);
-
-        c.gridx = 5;
-        c.gridy = 3;
-        c.gridheight = 1;
-        c.gridwidth = 1;
         add(onPeakToBox, c);
-        c.insets = def;
-        c.anchor = GridBagConstraints.CENTER;
 
-        // Row Three
-        c.gridx = 0;
-        c.gridy = 4;
-        c.gridheight = 2;
-        c.gridwidth = 2;
-        add(new JLabel("Off Peak"), c);
-
-        c.gridx = 2;
-        c.gridy = 4;
-        c.gridheight = 2;
-        c.gridwidth = 1;
-        c.insets = right;
-        c.anchor = GridBagConstraints.LINE_END;
-        add(new JLabel("Rates:"), c);
-
-        c.gridx = 3;
-        c.gridy = 4;
-        c.gridheight = 2;
-        c.gridwidth = 1;
-        c.insets = left;
-        c.anchor = GridBagConstraints.LINE_START;
-        add(secondOffPeakRatesField, c);
-
-        c.insets = def;
-        c.anchor = GridBagConstraints.CENTER;
-
-        c.gridx = 4;
-        c.gridy = 4;
-        c.gridheight = 1;
-        c.gridwidth = 1;
-        c.insets = right;
-        c.anchor = GridBagConstraints.LINE_END;
-        add(new JLabel("From:"), c);
-
-        c.gridx = 4;
-        c.gridy = 5;
-        c.gridheight = 1;
-        c.gridwidth = 1;
-        add(new JLabel("To:"), c);
-
-        c.gridx = 5;
-        c.gridy = 4;
-        c.gridheight = 1;
-        c.gridwidth = 1;
-        c.insets = left;
-        c.anchor = GridBagConstraints.LINE_START;
-        add(secondOffPeakFromBox, c);
-
-        c.gridx = 5;
-        c.gridy = 5;
-        c.gridheight = 1;
-        c.gridwidth = 1;
-        add(secondOffPeakToBox, c);
-        c.insets = def;
-        c.anchor = GridBagConstraints.CENTER;
     }
 
     public Double getOffPeakRatesField() {
@@ -237,29 +149,14 @@ public class WinterRatesPanel extends JPanel {
         return Double.valueOf(secondOffPeakRatesField.getText());
     }
 
-    public int getOffPeakFromBox() {
-        return TIMES.get(offPeakFromBox.getSelectedItem().toString());
-    }
-
     public int getOffPeakToBox() {
         return TIMES.get(offPeakToBox.getSelectedItem().toString());
-    }
-
-    public int getOnPeakFromBox() {
-        return TIMES.get(onPeakFromBox.getSelectedItem().toString());
     }
 
     public int getOnPeakToBox() {
         return TIMES.get(onPeakToBox.getSelectedItem().toString());
     }
 
-    public int getSecondOffPeakFromBox() {
-        return TIMES.get(secondOffPeakFromBox.getSelectedItem().toString());
-    }
-
-    public int getSecondOffPeakToBox() {
-        return TIMES.get(secondOffPeakToBox.getSelectedItem().toString());
-    }
 
     private static void initTimes() {
         TIMES_KEYS = new String[HOURS_IN_DAY];

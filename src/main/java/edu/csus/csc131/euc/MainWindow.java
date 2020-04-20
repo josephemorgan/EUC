@@ -196,12 +196,9 @@ public class MainWindow {
 
 					//Fetch data from file and add a day to week collection
 					week.fetchDayFromFile(selectedFile.getAbsolutePath());
-
-					System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 				}
 				else
 				{
-					System.out.println("Failed to select a file or choose an approved file.");
 				}
 			}
 		});
