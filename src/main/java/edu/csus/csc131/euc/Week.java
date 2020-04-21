@@ -15,6 +15,16 @@ public class Week {
 
     //Constructor
     public Week() {
+        double[] SR = {.1209d,.1209d,.1209d,.1209d,.1209d,.1209d,
+                .1209d,.1209d,.1209d,.1209d,.1209d,.1209d,
+                .1671d,.1671d,.1671d,.1671d,.1671d,.2941d,
+                .2941d,.2941d,.1671d,.1671d,.1671d,.1671d,};
+        double[] WR = {.1006d,.1006d,.1006d,.1006d,.1006d,.1006d,
+                .1006d,.1006d,.1006d,.1006d,.1006d,.1006d,
+                .1006d,.1006d,.1006d,.1006d,.1006d,.1388d,
+                .1388d,.1388d,.1006,.1006,.1006,.1006,};
+        summerRates = new Rates(SR);
+        winterRates = new Rates(WR);
     }
 
     public Week(Rates summerRates, Rates winterRates) {
