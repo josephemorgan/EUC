@@ -10,6 +10,7 @@ import java.io.File;
 
 public class AddDayDialog extends JFrame implements ActionListener {
 
+    private JPanel fieldPanel;
     private JPanel leftPanel;
     private JPanel rightPanel;
     private JButton finalizeButton;
@@ -28,12 +29,14 @@ public class AddDayDialog extends JFrame implements ActionListener {
         super("Enter Usage in KW/h [Ex: 12.32]");
         this.week = wk;
 
-        setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
+        setLayout(new BorderLayout());
         setLocationRelativeTo(null);
 
+        fieldPanel = new JPanel();
         leftPanel = new JPanel();
         rightPanel = new JPanel();
 
+        fieldPanel.setLayout(new BoxLayout());
         leftPanel.setLayout(new FlowLayout());
         rightPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         leftPanel.setPreferredSize(new Dimension(200, 800));
@@ -107,8 +110,8 @@ public class AddDayDialog extends JFrame implements ActionListener {
         rightPanel.setBorder(BorderFactory.createTitledBorder("Usage"));
 
         //add left and right panels to the Add Day Dialog
-        add(leftPanel, BorderLayout.WEST);
-        add(rightPanel, BorderLayout.CENTER);
+        fieldPanel.add(leftPanel, BorderLayout.WEST);
+        fieldPanel.add(rightPanel, BorderLayout.CENTER);
 
         pack ();
 
@@ -124,14 +127,10 @@ public class AddDayDialog extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         Object source = actionEvent.getSource();
         if (source == finalizeButton) {
+            Day dayToAdd;
             for (JTextField textfield : usageTextFields)
             {
-                //TODO: save the value of each text box to an hour of a day object
-                //      validate each text field and make sure its a double
-                //          Dialog window prompting user to change invalid hour before continuing
-                //      Did you mean to leave them at 0? (confirm)
                 hoursInDayUsage[textfield.getComponentCount()] = Double.parseDouble(textfield.getText());
-                System.out.println(textfield.getText());
             }
             for (int i = 0; i < HOURS_IN_DAY; i++)
             {
