@@ -100,6 +100,7 @@ public class MainWindow {
 					dailyCostValue.setText(currencyFormatter.format(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyCost()));
 					totalUsageValue.setText(String.valueOf(listOfDays.getTotalUsage()) + " kW/h");
 					totalCostValue.setText(currencyFormatter.format(listOfDays.getTotalCost()));
+					comboBox.addItem(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDateAsString());
 					mainwindow.validate();
 					mainwindow.repaint();
 				}
