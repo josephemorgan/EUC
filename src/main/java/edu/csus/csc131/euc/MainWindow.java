@@ -94,13 +94,15 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent actionEvent) {
 				AddDayDialog a = new AddDayDialog(mainwindow, listOfDays);
 
-				NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
-				dailyUsageValue.setText(String.valueOf(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyUsage()) + " kW/h");
-				dailyCostValue.setText(currencyFormatter.format(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyCost()));
-				totalUsageValue.setText(String.valueOf(listOfDays.getTotalUsage()) + " kW/h");
-				totalCostValue.setText(currencyFormatter.format(listOfDays.getTotalCost()));
-				mainwindow.validate();
-				mainwindow.repaint();
+				if (listOfDays.getNumOfDays() != 0) {
+					NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+					dailyUsageValue.setText(String.valueOf(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyUsage()) + " kW/h");
+					dailyCostValue.setText(currencyFormatter.format(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyCost()));
+					totalUsageValue.setText(String.valueOf(listOfDays.getTotalUsage()) + " kW/h");
+					totalCostValue.setText(currencyFormatter.format(listOfDays.getTotalCost()));
+					mainwindow.validate();
+					mainwindow.repaint();
+				}
 			}
 		});
 
@@ -118,7 +120,7 @@ public class MainWindow {
 		enterHourlyRatesB.addActionListener(new ActionListener() { //action listener for button being clicked
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-			    JFrame f = new EnterRatesDialog(listOfDays);
+			    JDialog d = new EnterRatesDialog(mainwindow, listOfDays);
 			}
 		});
 

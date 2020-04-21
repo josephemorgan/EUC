@@ -1,6 +1,7 @@
 package edu.csus.csc131.euc;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +38,10 @@ public class SummerRatesPanel extends JPanel {
         midPeakToBox.setSelectedIndex(17);
         onPeakToBox.setSelectedIndex(20);
 
+        Border innerBorder = BorderFactory.createTitledBorder("Enter cost per kW/h for Summer");
+        Border outerBorder = BorderFactory.createEmptyBorder(5,5,5,5);
+
+        setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
         ////// Build Panel //////
         int ratesLabelIndex = 0;
         int fromLabelIndex = 0;

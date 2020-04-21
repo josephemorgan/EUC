@@ -6,54 +6,77 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class EnterRatesDialog extends JFrame implements ActionListener {
+public class EnterRatesDialog extends JDialog implements ActionListener {
     private Week listOfDays;
-    private JPanel topPanel;
-    private JPanel midPanel;
+    private JPanel entryPanel;
     private JPanel bottomPanel;
+    private JPanel messagePanel;
+    private JLabel messageLabel;
     private WinterRatesPanel winterPanel;
     private SummerRatesPanel summerPanel;
     private JButton winterRatesButton;
     private JButton summerRatesButton;
     private JButton confirmButton;
-    private JButton abortButton;
+    private JButton backButton;
     private Season seasonBeingEntered;
+    private GridBagConstraints c;
 
-    public EnterRatesDialog(Week listOfDays) {
-        super("Enter Rates");
+    public EnterRatesDialog(Frame parent, Week listOfDays) {
+        super(parent, true);
         this.listOfDays = listOfDays;
         setLayout(new BorderLayout());
 
-        topPanel = new JPanel();
-        midPanel = new JPanel();
+        entryPanel = new JPanel();
         bottomPanel = new JPanel();
+        messagePanel = new JPanel();
         winterPanel = new WinterRatesPanel();
         summerPanel = new SummerRatesPanel();
-        winterRatesButton = new JButton("Winter Rates");
-        summerRatesButton = new JButton("Summer Rates");
+        messageLabel = new JLabel("Enter values and press 'Confirm' to update rates for winter.");
+        winterRatesButton = new JButton("Update Winter Rates");
+        summerRatesButton = new JButton("Update Summer Rates");
         confirmButton = new JButton("Confirm");
-        abortButton = new JButton("Back");
+        backButton = new JButton("Back");
         seasonBeingEntered = Season.WINTER;
 
-        topPanel.setLayout(new FlowLayout());
-        bottomPanel.setLayout(new FlowLayout());
+        bottomPanel.setLayout(new GridBagLayout());
 
-        topPanel.add(winterRatesButton);
-        topPanel.add(summerRatesButton);
+        messagePanel.setBorder(BorderFactory.createTitledBorder(""));
 
-        midPanel.add(winterPanel);
+        entryPanel.add(winterPanel);
 
-        bottomPanel.add(confirmButton);
-        bottomPanel.add(abortButton);
+        messagePanel.add(messageLabel);
 
-        add(topPanel, BorderLayout.NORTH);
-        add(midPanel, BorderLayout.CENTER);
+        add(entryPanel, BorderLayout.NORTH);
         add(bottomPanel, BorderLayout.SOUTH);
+
+        c = new GridBagConstraints();
+
+        c.weightx = 1;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(5,10,5,10);
+
+        c.gridx = 0;
+        c.gridy = 0;
+        bottomPanel.add(confirmButton, c);
+
+        c.gridx = 0;
+        c.gridy = 1;
+        bottomPanel.add(summerRatesButton, c);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        bottomPanel.add(backButton, c);
+
+        c.gridx = 0;
+        c.gridy = 3;
+        bottomPanel.add(messagePanel, c);
 
         winterRatesButton.addActionListener(this);
         summerRatesButton.addActionListener(this);
         confirmButton.addActionListener(this);
-        abortButton.addActionListener(this);
+        backButton.addActionListener(this);
 
         pack();
         setVisible(true);
@@ -75,6 +98,7 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
                     temp.setRates(i, winterPanel.getOffPeakRatesField());
                 }
                 listOfDays.setWinterRates(temp);
+                updateMessage("Winter rates have been updated.");
             }
         } else if (seasonBeingEntered == Season.SUMMER) {
             if (validateSummerComboBox()) {
@@ -92,6 +116,7 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
                     temp.setRates(i, summerPanel.getMidPeakRatesField());
                 }
                 listOfDays.setSummerRates(temp);
+                updateMessage("Summer rates have been updated.");
             }
         }
     }
@@ -106,27 +131,43 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
         return true;
     }
 
+    public void updateMessage(String msg) {
+        messageLabel.setText(msg);
+        validate();
+        repaint();
+    }
+
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Object source = actionEvent.getSource();
 
         if (source == winterRatesButton) {
             seasonBeingEntered = Season.WINTER;
-            midPanel.removeAll();
-            midPanel.add(winterPanel);
+            entryPanel.removeAll();
+            entryPanel.add(winterPanel);
+            bottomPanel.remove(winterRatesButton);
+            c.gridx = 0;
+            c.gridy = 1;
+            bottomPanel.add(summerRatesButton, c);
+            updateMessage("Enter values and press 'Confirm' to update rates for winter.");
             pack();
             getContentPane().validate();
             getContentPane().repaint();
         } else if (source == summerRatesButton) {
             seasonBeingEntered = Season.SUMMER;
-            midPanel.removeAll();
-            midPanel.add(summerPanel);
+            entryPanel.removeAll();
+            entryPanel.add(summerPanel);
+            bottomPanel.remove(summerRatesButton);
+            c.gridx = 0;
+            c.gridy = 1;
+            bottomPanel.add(winterRatesButton, c);
+            updateMessage("Enter values and press 'Confirm' to update rates for summer.");
             pack();
             getContentPane().validate();
             getContentPane().repaint();
         } else if (source == confirmButton) {
             readComboBoxes();
-        } else if (source == abortButton) {
+        } else if (source == backButton) {
             // TODO: It would be nice if this popped up an "are you sure" dialog.
             this.dispose();
         }
