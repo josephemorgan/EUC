@@ -7,8 +7,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.io.File;
+import java.time.LocalDate;
 
-public class AddDayDialog extends JFrame implements ActionListener {
+public class AddDayDialog extends JDialog implements ActionListener {
 
     private JPanel topPanel;
     private JPanel fieldPanel;
@@ -20,6 +21,7 @@ public class AddDayDialog extends JFrame implements ActionListener {
     private JButton cancelButton;
     private Week week;
     private JTextField usageTextFields[] = new JTextField[HOURS_IN_DAY];
+    private JTextField dateField = new JTextField(LocalDate.now().toString(), 24);
     public double[] hoursInDayUsage = new double[HOURS_IN_DAY];
     private int focusCounter = 0;
     private static int HOURS_IN_DAY = 24;
@@ -27,8 +29,8 @@ public class AddDayDialog extends JFrame implements ActionListener {
     private static Dimension BUTTON_DIMENSION = new Dimension(150, 25);
     private static Dimension LABEL_DIMENSION = new Dimension(180, 25);
 
-    public AddDayDialog(Week wk) {
-        super("Enter Usage in KW/h [Ex: 12.32]");
+    public AddDayDialog(Frame owner, Week wk) {
+        super(owner, true);
         this.week = wk;
 
         setLayout(new BorderLayout());
@@ -114,9 +116,9 @@ public class AddDayDialog extends JFrame implements ActionListener {
         //add left and right panels to the Add Day Dialog
         fieldPanel.add(leftPanel, BorderLayout.WEST);
         fieldPanel.add(rightPanel, BorderLayout.EAST);
-
         topPanel.add(new JLabel("Enter Date: "));
-        topPanel.add(new JTextField(24));
+        topPanel.add(dateField);
+
         add(topPanel, BorderLayout.NORTH);
         add(fieldPanel, BorderLayout.CENTER);
         add(bottomPanel, BorderLayout.SOUTH);
@@ -136,14 +138,13 @@ public class AddDayDialog extends JFrame implements ActionListener {
         Object source = actionEvent.getSource();
         if (source == finalizeButton) {
             Day dayToAdd;
-            for (JTextField textfield : usageTextFields)
+            Usage usageToAdd = new Usage();
+            for (int i = 0; i < HOURS_IN_DAY; ++i)
             {
-                hoursInDayUsage[textfield.getComponentCount()] = Double.parseDouble(textfield.getText());
+               usageToAdd.setUsage(i, Double.parseDouble(usageTextFields[i].getText()));
             }
-            for (int i = 0; i < HOURS_IN_DAY; i++)
-            {
-                System.out.println(hoursInDayUsage[i]);
-            }
+            dayToAdd = new Day(dateField.getText(), usageToAdd);
+            week.addDay(dayToAdd);
             this.dispose();
         }
         else if (source == cancelButton) {
@@ -169,6 +170,7 @@ public class AddDayDialog extends JFrame implements ActionListener {
                 week.fetchDayFromFile(selectedFile.getAbsolutePath());
 
                 System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                this.dispose();
             }
             else
             {

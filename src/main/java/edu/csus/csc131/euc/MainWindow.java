@@ -8,6 +8,7 @@
 package edu.csus.csc131.euc;
 
 import javax.swing.*;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -34,14 +35,10 @@ public class MainWindow {
 	public void createWindow() {
 		JLabel dailyUsage = new JLabel("Daily Usage:");
 		JLabel totalUsage = new JLabel("Total Usage:");
-		JLabel kilowattLabel = new JLabel("KW/h");
-		JLabel kilowattLabel2 = new JLabel("KW/h");
-		JLabel dollarSign1 = new JLabel ("$");
-		JLabel dollarSign2 = new JLabel ("$");
-		JLabel dailyUsageValue = new JLabel ("");
-		JLabel dailyCostValue = new JLabel ("");
-		JLabel totalUsageValue = new JLabel ("", SwingConstants.RIGHT);
-		JLabel totalCostValue = new JLabel ("", SwingConstants.RIGHT);
+		JLabel dailyUsageValue = new JLabel ("0 kW/h", SwingConstants.RIGHT);
+		JLabel dailyCostValue = new JLabel ("$0.00", SwingConstants.RIGHT);
+		JLabel totalUsageValue = new JLabel ("0 kW/h", SwingConstants.RIGHT);
+		JLabel totalCostValue = new JLabel ("$0.00", SwingConstants.RIGHT);
 
 
 		//#####################################################
@@ -81,13 +78,11 @@ public class MainWindow {
 		JButton addDayB = new JButton ("Add a Day");
 		JButton removeDayB = new JButton ("Remove a Day");
 		JButton enterHourlyRatesB = new JButton("Enter Hourly Rates");
-		JButton readFromFileB = new JButton("Read Usage from File");
 
 		//Set bounds and location of buttons
 		addDayB.setBounds(25, 85, 165, 25);
 		removeDayB.setBounds(195, 85, 165, 25);
 		enterHourlyRatesB.setBounds(25, 120, 335, 25);
-		readFromFileB.setBounds(35, 430, 300, 25);
 
 
 		//Add Button Objects & Action Listeners to Window UI
@@ -97,8 +92,15 @@ public class MainWindow {
 		addDayB.addActionListener(new ActionListener() { //action listener for button being clicked
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				JFrame a = new AddDayDialog(listOfDays);
+				AddDayDialog a = new AddDayDialog(mainwindow, listOfDays);
 
+				NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+				dailyUsageValue.setText(String.valueOf(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyUsage()) + " kW/h");
+				dailyCostValue.setText(currencyFormatter.format(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyCost()));
+				totalUsageValue.setText(String.valueOf(listOfDays.getTotalUsage()) + " kW/h");
+				totalCostValue.setText(currencyFormatter.format(listOfDays.getTotalCost()));
+				mainwindow.validate();
+				mainwindow.repaint();
 			}
 		});
 
@@ -120,56 +122,20 @@ public class MainWindow {
 			}
 		});
 
-		mainwindow.add(readFromFileB);
-
-		//Read from file button action listener
-		readFromFileB.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent event)
-			{
-				//Open a file browser, save file path
-				JFileChooser fileChooser = new JFileChooser();
-
-				//default the directory to the users home directory
-				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-
-				//variable to store the result of the dialog menu
-				int result = fileChooser.showOpenDialog(mainwindow);
-
-				//if the result is an approved option (a file)
-				if (result == JFileChooser.APPROVE_OPTION) {
-					//new file object to hold the file
-					File selectedFile = fileChooser.getSelectedFile();
-
-					//Fetch data from file and add a day to week collection
-					listOfDays.fetchDayFromFile(selectedFile.getAbsolutePath());
-					dailyUsage.setText(listOfDays.getDay(0).toString());
-				}
-			}
-		});
-
 		//#####################################################
 		//################### LABELS ##########################
 		//#####################################################
 
 		dailyUsage.setBounds(20, 155, 200, 25);
 		totalUsage.setBounds(20, 185, 200, 25);
-		kilowattLabel.setBounds(200, 155, 50, 25);
-		kilowattLabel2.setBounds(200, 185, 50, 25);
-		dollarSign1.setBounds(350, 155, 50, 25);
-		dollarSign2.setBounds(350, 185, 50, 25);
-		dailyUsageValue.setBounds(100, 155, 100, 25);
+		dailyUsageValue.setBounds(125, 155, 100, 25);
 		dailyCostValue.setBounds(250, 155, 100, 25);
-		totalUsageValue.setBounds(100, 185, 100, 25);
+		totalUsageValue.setBounds(125, 185, 100, 25);
 		totalCostValue.setBounds(250, 185, 100, 25);
 
 
 		mainwindow.add(dailyUsage);
 		mainwindow.add(totalUsage);
-		mainwindow.add(kilowattLabel);
-		mainwindow.add(kilowattLabel2);
-		mainwindow.add(dollarSign1);
-		mainwindow.add(dollarSign2);
 		mainwindow.add(totalUsageValue);
 		mainwindow.add(totalCostValue);
 		mainwindow.add(dailyCostValue);

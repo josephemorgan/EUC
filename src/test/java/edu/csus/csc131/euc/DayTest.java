@@ -57,7 +57,7 @@ class DayTest {
     void setDate() {
         LocalDate date = LocalDate.parse("2020-03-02");
 
-        Day altDay = new Day(null);
+        Day altDay = new Day((Rates)null);
 
         altDay.setDate(date);
 
@@ -78,7 +78,7 @@ class DayTest {
     @Test
     void setRates(){
 
-        Day altDay = new Day(null);
+        Day altDay = new Day((Rates)null);
 
         altDay.setRates(getSampleRates());
 
@@ -113,7 +113,7 @@ class DayTest {
     @Test
     void getDailyUsage_2() {
 
-        Day altDay = new Day(null);
+        Day altDay = new Day((Rates)null);
 
         double[] usageValues = getSampleUsage();
 
@@ -138,7 +138,7 @@ class DayTest {
     @Test
     void getDailyCost_1() {
 
-        Day altDay = new Day(null);
+        Day altDay = new Day((Rates)null);
 
         double[] usageValues = getSampleUsage();
 

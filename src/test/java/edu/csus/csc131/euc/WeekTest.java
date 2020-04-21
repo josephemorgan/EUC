@@ -10,7 +10,7 @@ class WeekTest {
 
     Week week = new Week(getSampleSummerRates(), getSampleWinterRates());
 
-    Day sampleDay = new Day(null);
+    Day sampleDay = new Day((Rates)null);
     Day sampleDayWithDate = new Day(null, "2020-03-02");
 
     private static final String TEST_FILE_PATH = "import\\dailyElectricityUsage_2020_02_28.json";

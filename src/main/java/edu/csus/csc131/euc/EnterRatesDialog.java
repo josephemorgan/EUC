@@ -17,6 +17,7 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
     private JButton summerRatesButton;
     private JButton confirmButton;
     private JButton abortButton;
+    private Season seasonBeingEntered;
 
     public EnterRatesDialog(Week listOfDays) {
         super("Enter Rates");
@@ -31,7 +32,8 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
         winterRatesButton = new JButton("Winter Rates");
         summerRatesButton = new JButton("Summer Rates");
         confirmButton = new JButton("Confirm");
-        abortButton = new JButton("Abort");
+        abortButton = new JButton("Back");
+        seasonBeingEntered = Season.WINTER;
 
         topPanel.setLayout(new FlowLayout());
         bottomPanel.setLayout(new FlowLayout());
@@ -60,7 +62,7 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
     private void readComboBoxes() {
         Rates temp = new Rates();
 
-        if (listOfDays.getSeason() == Season.WINTER) {
+        if (seasonBeingEntered == Season.WINTER) {
             if (validateWinterComboBox()) {
                 // Break this up into 3 loops because there are 3 blocks
                 for (int i = 0; i < winterPanel.getOffPeakToBox(); i++) {
@@ -74,7 +76,7 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
                 }
                 listOfDays.setWinterRates(temp);
             }
-        } else if (listOfDays.getSeason() == Season.SUMMER) {
+        } else if (seasonBeingEntered == Season.SUMMER) {
             if (validateSummerComboBox()) {
                 // Break this up into 4 loops because there are 4 blocks
                 for (int i = 0; i < summerPanel.getOffPeakToBox(); i++) {
@@ -109,21 +111,20 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
         Object source = actionEvent.getSource();
 
         if (source == winterRatesButton) {
-            listOfDays.setSeason(Season.WINTER);
+            seasonBeingEntered = Season.WINTER;
             midPanel.removeAll();
             midPanel.add(winterPanel);
             pack();
             getContentPane().validate();
             getContentPane().repaint();
         } else if (source == summerRatesButton) {
-            listOfDays.setSeason(Season.SUMMER);
+            seasonBeingEntered = Season.SUMMER;
             midPanel.removeAll();
             midPanel.add(summerPanel);
             pack();
             getContentPane().validate();
             getContentPane().repaint();
         } else if (source == confirmButton) {
-            // TODO: Need Week class to be finished to handle wiring up submission of info
             readComboBoxes();
         } else if (source == abortButton) {
             // TODO: It would be nice if this popped up an "are you sure" dialog.

@@ -13,9 +13,12 @@ public class Day {
     // Constructors
 
     // Basic constructor sets the date to today.
-    public Day(Rates r) {
+    public Day() {
         this.date = LocalDate.now();
-        this.rates = r;
+    }
+
+    public Day(Rates r) {
+        rates = r;
     }
 
     // Sets date to today minus offset number of days.
@@ -25,9 +28,19 @@ public class Day {
     }
 
     // Creates Day class with explicit date.
+    public Day(LocalDate date) {
+        this.date = date;
+    }
+
+    // Creates Day class with explicit date.
     public Day(Rates r, LocalDate date) {
         this.date = date;
         this.rates = r;
+    }
+
+    // Creates Date class with specific date as a string formatted as yyyy-mm-dd
+    public Day(CharSequence dayString) {
+        this.date = LocalDate.parse(dayString);
     }
 
     // Creates Date class with specific date as a string formatted as yyyy-mm-dd
@@ -36,6 +49,10 @@ public class Day {
         this.rates = r;
     }
 
+    public Day (CharSequence dayString, Usage u) {
+        this.usage = u;
+        this.date = LocalDate.parse(dayString);
+    }
 
     public void setDate(LocalDate date) {
         this.date = date;
