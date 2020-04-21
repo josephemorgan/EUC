@@ -1,32 +1,74 @@
 package edu.csus.csc131.euc;
 
-public class WeekTest {
+import org.junit.jupiter.api.Test;
 
-    public static void main(String[] args) {
-        testWeek();
+import static org.junit.jupiter.api.Assertions.*;
+
+class WeekTest {
+
+    Week week = new Week(getSampleSummerRates(), getSampleWinterRates());
+
+    private static final int HOURS_IN_DAY = 24;
+
+    @Test
+    void getDay() {
+
+    }
+
+    @Test
+    void getDay1() {
+    }
+
+    @Test
+    void addDay() {
+    }
+
+    @Test
+    void fetchDayFromFile() {
+    }
+
+    @Test
+    void getTotalUsage() {
+    }
+
+    @Test
+    void getTotalCost() {
+    }
+
+    @Test
+    void getSeason() {
+    }
+
+    @Test
+    void setSeason() {
+    }
+
+    @Test
+    void setSummerRates() {
+    }
+
+    @Test
+    void setWinterRates() {
     }
 
 
-    public static void testWeek(){
+    Rates getSampleSummerRates(){
+        Rates rates = new Rates();
 
-        double[] summerRates = new double[24];
-        double[] winterRates = new double[24];
-
-        for(int i = 0; i < summerRates.length; i++){
-            summerRates[i] = 4.0;
-        }
-        for(int i = 0; i < winterRates.length; i++){
-            winterRates[i] = 2.0;
+        for(int i = 0; i < HOURS_IN_DAY; i++){
+            rates.setRates(i, 2.0);
         }
 
-        Rates summer = new Rates(summerRates);
-        Rates winter = new Rates(winterRates);
+        return rates;
+    }
 
-        Week week = new Week(summer, winter);
+    Rates getSampleWinterRates(){
+        Rates rates = new Rates();
 
-        week.fetchDayFromFile("import\\dailyElectricityUsage_2020_02_28.json");
+        for(int i = 0; i < HOURS_IN_DAY; i++){
+            rates.setRates(i, 3.0);
+        }
 
-        double total = week.getTotalUsage();
-        System.out.println(total);
+        return rates;
     }
 }
