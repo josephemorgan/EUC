@@ -28,7 +28,7 @@ public class Week {
 
     public Day getDay(String date) {
         for (Day day : days) {
-            if (date == day.getDate().toString()) {
+            if (date.equals(day.getDateAsString())) {
                 return day;
             }
         }
