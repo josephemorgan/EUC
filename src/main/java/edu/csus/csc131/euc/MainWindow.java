@@ -146,10 +146,10 @@ public class MainWindow {
 		JLabel kilowattLabel2 = new JLabel("KW/h");
 		JLabel dollarSign1 = new JLabel ("$");
 		JLabel dollarSign2 = new JLabel ("$");
-		JLabel dailyUsageLabel = new JLabel ("");
-		JLabel dailyCostLabel = new JLabel ("");
-		JLabel totalUsageLabel = new JLabel ("", SwingConstants.RIGHT);
-		JLabel totalCostLabel = new JLabel ("", SwingConstants.RIGHT);
+		JLabel dailyUsageValue = new JLabel ("");
+		JLabel dailyCostValue = new JLabel ("");
+		JLabel totalUsageValue = new JLabel ("", SwingConstants.RIGHT);
+		JLabel totalCostValue = new JLabel ("", SwingConstants.RIGHT);
 
 
 		dailyUsage.setBounds(20, 155, 200, 25);
@@ -158,10 +158,10 @@ public class MainWindow {
 		kilowattLabel2.setBounds(200, 185, 50, 25);
 		dollarSign1.setBounds(350, 155, 50, 25);
 		dollarSign2.setBounds(350, 185, 50, 25);
-		dailyUsageLabel.setBounds(100, 155, 100, 25);
-		dailyCostLabel.setBounds(250, 155, 100, 25);
-		totalUsageLabel.setBounds(100, 185, 100, 25);
-		totalCostLabel.setBounds(250, 185, 100, 25);
+		dailyUsageValue.setBounds(100, 155, 100, 25);
+		dailyCostValue.setBounds(250, 155, 100, 25);
+		totalUsageValue.setBounds(100, 185, 100, 25);
+		totalCostValue.setBounds(250, 185, 100, 25);
 
 
 		mainwindow.add(dailyUsage);
@@ -170,10 +170,10 @@ public class MainWindow {
 		mainwindow.add(kilowattLabel2);
 		mainwindow.add(dollarSign1);
 		mainwindow.add(dollarSign2);
-		mainwindow.add(totalUsageLabel);
-		mainwindow.add(totalCostLabel);
-		mainwindow.add(dailyCostLabel);
-		mainwindow.add(dailyUsageLabel);
+		mainwindow.add(totalUsageValue);
+		mainwindow.add(totalCostValue);
+		mainwindow.add(dailyCostValue);
+		mainwindow.add(dailyUsageValue);
 
 
 
