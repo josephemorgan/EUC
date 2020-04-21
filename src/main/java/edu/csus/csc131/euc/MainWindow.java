@@ -100,6 +100,10 @@ public class MainWindow {
 					dailyCostValue.setText(currencyFormatter.format(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyCost()));
 					totalUsageValue.setText(String.valueOf(listOfDays.getTotalUsage()) + " kW/h");
 					totalCostValue.setText(currencyFormatter.format(listOfDays.getTotalCost()));
+					if (comboBox.getSelectedItem().toString() == "No days added yet")
+					{
+						comboBox.removeItem(comboBox.getSelectedItem());
+					}
 					comboBox.addItem(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDateAsString());
 					mainwindow.validate();
 					mainwindow.repaint();
@@ -113,6 +117,7 @@ public class MainWindow {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				JFrame a = new RemoveDayDialog(listOfDays);
+				comboBox.removeItem(comboBox.getSelectedItem());
 			}
 		});
 
