@@ -32,6 +32,17 @@ public class MainWindow {
 	private Week listOfDays = new Week();
 
 	public void createWindow() {
+		JLabel dailyUsage = new JLabel("Daily Usage:");
+		JLabel totalUsage = new JLabel("Total Usage:");
+		JLabel kilowattLabel = new JLabel("KW/h");
+		JLabel kilowattLabel2 = new JLabel("KW/h");
+		JLabel dollarSign1 = new JLabel ("$");
+		JLabel dollarSign2 = new JLabel ("$");
+		JLabel dailyUsageValue = new JLabel ("");
+		JLabel dailyCostValue = new JLabel ("");
+		JLabel totalUsageValue = new JLabel ("", SwingConstants.RIGHT);
+		JLabel totalCostValue = new JLabel ("", SwingConstants.RIGHT);
+
 
 		//#####################################################
 		//################### Main Window #####################
@@ -132,6 +143,7 @@ public class MainWindow {
 
 					//Fetch data from file and add a day to week collection
 					listOfDays.fetchDayFromFile(selectedFile.getAbsolutePath());
+					dailyUsage.setText(listOfDays.getDay(0).toString());
 				}
 			}
 		});
@@ -139,18 +151,6 @@ public class MainWindow {
 		//#####################################################
 		//################### LABELS ##########################
 		//#####################################################
-
-		JLabel dailyUsage = new JLabel("Daily Usage:");
-		JLabel totalUsage = new JLabel("Total Usage:");
-		JLabel kilowattLabel = new JLabel("KW/h");
-		JLabel kilowattLabel2 = new JLabel("KW/h");
-		JLabel dollarSign1 = new JLabel ("$");
-		JLabel dollarSign2 = new JLabel ("$");
-		JLabel dailyUsageValue = new JLabel ("");
-		JLabel dailyCostValue = new JLabel ("");
-		JLabel totalUsageValue = new JLabel ("", SwingConstants.RIGHT);
-		JLabel totalCostValue = new JLabel ("", SwingConstants.RIGHT);
-
 
 		dailyUsage.setBounds(20, 155, 200, 25);
 		totalUsage.setBounds(20, 185, 200, 25);

@@ -10,9 +10,11 @@ import java.io.File;
 
 public class AddDayDialog extends JFrame implements ActionListener {
 
+    private JPanel topPanel;
     private JPanel fieldPanel;
     private JPanel leftPanel;
     private JPanel rightPanel;
+    private JPanel bottomPanel;
     private JButton finalizeButton;
     private JButton readFromFileButton;
     private JButton cancelButton;
@@ -32,13 +34,17 @@ public class AddDayDialog extends JFrame implements ActionListener {
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
 
+        topPanel = new JPanel();
         fieldPanel = new JPanel();
         leftPanel = new JPanel();
         rightPanel = new JPanel();
+        bottomPanel = new JPanel();
 
-        fieldPanel.setLayout(new BoxLayout());
+        topPanel.setLayout(new FlowLayout());
+        fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.X_AXIS));
         leftPanel.setLayout(new FlowLayout());
         rightPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        bottomPanel.setLayout(new FlowLayout());
         leftPanel.setPreferredSize(new Dimension(200, 800));
         rightPanel.setPreferredSize(new Dimension(200, 800));
 
@@ -94,24 +100,26 @@ public class AddDayDialog extends JFrame implements ActionListener {
         readFromFileButton = new JButton ("Read From File");
         cancelButton = new JButton("Cancel");
 
-        finalizeButton.setPreferredSize(BUTTON_DIMENSION);
-        readFromFileButton.setPreferredSize(BUTTON_DIMENSION);
-        cancelButton.setPreferredSize(BUTTON_DIMENSION);
-
         finalizeButton.addActionListener(this);
         readFromFileButton.addActionListener(this);
         cancelButton.addActionListener(this);
 
-        leftPanel.add(finalizeButton);
-        leftPanel.add(readFromFileButton);
-        rightPanel.add(cancelButton);
+        bottomPanel.add(finalizeButton);
+        bottomPanel.add(readFromFileButton);
+        bottomPanel.add(cancelButton);
 
         leftPanel.setBorder(BorderFactory.createTitledBorder("Times"));
         rightPanel.setBorder(BorderFactory.createTitledBorder("Usage"));
 
         //add left and right panels to the Add Day Dialog
         fieldPanel.add(leftPanel, BorderLayout.WEST);
-        fieldPanel.add(rightPanel, BorderLayout.CENTER);
+        fieldPanel.add(rightPanel, BorderLayout.EAST);
+
+        topPanel.add(new JLabel("Enter Date: "));
+        topPanel.add(new JTextField(24));
+        add(topPanel, BorderLayout.NORTH);
+        add(fieldPanel, BorderLayout.CENTER);
+        add(bottomPanel, BorderLayout.SOUTH);
 
         pack ();
 
