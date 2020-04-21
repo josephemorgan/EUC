@@ -29,36 +29,13 @@ import java.util.Arrays;
 
 public class MainWindow {
 
-	Week listOfDays;
-
-	//TODO: UNCOMMENT THIS
-	//private Week week = new Week();
-
-	//TODO: probably remove with UI changes
-	//number of days (SHOULD BE CHANGED BY ADD DAYS BUTTON)
-	int numOfDays = 4; //test
+	private Week listOfDays = new Week();
 
 	public void createWindow() {
-
-		//TODO: REMOVE THIS CODE
-		//THIS IS TEMPORARY CODE FOR TESTING
-		double[] summerRates = new double[24];
-		double[] winterRates = new double[24];
-
-		for(int i = 0; i < summerRates.length; i++){
-			summerRates[i] = 4.0;
-		}
-		for(int i = 0; i < winterRates.length; i++){
-			winterRates[i] = 2.0;
-		}
-
-		//THIS IS TEMPORARY CODE FOR TESTING
-		//TODO: REMOVE THIS CODE
 
 		//#####################################################
 		//################### Main Window #####################
 		//#####################################################
-		listOfDays = new Week(new Rates(), new Rates());
 
 		//Create new object for Window Frame
 		JFrame mainwindow = new JFrame("Electricity Project");
@@ -78,10 +55,10 @@ public class MainWindow {
 		//################### Combo Box #######################
 		//#####################################################
 
-		String dayEntry[] = {"1/1/2020", "1/2/2020", "1/3/2020"};
+		String dayEntry[] = {"No days added yet"};
 		JComboBox comboBox = new JComboBox(dayEntry);
 
-		comboBox.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		comboBox.setFont(new Font("Arial", Font.BOLD, 20));
 
 		comboBox.setBounds(25, 25, 335, 50);
 		mainwindow.add(comboBox);
@@ -134,6 +111,31 @@ public class MainWindow {
 
 		mainwindow.add(readFromFileB);
 
+		//Read from file button action listener
+		readFromFileB.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent event)
+			{
+				//Open a file browser, save file path
+				JFileChooser fileChooser = new JFileChooser();
+
+				//default the directory to the users home directory
+				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+
+				//variable to store the result of the dialog menu
+				int result = fileChooser.showOpenDialog(mainwindow);
+
+				//if the result is an approved option (a file)
+				if (result == JFileChooser.APPROVE_OPTION) {
+					//new file object to hold the file
+					File selectedFile = fileChooser.getSelectedFile();
+
+					//Fetch data from file and add a day to week collection
+					listOfDays.fetchDayFromFile(selectedFile.getAbsolutePath());
+				}
+			}
+		});
+
 		//#####################################################
 		//################### LABELS ##########################
 		//#####################################################
@@ -173,33 +175,7 @@ public class MainWindow {
 		mainwindow.add(dailyCostLabel);
 		mainwindow.add(dailyUsageLabel);
 
-		//Read from file button action listener
-		readFromFileB.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent event)
-			{
-				//Open a file browser, save file path
-				JFileChooser fileChooser = new JFileChooser();
 
-				//default the directory to the users home directory
-				fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-
-				//variable to store the result of the dialog menu
-				int result = fileChooser.showOpenDialog(mainwindow);
-
-				//if the result is an approved option (a file)
-				if (result == JFileChooser.APPROVE_OPTION) {
-					//new file object to hold the file
-					File selectedFile = fileChooser.getSelectedFile();
-
-					//Fetch data from file and add a day to week collection
-					listOfDays.fetchDayFromFile(selectedFile.getAbsolutePath());
-				}
-				else
-				{
-				}
-			}
-		});
 
 		//must be at the end to avoid bug
 		mainwindow.setVisible(true);
