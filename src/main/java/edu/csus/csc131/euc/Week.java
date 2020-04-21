@@ -12,7 +12,7 @@ public class Week {
 
     private ArrayList<Day> days = new ArrayList();
 
-    Season currentSeason = Season.WINTER; // Default value
+    private Season currentSeason = Season.WINTER; // Default value
 
     //Constructor
     public Week(){}
@@ -28,7 +28,7 @@ public class Week {
 
     public Day getDay(String date) {
         for (Day day : days) {
-            if (date == day.getDate().toString()) {
+            if (date.equals(day.getDateAsString())) {
                 return day;
             }
         }
@@ -36,6 +36,12 @@ public class Week {
     }
 
     public void addDay(Day dayToAdd) {
+
+        if(isWinter(dayToAdd.getDate()))
+            dayToAdd.setRates(this.winterRates);
+        else
+            dayToAdd.setRates(this.winterRates);
+
         days.add(dayToAdd);
     }
 

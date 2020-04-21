@@ -7,7 +7,7 @@ public class Day {
     // Index represents hours with contents of array representing the kW/h usage and hourly usage rates respectively.
     private static final int HOURS_IN_DAY = 24;
     private LocalDate date;
-    private Rates rates = new Rates();
+    private Rates rates = null;
     private Usage usage = new Usage();
 
     // Constructors
@@ -64,8 +64,17 @@ public class Day {
         usage.setUsage(index, kWh);
     }
 
+    public void setRates(Rates in){
+        this.rates = in;
+    }
+
     // Calculates total usage for the day in kW/h.
     public double getDailyUsage() {
+
+        if(this.rates == null){
+            System.out.println("Error: Rates have not yet been set.");
+            return -1.0;
+        }
 
         double totalUsage = 0;
         for (int i = 0; i < HOURS_IN_DAY; i++) {
@@ -76,8 +85,13 @@ public class Day {
     }
 
     // Calculates total cost for the day in $ based on associated hourly usage and hourly rates.
-    public double getDailyCost() 
-    {
+    public double getDailyCost() {
+
+        if(this.rates == null){
+            System.out.println("Error: Rates have not yet been set.");
+            return -1.0;
+        }
+
     	double totalCost = 0;
         for (int i = 0; i < HOURS_IN_DAY; i++) 
         {
@@ -88,6 +102,12 @@ public class Day {
 
     @Override
     public String toString() {
+
+        if(this.rates == null){
+            System.out.println("Error: Rates have not yet been set.");
+            return null;
+        }
+
         return "Day{" +
                 "date=" + date +
                 ", rates=" + rates +

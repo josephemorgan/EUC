@@ -52,11 +52,39 @@ class DayTest {
         assertEquals(2, date.getDayOfMonth());
     }
 
+
+    @Test
+    void setDate() {
+        LocalDate date = LocalDate.parse("2020-03-02");
+
+        Day altDay = new Day(null);
+
+        altDay.setDate(date);
+
+        LocalDate altDate = altDay.getDate();
+
+        assertEquals(2020, altDate.getYear());
+        assertEquals(3, altDate.getMonthValue());
+        assertEquals(2, altDate.getDayOfMonth());
+    }
+
     @Test
     void getDateAsString(){
         Day altDay = new Day(getSampleRates(), "2020-03-02");
 
         assertEquals("2020-03-02", altDay.getDateAsString());
+    }
+
+    @Test
+    void setRates(){
+
+        Day altDay = new Day(null);
+
+        altDay.setRates(getSampleRates());
+
+        altDay.setUsage(getSampleUsage());
+
+        assertEquals(53.6304, altDay.getDailyCost());
     }
 
 
@@ -82,6 +110,20 @@ class DayTest {
         assertEquals(26.8152, day.getDailyUsage());
     }
 
+    @Test
+    void getDailyUsage_2() {
+
+        Day altDay = new Day(null);
+
+        double[] usageValues = getSampleUsage();
+
+        for(int i = 0; i < HOURS_IN_DAY; i++){
+            altDay.setUsage(i, usageValues[i]);
+        }
+
+        assertEquals(-1.0, altDay.getDailyUsage());
+    }
+
 
     @Test
     void getDailyCost() {
@@ -91,6 +133,18 @@ class DayTest {
         day.setUsage(usageValues);
 
         assertEquals(26.8152 * 2, day.getDailyCost());
+    }
+
+    @Test
+    void getDailyCost_1() {
+
+        Day altDay = new Day(null);
+
+        double[] usageValues = getSampleUsage();
+
+        altDay.setUsage(usageValues);
+
+        assertEquals(-1, altDay.getDailyCost());
     }
 
 
