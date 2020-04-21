@@ -7,8 +7,7 @@ import java.awt.event.ActionListener;
 
 
 public class EnterRatesDialog extends JFrame implements ActionListener {
-    protected Rates r;
-    protected Season s;
+    private Week listOfDays;
     private JPanel topPanel;
     private JPanel midPanel;
     private JPanel bottomPanel;
@@ -19,14 +18,9 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
     private JButton confirmButton;
     private JButton abortButton;
 
-    public enum Season {
-        WINTER,
-        SUMMER
-    }
-
-    public EnterRatesDialog() {
+    public EnterRatesDialog(Week listOfDays) {
         super("Enter Rates");
-        s = Season.WINTER; // Default value
+        this.listOfDays = listOfDays;
         setLayout(new BorderLayout());
 
         topPanel = new JPanel();
@@ -66,7 +60,7 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
     private void readComboBoxes() {
         Rates temp = new Rates();
 
-        if (s == Season.WINTER) {
+        if (listOfDays.getSeason() == Season.WINTER) {
             if (validateWinterComboBox()) {
                 // Break this up into 3 loops because there are 3 blocks
                 for (int i = 0; i < winterPanel.getOffPeakToBox(); i++) {
@@ -76,10 +70,11 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
                     temp.setRates(i, winterPanel.getOnPeakRatesField());
                 }
                 for (int i = winterPanel.getOnPeakToBox(); i < 24; i++) {
-                    temp.setRates(i, winterPanel.getSecondOffPeakRatesField());
+                    temp.setRates(i, winterPanel.getOffPeakRatesField());
                 }
+                listOfDays.setWinterRates(temp);
             }
-        } else if (s == Season.SUMMER) {
+        } else if (listOfDays.getSeason() == Season.SUMMER) {
             if (validateSummerComboBox()) {
                 // Break this up into 4 loops because there are 4 blocks
                 for (int i = 0; i < summerPanel.getOffPeakToBox(); i++) {
@@ -94,6 +89,7 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
                 for (int i = summerPanel.getOnPeakToBox(); i < 24; i++) {
                     temp.setRates(i, summerPanel.getMidPeakRatesField());
                 }
+                listOfDays.setSummerRates(temp);
             }
         }
     }
@@ -113,14 +109,14 @@ public class EnterRatesDialog extends JFrame implements ActionListener {
         Object source = actionEvent.getSource();
 
         if (source == winterRatesButton) {
-            s = Season.WINTER;
+            listOfDays.setSeason(Season.WINTER);
             midPanel.removeAll();
             midPanel.add(winterPanel);
             pack();
             getContentPane().validate();
             getContentPane().repaint();
         } else if (source == summerRatesButton) {
-            s = Season.SUMMER;
+            listOfDays.setSeason(Season.SUMMER);
             midPanel.removeAll();
             midPanel.add(summerPanel);
             pack();
