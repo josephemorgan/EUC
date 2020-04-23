@@ -7,11 +7,19 @@
  */
 package edu.csus.csc131.euc;
 
-public class App 
+import javax.swing.*;
+
+public class App
 {
     public static void main( String[] args )
     {
-		MainWindow GUIWindow = new MainWindow();
-		GUIWindow.createWindow();
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+             public void run() {
+                MainWindow GUIWindow = new MainWindow();
+                GUIWindow.createWindow();
+            }
+        });
     }
 }

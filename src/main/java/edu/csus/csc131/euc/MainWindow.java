@@ -9,12 +9,9 @@ package edu.csus.csc131.euc;
 
 import javax.swing.*;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.Arrays;
 
 
 /* NEEDED:
@@ -30,23 +27,32 @@ import java.util.Arrays;
 
 public class MainWindow {
 
-	private Week listOfDays = new Week();
+	private Week listOfDays;
+	private JLabel dailyUsage;
+	private JLabel totalUsage;
+	private JLabel dailyUsageValue;
+	private JLabel dailyCostValue;
+	private JLabel totalUsageValue;
+	private JLabel totalCostValue;
+	private String noDaysString = "No days added yet";
+	private JComboBox comboBox;
+	private JFrame mainwindow;
 
 	public void createWindow() {
-		JLabel dailyUsage = new JLabel("Daily Usage:");
-		JLabel totalUsage = new JLabel("Total Usage:");
-		JLabel dailyUsageValue = new JLabel ("0 kW/h", SwingConstants.RIGHT);
-		JLabel dailyCostValue = new JLabel ("$0.00", SwingConstants.RIGHT);
-		JLabel totalUsageValue = new JLabel ("0 kW/h", SwingConstants.RIGHT);
-		JLabel totalCostValue = new JLabel ("$0.00", SwingConstants.RIGHT);
-
-
+		listOfDays = new Week();
+		dailyUsage = new JLabel("Daily Usage:");
+		totalUsage = new JLabel("Total Usage:");
+		dailyUsageValue = new JLabel ("0 kW/h", SwingConstants.RIGHT);
+		dailyCostValue = new JLabel ("$0.00", SwingConstants.RIGHT);
+		totalUsageValue = new JLabel ("0 kW/h", SwingConstants.RIGHT);
+		totalCostValue = new JLabel ("$0.00", SwingConstants.RIGHT);
+		comboBox = new JComboBox(new String[]{noDaysString});
+		mainwindow = new JFrame("Electricity Project");
 		//#####################################################
 		//################### Main Window #####################
 		//#####################################################
 
 		//Create new object for Window Frame
-		JFrame mainwindow = new JFrame("Electricity Project");
 		mainwindow.pack();
 
 		//Set properties of the created window
@@ -62,9 +68,6 @@ public class MainWindow {
 		//#####################################################
 		//################### Combo Box #######################
 		//#####################################################
-
-		String dayEntry[] = {"No days added yet"};
-		JComboBox comboBox = new JComboBox(dayEntry);
 
 		comboBox.setFont(new Font("Arial", Font.BOLD, 20));
 
@@ -93,23 +96,7 @@ public class MainWindow {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
 				AddDayDialog a = new AddDayDialog(mainwindow, listOfDays);
-
-				if (listOfDays.getNumOfDays() != 0) {
-					NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
-					dailyUsageValue.setText(String.valueOf(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyUsage()) + " kW/h");
-					dailyCostValue.setText(currencyFormatter.format(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyCost()));
-					totalUsageValue.setText(String.valueOf(listOfDays.getTotalUsage()) + " kW/h");
-					totalCostValue.setText(currencyFormatter.format(listOfDays.getTotalCost()));
-					if (comboBox.getItemCount() != 0)
-					{
-						if (comboBox.getSelectedItem().toString() == "No days added yet") {
-							comboBox.removeItem(comboBox.getSelectedItem());
-						}
-					}
-					comboBox.addItem(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDateAsString());
-					mainwindow.validate();
-					mainwindow.repaint();
-				}
+				refreshMainWindow();
 			}
 		});
 
@@ -118,8 +105,11 @@ public class MainWindow {
 		removeDayB.addActionListener(new ActionListener() { //action listener for button being clicked
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				JFrame a = new RemoveDayDialog(listOfDays);
-				comboBox.removeItem(comboBox.getSelectedItem());
+				String itemToRemove = comboBox.getSelectedItem().toString();
+				if (!comboBox.getSelectedItem().equals(noDaysString)) {
+					listOfDays.removeDay(itemToRemove);
+					refreshMainWindow();
+				}
 			}
 		});
 
@@ -157,4 +147,34 @@ public class MainWindow {
 		mainwindow.setVisible(true);
 	}
 
+	private void refreshMainWindow() {
+		refreshUsageValues();
+		refreshComboBox();
+		mainwindow.validate();
+		mainwindow.repaint();
+	}
+
+	private void refreshComboBox() {
+		comboBox.removeAllItems();
+		if (listOfDays.getNumOfDays() == 0) {
+			comboBox.addItem(noDaysString);
+		} else {
+			if (comboBox.getItemAt(0) == noDaysString) {
+				comboBox.removeItem(noDaysString);
+			}
+			for (int i = 0; i < listOfDays.getNumOfDays(); i++) {
+				comboBox.addItem(listOfDays.getDay(i).getDateAsString());
+			}
+		}
+	}
+
+	private void refreshUsageValues() {
+		if (listOfDays.getNumOfDays() != 0) {
+			NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+			dailyUsageValue.setText(String.valueOf(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyUsage()) + " kW/h");
+			dailyCostValue.setText(currencyFormatter.format(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyCost()));
+			totalUsageValue.setText(String.valueOf(listOfDays.getTotalUsage()) + " kW/h");
+			totalCostValue.setText(currencyFormatter.format(listOfDays.getTotalCost()));
+		}
+	}
 }

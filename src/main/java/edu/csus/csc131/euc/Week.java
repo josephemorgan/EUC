@@ -11,7 +11,6 @@ public class Week {
     private Rates winterRates;
 
     private ArrayList<Day> days = new ArrayList();
-    private int numOfDays = 0;
 
     //Constructor
     public Week() {
@@ -32,6 +31,45 @@ public class Week {
         this.winterRates = winterRates;
     }
 
+    public void setSummerRates(Rates summerRates) {
+        this.summerRates = summerRates;
+    }
+
+    public void setWinterRates(Rates winterRates) {
+        this.winterRates = winterRates;
+    }
+
+    public int getNumOfDays() {
+        return days.size();
+    }
+
+    public void addDay(Day dayToAdd) {
+
+        if (isWinter(dayToAdd.getDate()))
+            dayToAdd.setRates(this.winterRates);
+        else
+            dayToAdd.setRates(this.winterRates);
+
+        days.add(dayToAdd);
+    }
+
+    public Day removeDay(int i) {
+        Day temp = null;
+        if (i < days.size()) {
+            temp = days.get(i);
+            days.remove(i);
+        }
+        return temp;
+    }
+
+    public void removeDay(CharSequence str) {
+        for (int i = 0; i < days.size(); ++i) {
+            if (days.get(i).getDateAsString().equals(str)) {
+                days.remove(i);
+            }
+        }
+    }
+
     public Day getDay(int i) {
         return days.get(i);
     }
@@ -43,36 +81,6 @@ public class Week {
             }
         }
         return null;
-    }
-
-    public void addDay(Day dayToAdd) {
-
-        if (isWinter(dayToAdd.getDate()))
-            dayToAdd.setRates(this.winterRates);
-        else
-            dayToAdd.setRates(this.winterRates);
-
-        days.add(dayToAdd);
-        numOfDays++;
-    }
-
-    public void fetchDayFromFile(String filePath) {
-
-        parser.fetchData(filePath);
-
-        Day in;
-
-        //Create instance of day with either summer or winter rates, depending on month
-        if (isWinter(parser.getDate()))
-            in = new Day(this.winterRates);
-        else
-            in = new Day(this.summerRates);
-
-        in.setDate(parser.getDate());
-        in.setUsage(parser.getValues());
-
-        days.add(in);
-        numOfDays++;
     }
 
     public double getTotalUsage() {
@@ -92,16 +100,30 @@ public class Week {
         return totalCost;
     }
 
-    public void setSummerRates(Rates summerRates) {
-        this.summerRates = summerRates;
+    public String[] getListOfDaysAsStringArray() {
+        ArrayList<String> ret = new ArrayList<>();
+        for (Day day : days) {
+            ret.add(day.getDateAsString());
+        }
+        return ret.toArray(new String[ret.size()]);
     }
 
-    public void setWinterRates(Rates winterRates) {
-        this.winterRates = winterRates;
-    }
+    public void fetchDayFromFile(String filePath) {
 
-    public int getNumOfDays() {
-        return numOfDays;
+        parser.fetchData(filePath);
+
+        Day in;
+
+        //Create instance of day with either summer or winter rates, depending on month
+        if (isWinter(parser.getDate()))
+            in = new Day(this.winterRates);
+        else
+            in = new Day(this.summerRates);
+
+        in.setDate(parser.getDate());
+        in.setUsage(parser.getValues());
+
+        days.add(in);
     }
 
     private boolean isWinter(LocalDate in) {
