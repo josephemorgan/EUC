@@ -169,7 +169,12 @@ public class MainWindow {
 	}
 
 	private void refreshUsageValues() {
-		if (listOfDays.getNumOfDays() != 0) {
+		if (listOfDays.getNumOfDays() == 0) {
+			dailyUsageValue.setText("0 kW/h");
+			dailyCostValue.setText("$0.00");
+			totalUsageValue.setText("0 kW/h");
+			totalCostValue.setText("$0.00");
+		} else {
 			NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
 			dailyUsageValue.setText(String.valueOf(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyUsage()) + " kW/h");
 			dailyCostValue.setText(currencyFormatter.format(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyCost()));

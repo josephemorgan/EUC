@@ -63,9 +63,10 @@ public class Week {
     }
 
     public void removeDay(CharSequence str) {
-        for (int i = 0; i < days.size(); ++i) {
-            if (days.get(i).getDateAsString().equals(str)) {
-                days.remove(i);
+        for (Day day : days) {
+            if (day.getDateAsString().equals(str)) {
+                days.remove(day);
+                break;
             }
         }
     }
