@@ -100,6 +100,10 @@ public class EnterRatesDialog extends JDialog implements ActionListener {
                 listOfDays.setWinterRates(temp);
                 updateMessage("Winter rates have been updated.");
             }
+            else
+            {
+                JOptionPane.showMessageDialog(winterPanel, "Please enter all rates in the format: #.####");
+            }
         } else if (seasonBeingEntered == Season.SUMMER) {
             if (validateSummerComboBox()) {
                 // Break this up into 4 loops because there are 4 blocks
@@ -118,16 +122,39 @@ public class EnterRatesDialog extends JDialog implements ActionListener {
                 listOfDays.setSummerRates(temp);
                 updateMessage("Summer rates have been updated.");
             }
+            else
+            {
+                JOptionPane.showMessageDialog(winterPanel, "Please enter all rates in the format: #.####");
+            }
         }
     }
 
     private boolean validateWinterComboBox() {
-        // TODO: Add error checking to make sure that user has entered valid $/kWh values and time spans
-        return true;
+        boolean isValid = false;
+        // logic:
+        // if the ___ text box is not empty
+        //      and contains a positive double
+        //          return true
+        // else false (info popup)
+        if (winterPanel.getOffPeakRatesField() != null)
+        {
+            if (winterPanel.getOffPeakRatesField() > 0)
+            {
+                isValid = true;
+            }
+        }
+        else
+            isValid = false;
+        return isValid;
     }
 
     private boolean validateSummerComboBox() {
         // TODO: Add error checking to make sure that user has entered valid $/kWh values and time spans
+        // logic:
+        // if the ___ text box is not empty
+        //      and contains a positive double
+        //          return true
+        // else false (info popup)
         return true;
     }
 

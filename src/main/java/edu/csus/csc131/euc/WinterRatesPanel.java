@@ -143,7 +143,7 @@ public class WinterRatesPanel extends JPanel {
     }
 
     public Double getOffPeakRatesField() {
-        return Double.valueOf(offPeakRatesField.getText());
+        return Double.parseDouble(offPeakRatesField.getText());
     }
 
     public Double getOnPeakRatesField() {
