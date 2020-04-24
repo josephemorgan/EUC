@@ -148,7 +148,7 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent e) {
 				String helpMessageString = "Thanks for using our Electricity Usage Calculator!\n\n" +
 						"\tThe calculator comes loaded with some default rates for summer and winter, but if\n" +
-						"you'd like to change either summer or winter rates, just click \"Set Usage Rates.\"\n\n" +
+						"you'd like to change either summer or winter rates, just click \"Enter Hourly Rates.\"\n\n" +
 						"\tOnce you're happy with the usage rates, you can enter your daily usage by clicking\n" +
 						"\"Add a Day.\" If you try to add a day for a date that's already been added, the new\n" +
 						"day will replace the old one with the same date.\n\n" +

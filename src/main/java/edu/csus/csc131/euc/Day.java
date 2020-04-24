@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class Day {
 
     // Index represents hours with contents of array representing the kW/h usage and hourly usage rates respectively.
-    private static final int HOURS_IN_DAY = 24;
+    protected static final int HOURS_IN_DAY = 24;
     private LocalDate date;
     private Rates rates = null;
     private Usage usage = new Usage();

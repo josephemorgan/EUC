@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class AddDayDialog extends JDialog implements ActionListener {
 
     private JPanel topPanel;
-    private JPanel fieldPanel;
+    private DayEntryPanel fieldPanel;
     private JPanel leftPanel;
     private JPanel rightPanel;
     private JPanel bottomPanel;
@@ -37,13 +37,12 @@ public class AddDayDialog extends JDialog implements ActionListener {
         setLocationRelativeTo(null);
 
         topPanel = new JPanel();
-        fieldPanel = new JPanel();
+        fieldPanel = new DayEntryPanel();
         leftPanel = new JPanel();
         rightPanel = new JPanel();
         bottomPanel = new JPanel();
 
         topPanel.setLayout(new FlowLayout());
-        fieldPanel.setLayout(new BoxLayout(fieldPanel, BoxLayout.X_AXIS));
         leftPanel.setLayout(new FlowLayout());
         rightPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         bottomPanel.setLayout(new FlowLayout());
@@ -114,8 +113,6 @@ public class AddDayDialog extends JDialog implements ActionListener {
         rightPanel.setBorder(BorderFactory.createTitledBorder("Usage"));
 
         //add left and right panels to the Add Day Dialog
-        fieldPanel.add(leftPanel, BorderLayout.WEST);
-        fieldPanel.add(rightPanel, BorderLayout.EAST);
         topPanel.add(new JLabel("Enter Date: "));
         topPanel.add(dateField);
 
@@ -141,7 +138,7 @@ public class AddDayDialog extends JDialog implements ActionListener {
             Usage usageToAdd = new Usage();
             for (int i = 0; i < HOURS_IN_DAY; ++i)
             {
-               usageToAdd.setUsage(i, Double.parseDouble(usageTextFields[i].getText()));
+               usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
             }
             dayToAdd = new Day(dateField.getText(), usageToAdd);
             week.addDay(dayToAdd);
