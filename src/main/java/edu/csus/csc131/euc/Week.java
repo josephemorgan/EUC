@@ -44,6 +44,13 @@ public class Week {
     }
 
     public void addDay(Day dayToAdd) {
+        // Gotta make sure the day hasn't already been added
+        for (Day day : days) {
+            if (dayToAdd.getDateAsString().equals(day.getDateAsString())) {
+                days.remove(day);
+                break;
+            }
+        }
 
         if (isWinter(dayToAdd.getDate()))
             dayToAdd.setRates(this.winterRates);
@@ -71,7 +78,10 @@ public class Week {
     }
 
     public Day getDay(int i) {
-        return days.get(i);
+        if (i < days.size())
+            return days.get(i);
+        else
+            return null;
     }
 
     public Day getDay(String date) {
