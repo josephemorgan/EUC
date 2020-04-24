@@ -35,8 +35,9 @@ public class MainWindow {
 	private JLabel totalUsageValue;
 	private JLabel totalCostValue;
 	private String noDaysString = "No days added yet";
-	private JComboBox comboBox;
+	private JComboBox addedDaysComboBox;
 	private JFrame mainwindow;
+	private ActionListener comboBoxActionListener;
 
 	public void createWindow() {
 		listOfDays = new Week();
@@ -46,7 +47,7 @@ public class MainWindow {
 		dailyCostValue = new JLabel ("$0.00", SwingConstants.RIGHT);
 		totalUsageValue = new JLabel ("0 kW/h", SwingConstants.RIGHT);
 		totalCostValue = new JLabel ("$0.00", SwingConstants.RIGHT);
-		comboBox = new JComboBox(new String[]{noDaysString});
+		addedDaysComboBox = new JComboBox(new String[]{noDaysString});
 		mainwindow = new JFrame("Electricity Project");
 		//#####################################################
 		//################### Main Window #####################
@@ -69,10 +70,10 @@ public class MainWindow {
 		//################### Combo Box #######################
 		//#####################################################
 
-		comboBox.setFont(new Font("Arial", Font.BOLD, 20));
+		addedDaysComboBox.setFont(new Font("Arial", Font.BOLD, 20));
 
-		comboBox.setBounds(25, 25, 335, 50);
-		mainwindow.add(comboBox);
+		addedDaysComboBox.setBounds(25, 25, 335, 50);
+		mainwindow.add(addedDaysComboBox);
 
 		//#####################################################
 		//################### BUTTONS #########################
@@ -105,10 +106,10 @@ public class MainWindow {
 		removeDayB.addActionListener(new ActionListener() { //action listener for button being clicked
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				String itemToRemove = comboBox.getSelectedItem().toString();
-				if (!comboBox.getSelectedItem().equals(noDaysString)) {
+				String itemToRemove = addedDaysComboBox.getSelectedItem().toString();
+				if (!addedDaysComboBox.getSelectedItem().equals(noDaysString)) {
 					listOfDays.removeDay(itemToRemove);
-					refreshMainWindow();
+					refreshUsageValues();
 				}
 			}
 		});
@@ -121,6 +122,18 @@ public class MainWindow {
 			    JDialog d = new EnterRatesDialog(mainwindow, listOfDays);
 			}
 		});
+
+		comboBoxActionListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent actionEvent) {
+				String selectedItem = addedDaysComboBox.getSelectedItem().toString();
+				if (!selectedItem.equals(noDaysString)) {
+					dailyCostValue.setText(String.valueOf(listOfDays.getDay(selectedItem).getDailyCost()));
+					refreshUsageValues();
+				}
+			}
+		};
+		addedDaysComboBox.addActionListener(comboBoxActionListener);
 
 		//#####################################################
 		//################### LABELS ##########################
@@ -155,17 +168,19 @@ public class MainWindow {
 	}
 
 	private void refreshComboBox() {
-		comboBox.removeAllItems();
+		addedDaysComboBox.removeActionListener(comboBoxActionListener);
+		addedDaysComboBox.removeAllItems();
 		if (listOfDays.getNumOfDays() == 0) {
-			comboBox.addItem(noDaysString);
+			addedDaysComboBox.addItem(noDaysString);
 		} else {
-			if (comboBox.getItemAt(0) == noDaysString) {
-				comboBox.removeItem(noDaysString);
+			if (addedDaysComboBox.getItemAt(0) == noDaysString) {
+				addedDaysComboBox.removeItem(noDaysString);
 			}
 			for (int i = 0; i < listOfDays.getNumOfDays(); i++) {
-				comboBox.addItem(listOfDays.getDay(i).getDateAsString());
+				addedDaysComboBox.addItem(listOfDays.getDay(i).getDateAsString());
 			}
 		}
+		addedDaysComboBox.addActionListener(comboBoxActionListener);
 	}
 
 	private void refreshUsageValues() {

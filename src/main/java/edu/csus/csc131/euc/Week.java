@@ -48,8 +48,7 @@ public class Week {
         if (isWinter(dayToAdd.getDate()))
             dayToAdd.setRates(this.winterRates);
         else
-            dayToAdd.setRates(this.winterRates);
-
+            dayToAdd.setRates(this.summerRates);
         days.add(dayToAdd);
     }
 
