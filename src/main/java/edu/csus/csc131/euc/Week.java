@@ -84,21 +84,16 @@ public class Week {
         return null;
     }
 
-    public double getTotalUsage() {
-        double totalUsage = 0.0;
-        for (Day day : days) {
-            totalUsage += day.getDailyUsage();
-        }
-
-        return totalUsage;
+    public ArrayList<Day> getListOfDays() {
+        return days;
     }
 
-    public double getTotalCost() {
-        double totalCost = 0.0;
-        for (Day day : days) {
-            totalCost += day.getDailyCost();
-        }
-        return totalCost;
+    public double calculateTotalUsage() {
+        return unwillingComplianceCalculator.calculateTotalUsage(this);
+    }
+
+    public double calculateTotalCost() {
+        return unwillingComplianceCalculator.calculateTotalCost(this);
     }
 
     public String[] getListOfDaysAsStringArray() {

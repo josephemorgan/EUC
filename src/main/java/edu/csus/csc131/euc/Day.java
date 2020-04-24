@@ -72,7 +72,6 @@ public class Day {
         return out;
     }
 
-
     public void setUsage(double[] kWh) {
         this.usage.setUsage(kWh);
     }
@@ -85,36 +84,22 @@ public class Day {
         this.rates = in;
     }
 
+    public Usage getUsage() {
+        return this.usage;
+    }
+
+    public Rates getRates() {
+        return this.rates;
+    }
+
     // Calculates total usage for the day in kW/h.
     public double getDailyUsage() {
-
-        if(this.rates == null){
-            System.out.println("Error: Rates have not yet been set.");
-            return -1.0;
-        }
-
-        double totalUsage = 0;
-        for (int i = 0; i < HOURS_IN_DAY; i++) {
-            totalUsage += usage.getUsage(i);
-        }
-        return totalUsage;
-
+        return unwillingComplianceCalculator.calculateDailyUsage(this);
     }
 
     // Calculates total cost for the day in $ based on associated hourly usage and hourly rates.
     public double getDailyCost() {
-
-        if(this.rates == null){
-            System.out.println("Error: Rates have not yet been set.");
-            return -1.0;
-        }
-
-    	double totalCost = 0;
-        for (int i = 0; i < HOURS_IN_DAY; i++) 
-        {
-            totalCost += usage.getUsage(i) * rates.getRate(i);
-        }
-        return totalCost;
+        return unwillingComplianceCalculator.calculateDailyCost(this);
     }
 
     @Override

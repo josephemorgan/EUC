@@ -57,7 +57,7 @@ class WeekTest {
     void fetchDayFromFile() {
         week.fetchDayFromFile(TEST_FILE_PATH);
 
-        assertEquals(26.8152, week.getTotalUsage());
+        assertEquals(26.8152, week.calculateTotalUsage());
         assertEquals("2020-02-28", week.getDay(0).getDateAsString());
     }
 
@@ -70,7 +70,7 @@ class WeekTest {
     void getTotalCost() {
         week.fetchDayFromFile(TEST_FILE_PATH);
 
-        assertEquals(80.4456, week.getTotalCost());
+        assertEquals(80.4456, week.calculateTotalCost());
     }
 
 

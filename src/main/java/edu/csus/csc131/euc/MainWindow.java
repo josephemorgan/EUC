@@ -178,8 +178,8 @@ public class MainWindow {
 			NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
 			dailyUsageValue.setText(String.valueOf(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyUsage()) + " kW/h");
 			dailyCostValue.setText(currencyFormatter.format(listOfDays.getDay(listOfDays.getNumOfDays() - 1).getDailyCost()));
-			totalUsageValue.setText(String.valueOf(listOfDays.getTotalUsage()) + " kW/h");
-			totalCostValue.setText(currencyFormatter.format(listOfDays.getTotalCost()));
+			totalUsageValue.setText(String.valueOf(listOfDays.calculateTotalUsage()) + " kW/h");
+			totalCostValue.setText(currencyFormatter.format(listOfDays.calculateTotalCost()));
 		}
 	}
 }
