@@ -170,24 +170,26 @@ public class AddDayDialog extends JDialog implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Unable to open file");
             }
         } else if (source == finalizeButton) {
-            int confirm = 0;
-            for (Day day : week.getListOfDays()) {
-                if (day.getDate().toString().equals(dateField.getText())) {
-                    confirm = JOptionPane.showConfirmDialog(this, "Are you sure you would like to overwrite " + dateField.getText() + "?");
+            if (ValidateTextFields() == true) {
+                int confirm = 0;
+                for (Day day : week.getListOfDays()) {
+                    if (day.getDate().toString().equals(dateField.getText())) {
+                        confirm = JOptionPane.showConfirmDialog(this, "Are you sure you would like to overwrite " + dateField.getText() + "?");
+                    }
                 }
-            }
-            if (confirm == 0) {
-                Day dayToAdd;
-                Usage usageToAdd = new Usage();
-                for (int i = 0; i < Day.HOURS_IN_DAY; ++i) {
-                    usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
+                if (confirm == 0) {
+                    Day dayToAdd;
+                    Usage usageToAdd = new Usage();
+                    for (int i = 0; i < Day.HOURS_IN_DAY; ++i) {
+                        usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
+                    }
+                    dayToAdd = new Day(dateField.getText(), usageToAdd);
+                    week.addDay(dayToAdd);
+                    --dayCounter;
+                    this.dispose();
+                } else if (confirm == 2) {
+                    this.dispose();
                 }
-                dayToAdd = new Day(dateField.getText(), usageToAdd);
-                week.addDay(dayToAdd);
-                --dayCounter;
-                this.dispose();
-            } else if (confirm == 2) {
-                this.dispose();
             }
         } else if (source == cancelButton) {
             this.dispose();
@@ -205,6 +207,30 @@ public class AddDayDialog extends JDialog implements ActionListener {
         } else if (source == dateMinusButton) {
             dateField.setText(LocalDate.now().plusDays(--dayCounter).toString());
         }
+    }
+
+    private boolean ValidateTextFields(){
+        // logic:
+        // for each text field, check if its non null (already parsed to double)
+        //  if non null, then check if its less than 0.  If so then return not valid
+        //  if null, return not valid
+
+        boolean isValid = true;
+        for (int i = 0; i < Day.HOURS_IN_DAY; i++) {
+            if (fieldPanel.getTextFieldContents(i) != null)
+            {
+                if (fieldPanel.getTextFieldContents(i) < 0) {
+                    isValid = false;
+                    JOptionPane.showMessageDialog(this, "Please enter data greather than or equal to 0");
+                    break;
+                }
+            }
+            else
+            {
+                isValid = false;
+            }
+        }
+        return isValid;
     }
 
     public void keyPressed(KeyEvent e) {
