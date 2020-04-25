@@ -1,7 +1,5 @@
 package edu.csus.csc131.euc;
 
-import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicArrowButton;
@@ -133,17 +131,7 @@ public class AddDayDialog extends JDialog implements ActionListener {
 
         this.add(midPanel, BorderLayout.CENTER);
 
-        //add(topPanel, BorderLayout.NORTH);
-        //add(fieldPanel, BorderLayout.CENTER);
-        //add(bottomPanel, BorderLayout.SOUTH);
-
         pack ();
-
-        //setting focus initially for new frame must be after pack() according to stack overflow
-        //usageTextFields[focusCounter].requestFocusInWindow();
-        //usageTextFields[focusCounter].selectAll();
-
-        //must be last or bugggggggs
         setVisible(true);
     }
 
