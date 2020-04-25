@@ -26,7 +26,13 @@ public class DayEntryPanel extends JPanel {
         return ret;
     }
 
-    public double getTextFieldContents(int i) {
+    public Double getTextFieldContents(int i) {
+        try {
+            Double textContents = Double.parseDouble(usageTextFieldList.get(i).getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter data in the format: #.##");
+            return null;
+        }
         return Double.parseDouble(usageTextFieldList.get(i).getText());
     }
 
@@ -41,7 +47,7 @@ public class DayEntryPanel extends JPanel {
             } else {
                 hoursLabelList.add(new JLabel(i + ":00 - " + (i + 1) + ":00"));
             }
-            usageTextFieldList.add(new JTextField("0.0",8));
+            usageTextFieldList.add(new JTextField("0.00",8));
         }
 
     }

@@ -159,15 +159,20 @@ public class AddDayDialog extends JDialog implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Unable to open file");
             }
         } else if (source == finalizeButton) {
-            Day dayToAdd;
-            Usage usageToAdd = new Usage();
-            for (int i = 0; i < HOURS_IN_DAY; ++i)
-            {
-               usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
+            if (ValidateTextFields() == true) {
+                Day dayToAdd;
+                Usage usageToAdd = new Usage();
+                for (int i = 0; i < HOURS_IN_DAY; ++i) {
+                    usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
+                }
+                dayToAdd = new Day(dateField.getText(), usageToAdd);
+                week.addDay(dayToAdd);
+                this.dispose();
             }
-            dayToAdd = new Day(dateField.getText(), usageToAdd);
-            week.addDay(dayToAdd);
-            this.dispose();
+            else
+            {
+                //if data was not valid, do nothing
+            }
         } else if (source == cancelButton) {
             this.dispose();
         } else if (source == helpButton) {
@@ -180,6 +185,30 @@ public class AddDayDialog extends JDialog implements ActionListener {
                             "You can click \"Abort\" at any time to cancel usage entry.";
             JOptionPane.showMessageDialog(this, helpMessage);
         }
+    }
+
+    private boolean ValidateTextFields(){
+        // logic:
+        // for each text field, check if its non null (already parsed to double)
+        //  if non null, then check if its less than 0.  If so then return not valid
+        //  if null, return not valid
+
+        boolean isValid = true;
+        for (int i = 0; i < HOURS_IN_DAY; i++) {
+            if (fieldPanel.getTextFieldContents(i) != null)
+            {
+                if (fieldPanel.getTextFieldContents(i) < 0) {
+                    isValid = false;
+                    JOptionPane.showMessageDialog(this, "Please enter data greather than or equal to 0");
+                    break;
+                }
+            }
+            else
+            {
+                isValid = false;
+            }
+        }
+        return isValid;
     }
 
     public void keyPressed(KeyEvent e) {
