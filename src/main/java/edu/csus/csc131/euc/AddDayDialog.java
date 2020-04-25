@@ -18,6 +18,7 @@ public class AddDayDialog extends JDialog implements ActionListener {
     private JButton readFromFileButton;
     private JButton cancelButton;
     private JButton enterManuallyButton;
+    private JButton helpButton;
     private DayEntryPanel fieldPanel;
     private Week week;
     private JTextField usageTextFields[] = new JTextField[HOURS_IN_DAY];
@@ -49,30 +50,40 @@ public class AddDayDialog extends JDialog implements ActionListener {
         readFromFileButton = new JButton ("Read From File");
         enterManuallyButton = new JButton ("Enter Usage Manually");
         cancelButton = new JButton("Cancel");
+        helpButton = new JButton("Help");
 
         finalizeButton.addActionListener(this);
         readFromFileButton.addActionListener(this);
         enterManuallyButton.addActionListener(this);
         cancelButton.addActionListener(this);
+        helpButton.addActionListener(this);
 
         GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 0;
-        c.weighty = 0;
+        c.weightx = 1;
+        c.weighty = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5, 5, 5, 5);
 
         c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth = 2;
         bottomPanel.add(finalizeButton, c);
 
-        c.gridx = 1;
-        c.gridy = 0;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 1;
         bottomPanel.add(cancelButton, c);
+
+        c.gridx = 1;
+        c.gridy = 1;
+        bottomPanel.add(helpButton, c);
 
         c.weightx = 0;
         c.weighty = 0;
         c.gridx = 0;
         c.gridy = 0;
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0,0,0,0);
         midPanel.add(readFromFileButton, c);
 
         c.weighty = .5;
@@ -124,23 +135,7 @@ public class AddDayDialog extends JDialog implements ActionListener {
             this.pack();
             this.validate();
             this.repaint();
-        }
-        else if (source == finalizeButton) {
-            Day dayToAdd;
-            Usage usageToAdd = new Usage();
-            for (int i = 0; i < HOURS_IN_DAY; ++i)
-            {
-               usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
-            }
-            dayToAdd = new Day(dateField.getText(), usageToAdd);
-            week.addDay(dayToAdd);
-            this.dispose();
-        }
-        else if (source == cancelButton) {
-            this.dispose();
-        }
-        else if (source == readFromFileButton)
-        {
+        } else if (source == readFromFileButton) {
             //Open a file browser, save file path
             JFileChooser fileChooser = new JFileChooser();
 
@@ -160,11 +155,30 @@ public class AddDayDialog extends JDialog implements ActionListener {
 
                 System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                 this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Unable to open file");
             }
-            else
+        } else if (source == finalizeButton) {
+            Day dayToAdd;
+            Usage usageToAdd = new Usage();
+            for (int i = 0; i < HOURS_IN_DAY; ++i)
             {
-                System.out.println("Failed to select a file or choose an approved file.");
+               usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
             }
+            dayToAdd = new Day(dateField.getText(), usageToAdd);
+            week.addDay(dayToAdd);
+            this.dispose();
+        } else if (source == cancelButton) {
+            this.dispose();
+        } else if (source == helpButton) {
+            String helpMessage = "Add a Day Dialog Help Message:\n\n" +
+                            "To add a day manually, please first make sure that you've entered the correct date\n" +
+                            "corresponding to the day you want to add. If the date you've entered is the same as a day\n" +
+                            "that's already been added, the new usage values will replace those for the previous entry\n\n" +
+                            "Next, enter the number of kiloWatt-hours that you used during each hourly period of the day.\n\n" +
+                            "Last, click \"Finalize Usage,\" and the values that you've entered with be saved.\n\n" +
+                            "You can click \"Abort\" at any time to cancel usage entry.";
+            JOptionPane.showMessageDialog(this, helpMessage);
         }
     }
 
