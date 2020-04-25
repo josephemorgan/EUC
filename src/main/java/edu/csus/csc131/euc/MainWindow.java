@@ -115,8 +115,12 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent actionEvent) {
 				String itemToRemove = addedDaysComboBox.getSelectedItem().toString();
 				if (!addedDaysComboBox.getSelectedItem().equals(noDaysString)) {
-					listOfDays.removeDay(itemToRemove);
-					refreshMainWindow();
+					int selection = JOptionPane.showConfirmDialog(mainwindow, "Confirm the removal");
+					if (selection == JOptionPane.YES_OPTION)
+					{
+						listOfDays.removeDay(itemToRemove);
+						refreshMainWindow();
+					}
 				} else {
 					JOptionPane.showMessageDialog(mainwindow, "There are no days to remove!");
 				}
