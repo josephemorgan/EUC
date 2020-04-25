@@ -1,24 +1,24 @@
 package edu.csus.csc131.euc;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
 import java.io.File;
 import java.time.LocalDate;
 
 public class AddDayDialog extends JDialog implements ActionListener {
 
     private JPanel topPanel;
-    private DayEntryPanel fieldPanel;
-    private JPanel leftPanel;
-    private JPanel rightPanel;
+    private JPanel midPanel;
     private JPanel bottomPanel;
     private JButton finalizeButton;
     private JButton readFromFileButton;
     private JButton cancelButton;
+    private JButton enterManuallyButton;
+    private DayEntryPanel fieldPanel;
     private Week week;
     private JTextField usageTextFields[] = new JTextField[HOURS_IN_DAY];
     private JTextField dateField = new JTextField(LocalDate.now().toString(), 24);
@@ -37,94 +37,77 @@ public class AddDayDialog extends JDialog implements ActionListener {
         setLocationRelativeTo(null);
 
         topPanel = new JPanel();
-        fieldPanel = new DayEntryPanel();
-        leftPanel = new JPanel();
-        rightPanel = new JPanel();
+        midPanel = new JPanel();
         bottomPanel = new JPanel();
+        fieldPanel = new DayEntryPanel();
 
         topPanel.setLayout(new FlowLayout());
-        leftPanel.setLayout(new FlowLayout());
-        rightPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        bottomPanel.setLayout(new FlowLayout());
-        leftPanel.setPreferredSize(new Dimension(200, 800));
-        rightPanel.setPreferredSize(new Dimension(200, 800));
-
-        for (int i = 0; i < HOURS_IN_DAY; i++)
-        {
-            if(i == 0){
-                JLabel usageLabel = new JLabel("Usage from " + (i + 12) + "am to " + (i + 1) + "am");
-                usageLabel.setPreferredSize(LABEL_DIMENSION);
-                leftPanel.add(usageLabel);
-            }
-            else if (i < 11){
-                JLabel usageLabel = new JLabel("Usage from " + i + "am to " + (i + 1) + "am");
-                usageLabel.setPreferredSize(LABEL_DIMENSION);
-                leftPanel.add(usageLabel);
-            }
-            else if (i == 11) {
-                JLabel usageLabel = new JLabel("Usage from " + i + "am to " + (i + 1) + "pm");
-                usageLabel.setPreferredSize(LABEL_DIMENSION);
-                leftPanel.add(usageLabel);
-            }
-            else if (i == 12) {
-                JLabel usageLabel = new JLabel("Usage from " + i + "pm to " + (i - 11) + "pm");
-                usageLabel.setPreferredSize(LABEL_DIMENSION);
-                leftPanel.add(usageLabel);
-            }
-            else if (i > 12 && i < 24) {
-                JLabel usageLabel = new JLabel("Usage from " + (i - 12) + "pm to " + (i - 11) + "pm");
-                usageLabel.setPreferredSize(LABEL_DIMENSION);
-                leftPanel.add(usageLabel);
-            }
-        }
-
-        //add a text field for each hour
-        for (int i = 0; i < HOURS_IN_DAY; i++)
-        {
-            usageTextFields[i] = new JTextField("0.0");
-            usageTextFields[i].setPreferredSize(TF_DIMENSION);
-
-            usageTextFields[i].addKeyListener(new KeyAdapter() {
-                public void keyPressed(KeyEvent e) {
-                    if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                        usageTextFields[focusCounter + 1].requestFocusInWindow();
-                        usageTextFields[focusCounter + 1].selectAll();
-                        focusCounter++;
-                    }
-                }
-            });
-
-            rightPanel.add(usageTextFields[i]);
-        }
+        midPanel.setLayout(new GridBagLayout());
+        bottomPanel.setLayout(new GridBagLayout());
 
         finalizeButton = new JButton ("Finalize Usage");
         readFromFileButton = new JButton ("Read From File");
+        enterManuallyButton = new JButton ("Enter Usage Manually");
         cancelButton = new JButton("Cancel");
 
         finalizeButton.addActionListener(this);
         readFromFileButton.addActionListener(this);
+        enterManuallyButton.addActionListener(this);
         cancelButton.addActionListener(this);
 
-        bottomPanel.add(finalizeButton);
-        bottomPanel.add(readFromFileButton);
-        bottomPanel.add(cancelButton);
+        GridBagConstraints c = new GridBagConstraints();
+        c.weightx = 0;
+        c.weighty = 0;
+        c.fill = GridBagConstraints.HORIZONTAL;
 
-        leftPanel.setBorder(BorderFactory.createTitledBorder("Times"));
-        rightPanel.setBorder(BorderFactory.createTitledBorder("Usage"));
+        c.gridx = 0;
+        c.gridy = 0;
+        bottomPanel.add(finalizeButton, c);
+
+        c.gridx = 1;
+        c.gridy = 0;
+        bottomPanel.add(cancelButton, c);
+
+        c.weightx = 0;
+        c.weighty = 0;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        midPanel.add(readFromFileButton, c);
+
+        c.weighty = .5;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.fill = GridBagConstraints.NONE;
+        midPanel.add(new JLabel("Or"), c);
+
+        c.weighty = 1;
+        c.gridx = 0;
+        c.gridy = 2;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        midPanel.add(enterManuallyButton, c);
+
+        Border innerBorder = BorderFactory.createTitledBorder("How would you like to enter usage?");
+        Border outerBorder = BorderFactory.createEmptyBorder(5,5,5,5);
+
+        midPanel.setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
+        midPanel.setPreferredSize(new Dimension(400, 100));
 
         //add left and right panels to the Add Day Dialog
         topPanel.add(new JLabel("Enter Date: "));
         topPanel.add(dateField);
 
-        add(topPanel, BorderLayout.NORTH);
-        add(fieldPanel, BorderLayout.CENTER);
-        add(bottomPanel, BorderLayout.SOUTH);
+        this.add(midPanel, BorderLayout.CENTER);
+
+        //add(topPanel, BorderLayout.NORTH);
+        //add(fieldPanel, BorderLayout.CENTER);
+        //add(bottomPanel, BorderLayout.SOUTH);
 
         pack ();
 
         //setting focus initially for new frame must be after pack() according to stack overflow
-        usageTextFields[focusCounter].requestFocusInWindow();
-        usageTextFields[focusCounter].selectAll();
+        //usageTextFields[focusCounter].requestFocusInWindow();
+        //usageTextFields[focusCounter].selectAll();
 
         //must be last or bugggggggs
         setVisible(true);
@@ -133,7 +116,16 @@ public class AddDayDialog extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         Object source = actionEvent.getSource();
-        if (source == finalizeButton) {
+        if (source == enterManuallyButton) {
+            this.remove(midPanel);
+            this.add(topPanel, BorderLayout.NORTH);
+            this.add(fieldPanel, BorderLayout.CENTER);
+            this.add(bottomPanel, BorderLayout.SOUTH);
+            this.pack();
+            this.validate();
+            this.repaint();
+        }
+        else if (source == finalizeButton) {
             Day dayToAdd;
             Usage usageToAdd = new Usage();
             for (int i = 0; i < HOURS_IN_DAY; ++i)
