@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -80,6 +82,7 @@ public class AddDayDialog extends JDialog implements ActionListener {
         helpButton.addActionListener(this);
         datePlusButton.addActionListener(this);
         dateMinusButton.addActionListener(this);
+        dateField.addActionListener(this);
 
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = 1;
@@ -187,10 +190,16 @@ public class AddDayDialog extends JDialog implements ActionListener {
                     for (int i = 0; i < Day.HOURS_IN_DAY; ++i) {
                         usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
                     }
-                    dayToAdd = new Day(dateField.getText(), usageToAdd);
-                    week.addDay(dayToAdd);
-                    --dayCounter;
-                    this.dispose();
+                    boolean validInput = true;
+                    try {
+                        dayToAdd = new Day(dateField.getText(), usageToAdd);
+                        week.addDay(dayToAdd);
+                        --dayCounter;
+                        this.dispose();
+                    } catch (DateTimeParseException e) {
+                        JOptionPane.showMessageDialog(this, "Please make sure dates are entered in the format <yyyy-mm-dd>");
+                        validInput = false;
+                    }
                 } else if (confirm == 2) {
                     this.dispose();
                 }
@@ -210,6 +219,12 @@ public class AddDayDialog extends JDialog implements ActionListener {
             dateField.setText(LocalDate.now().plusDays(++dayCounter).toString());
         } else if (source == dateMinusButton) {
             dateField.setText(LocalDate.now().plusDays(--dayCounter).toString());
+        } else if (source == dateField) {
+            try {
+                dayCounter = (int)ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.parse(dateField.getText()));
+            } catch (DateTimeParseException err) {
+                JOptionPane.showMessageDialog(this, "Please make sure dates are entered in the format <yyyy-mm-dd>");
+            }
         }
     }
 
@@ -225,7 +240,7 @@ public class AddDayDialog extends JDialog implements ActionListener {
             {
                 if (fieldPanel.getTextFieldContents(i) < 0) {
                     isValid = false;
-                    JOptionPane.showMessageDialog(this, "Please enter data greather than or equal to 0");
+                    JOptionPane.showMessageDialog(this, "Please enter data greater than or equal to 0");
                     break;
                 }
             }

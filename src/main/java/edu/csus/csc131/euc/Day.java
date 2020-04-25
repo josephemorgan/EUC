@@ -1,6 +1,7 @@
 package edu.csus.csc131.euc;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Day {
 
@@ -11,11 +12,6 @@ public class Day {
     private Usage usage = new Usage();
 
     // Constructors
-
-    // Basic constructor sets the date to today.
-    public Day() {
-        this.date = LocalDate.now();
-    }
 
     public Day(Rates r) {
         rates = r;
@@ -28,19 +24,9 @@ public class Day {
     }
 
     // Creates Day class with explicit date.
-    public Day(LocalDate date) {
-        this.date = date;
-    }
-
-    // Creates Day class with explicit date.
     public Day(Rates r, LocalDate date) {
         this.date = date;
         this.rates = r;
-    }
-
-    // Creates Date class with specific date as a string formatted as yyyy-mm-dd
-    public Day(CharSequence dayString) {
-        this.date = LocalDate.parse(dayString);
     }
 
     // Creates Date class with specific date as a string formatted as yyyy-mm-dd
@@ -50,8 +36,12 @@ public class Day {
     }
 
     public Day (CharSequence dayString, Usage u) {
-        this.usage = u;
-        this.date = LocalDate.parse(dayString);
+        try {
+            this.date = LocalDate.parse(dayString);
+            this.usage = u;
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
     }
 
     public void setDate(LocalDate date) {
