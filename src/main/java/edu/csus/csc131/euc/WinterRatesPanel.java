@@ -3,6 +3,7 @@ package edu.csus.csc131.euc;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -143,10 +144,24 @@ public class WinterRatesPanel extends JPanel {
     }
 
     public Double getOffPeakRatesField() {
-        return Double.valueOf(offPeakRatesField.getText());
+        try {
+            Double offPeakText = Double.parseDouble(offPeakRatesField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter all rates in the format: #.####");
+            return null;
+        }
+
+        return Double.parseDouble(offPeakRatesField.getText());
     }
 
     public Double getOnPeakRatesField() {
+        try {
+            Double offPeakText = Double.parseDouble(onPeakRatesField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter all rates in the format: #.####");
+            return null;
+        }
+
         return Double.valueOf(onPeakRatesField.getText());
     }
 

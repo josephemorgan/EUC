@@ -122,13 +122,54 @@ public class EnterRatesDialog extends JDialog implements ActionListener {
     }
 
     private boolean validateWinterComboBox() {
-        // TODO: Add error checking to make sure that user has entered valid $/kWh values and time spans
-        return true;
+
+        // logic:
+        // (known: not null string, is double)
+        // if the text fields are null, dont validate
+        // then if the fields are greater than 0, the fields are validated
+
+        boolean isValid = false;
+
+        if (winterPanel.getOffPeakRatesField() == null || winterPanel.getOnPeakRatesField() == null)
+        {
+            isValid = false;
+            return isValid;
+        }
+
+        if(winterPanel.getOffPeakRatesField() > 0 && winterPanel.getOnPeakRatesField() > 0)
+        {
+            isValid = true;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Please enter positive data");
+        }
+        return isValid;
     }
 
     private boolean validateSummerComboBox() {
-        // TODO: Add error checking to make sure that user has entered valid $/kWh values and time spans
-        return true;
+        // logic:
+        // (known: not null string, is double)
+        // if the text fields are null, dont validate
+        // then if the fields are greater than 0, the fields are validated
+
+        boolean isValid = false;
+
+        if (summerPanel.getOffPeakRatesField() == null || summerPanel.getOnPeakRatesField() == null || summerPanel.getMidPeakRatesField() == null)
+        {
+            isValid = false;
+            return isValid;
+        }
+
+        if(summerPanel.getOffPeakRatesField() > 0 && summerPanel.getOnPeakRatesField() > 0 && summerPanel.getMidPeakRatesField() > 0)
+        {
+            isValid = true;
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Please enter positive data");
+        }
+        return isValid;
     }
 
     public void updateMessage(String msg) {
