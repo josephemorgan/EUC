@@ -34,7 +34,7 @@ public class AddDayDialog extends JDialog implements ActionListener {
     private JTextField dateField;
 
     private int focusCounter = 0;
-    private int dayCounter = 0;
+    private static int dayCounter = 0;
 
     private static Dimension TF_DIMENSION = new Dimension(100, 25);
     private static Dimension BUTTON_DIMENSION = new Dimension(150, 25);
@@ -182,15 +182,25 @@ public class AddDayDialog extends JDialog implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Unable to open file");
             }
         } else if (source == finalizeButton) {
-            Day dayToAdd;
-            Usage usageToAdd = new Usage();
-            for (int i = 0; i < Day.HOURS_IN_DAY; ++i)
-            {
-               usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
+            int confirm = 0;
+            for (Day day : week.getListOfDays()) {
+                if (day.getDate().toString().equals(dateField.getText())) {
+                    confirm = JOptionPane.showConfirmDialog(this, "Are you sure you would like to overwrite " + dateField.getText() + "?");
+                }
             }
-            dayToAdd = new Day(dateField.getText(), usageToAdd);
-            week.addDay(dayToAdd);
-            this.dispose();
+            if (confirm == 0) {
+                Day dayToAdd;
+                Usage usageToAdd = new Usage();
+                for (int i = 0; i < Day.HOURS_IN_DAY; ++i) {
+                    usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
+                }
+                dayToAdd = new Day(dateField.getText(), usageToAdd);
+                week.addDay(dayToAdd);
+                --dayCounter;
+                this.dispose();
+            } else if (confirm == 2) {
+                this.dispose();
+            }
         } else if (source == cancelButton) {
             this.dispose();
         } else if (source == helpButton) {
