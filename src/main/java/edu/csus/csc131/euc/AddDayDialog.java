@@ -10,6 +10,10 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.time.LocalDate;
 
+/**
+ *
+ */
+
 public class AddDayDialog extends JDialog implements ActionListener {
 
     private JPanel topPanel;
@@ -228,6 +232,7 @@ public class AddDayDialog extends JDialog implements ActionListener {
             else
             {
                 isValid = false;
+                break;
             }
         }
         return isValid;

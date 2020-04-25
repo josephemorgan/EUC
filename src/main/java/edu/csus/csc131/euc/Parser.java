@@ -51,7 +51,6 @@ public class Parser {
      * After data has been fetched, use getter methods to extract relevant data.
      *
      * @param filePath the file path to the JSON file to be read from
-     * @throws IOException
      */
 
     public void fetchData(String filePath) {
