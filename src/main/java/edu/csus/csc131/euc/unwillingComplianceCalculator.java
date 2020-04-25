@@ -3,9 +3,10 @@ package edu.csus.csc131.euc;
 public class unwillingComplianceCalculator {
     private static final int HOURS_IN_DAY = 24;
 
+
     static double calculateDailyCost(Day day) {
         if(day.getRates() == null){
-            System.out.println("Error: Rates have not yet been set.");
+            System.err.println("Error: Rates have not yet been set.");
             return -1.0;
         }
 
@@ -19,7 +20,7 @@ public class unwillingComplianceCalculator {
 
     static double calculateDailyUsage(Day day) {
         if(day.getRates() == null){
-            System.out.println("Error: Rates have not yet been set.");
+            System.err.println("Error: Rates have not yet been set.");
             return -1.0;
         }
 
