@@ -1,7 +1,10 @@
 package edu.csus.csc131.euc;
 
+import com.fasterxml.jackson.databind.introspect.TypeResolutionContext;
+
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicArrowButton;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,21 +17,29 @@ public class AddDayDialog extends JDialog implements ActionListener {
     private JPanel topPanel;
     private JPanel midPanel;
     private JPanel bottomPanel;
+
     private JButton finalizeButton;
     private JButton readFromFileButton;
     private JButton cancelButton;
     private JButton enterManuallyButton;
     private JButton helpButton;
+    private JButton datePlusButton;
+    private JButton dateMinusButton;
+
     private DayEntryPanel fieldPanel;
+
     private Week week;
-    private JTextField usageTextFields[] = new JTextField[HOURS_IN_DAY];
-    private JTextField dateField = new JTextField(LocalDate.now().toString(), 24);
-    public double[] hoursInDayUsage = new double[HOURS_IN_DAY];
+
+    private JTextField usageTextFields[] = new JTextField[Day.HOURS_IN_DAY];
+    private JTextField dateField;
+
     private int focusCounter = 0;
-    private static int HOURS_IN_DAY = 24;
+    private int dayCounter = 0;
+
     private static Dimension TF_DIMENSION = new Dimension(100, 25);
     private static Dimension BUTTON_DIMENSION = new Dimension(150, 25);
     private static Dimension LABEL_DIMENSION = new Dimension(180, 25);
+
 
     public AddDayDialog(Frame owner, Week wk) {
         super(owner, true);
@@ -51,12 +62,22 @@ public class AddDayDialog extends JDialog implements ActionListener {
         enterManuallyButton = new JButton ("Enter Usage Manually");
         cancelButton = new JButton("Cancel");
         helpButton = new JButton("Help");
+        dateField = new JTextField(LocalDate.now().plusDays(dayCounter).toString(), 16);
+        datePlusButton = new BasicArrowButton(BasicArrowButton.NORTH);
+        dateMinusButton = new BasicArrowButton(BasicArrowButton.SOUTH);
+
+        datePlusButton.setMargin(new Insets(1, 1, 1, 1));
+        datePlusButton.setPreferredSize(new Dimension(20, 20));
+        dateMinusButton.setMargin(new Insets(1, 1, 1, 1));
+        dateMinusButton.setPreferredSize(new Dimension(20, 20));
 
         finalizeButton.addActionListener(this);
         readFromFileButton.addActionListener(this);
         enterManuallyButton.addActionListener(this);
         cancelButton.addActionListener(this);
         helpButton.addActionListener(this);
+        datePlusButton.addActionListener(this);
+        dateMinusButton.addActionListener(this);
 
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = 1;
@@ -107,6 +128,8 @@ public class AddDayDialog extends JDialog implements ActionListener {
         //add left and right panels to the Add Day Dialog
         topPanel.add(new JLabel("Enter Date: "));
         topPanel.add(dateField);
+        topPanel.add(datePlusButton);
+        topPanel.add(dateMinusButton);
 
         this.add(midPanel, BorderLayout.CENTER);
 
@@ -161,7 +184,7 @@ public class AddDayDialog extends JDialog implements ActionListener {
         } else if (source == finalizeButton) {
             Day dayToAdd;
             Usage usageToAdd = new Usage();
-            for (int i = 0; i < HOURS_IN_DAY; ++i)
+            for (int i = 0; i < Day.HOURS_IN_DAY; ++i)
             {
                usageToAdd.setUsage(i, fieldPanel.getTextFieldContents(i));
             }
@@ -179,6 +202,10 @@ public class AddDayDialog extends JDialog implements ActionListener {
                             "Last, click \"Finalize Usage,\" and the values that you've entered with be saved.\n\n" +
                             "You can click \"Abort\" at any time to cancel usage entry.";
             JOptionPane.showMessageDialog(this, helpMessage);
+        } else if (source == datePlusButton) {
+            dateField.setText(LocalDate.now().plusDays(++dayCounter).toString());
+        } else if (source == dateMinusButton) {
+            dateField.setText(LocalDate.now().plusDays(--dayCounter).toString());
         }
     }
 
