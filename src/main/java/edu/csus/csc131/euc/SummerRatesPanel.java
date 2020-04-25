@@ -189,15 +189,36 @@ public class SummerRatesPanel extends JPanel {
     }
 
     public Double getOffPeakRatesField() {
-        return Double.valueOf(offPeakRatesField.getText());
+        try {
+            Double offPeakText = Double.parseDouble(offPeakRatesField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter all rates in the format: #.####");
+            return null;
+        }
+
+        return Double.parseDouble(offPeakRatesField.getText());
     }
 
     public Double getMidPeakRatesField() {
-        return Double.valueOf(midPeakRatesField.getText());
+        try {
+            Double offPeakText = Double.parseDouble(midPeakRatesField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter all rates in the format: #.####");
+            return null;
+        }
+
+        return Double.parseDouble(midPeakRatesField.getText());
     }
 
     public Double getOnPeakRatesField() {
-        return Double.valueOf(onPeakRatesField.getText());
+        try {
+            Double offPeakText = Double.parseDouble(onPeakRatesField.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter all rates in the format: #.####");
+            return null;
+        }
+
+        return Double.parseDouble(onPeakRatesField.getText());
     }
 
     public int getOffPeakToBox() {
