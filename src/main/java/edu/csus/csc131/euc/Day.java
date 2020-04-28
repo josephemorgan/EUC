@@ -54,11 +54,11 @@ public class Day {
 
     public String getDateAsString(){
         String out = "";
-        out += this.date.getYear();
-        out += "-";
         out += String.format("%02d", this.date.getMonthValue());
         out += "-";
         out += String.format("%02d", this.date.getDayOfMonth());
+        out += "-";
+        out += this.date.getYear();
         return out;
     }
 
