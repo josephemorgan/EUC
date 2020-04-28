@@ -115,7 +115,7 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent actionEvent) {
 				String itemToRemove = addedDaysComboBox.getSelectedItem().toString();
 				if (!addedDaysComboBox.getSelectedItem().equals(noDaysString)) {
-					int selection = JOptionPane.showConfirmDialog(mainwindow, "Confirm the removal");
+					int selection = JOptionPane.showConfirmDialog(mainwindow, "Really remove " + itemToRemove + "?");
 					if (selection == JOptionPane.YES_OPTION)
 					{
 						listOfDays.removeDay(itemToRemove);
@@ -139,10 +139,7 @@ public class MainWindow {
 		comboBoxActionListener = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent actionEvent) {
-				int selectedIndex = addedDaysComboBox.getSelectedIndex();
-				if (!listOfDays.getDay(selectedIndex).getDateAsString().equals(noDaysString)) {
-					refreshUsageValues();
-				}
+				refreshUsageValues();
 			}
 		};
 		addedDaysComboBox.addActionListener(comboBoxActionListener);
