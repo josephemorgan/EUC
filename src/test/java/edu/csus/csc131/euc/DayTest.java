@@ -72,7 +72,7 @@ class DayTest {
     void getDateAsString(){
         Day altDay = new Day(getSampleRates(), "2020-03-02");
 
-        assertEquals("2020-03-02", altDay.getDateAsString());
+        assertEquals("03-02-2020", altDay.getDateAsString());
     }
 
     @Test
@@ -124,6 +124,17 @@ class DayTest {
         assertEquals(-1.0, altDay.getDailyUsage());
     }
 
+    @Test
+    void getDailyUsage_3() {
+
+        Usage u = new Usage();
+        u.setUsage(getSampleUsage());
+
+        Day altDay = new Day("2020-03-02", u);
+
+        assertEquals("03-02-2020", altDay.getDateAsString());
+    }
+
 
     @Test
     void getDailyCost() {
@@ -138,7 +149,7 @@ class DayTest {
     @Test
     void getDailyCost_1() {
 
-        Day altDay = new Day((Rates)null);
+        Day altDay = new Day(null);
 
         double[] usageValues = getSampleUsage();
 

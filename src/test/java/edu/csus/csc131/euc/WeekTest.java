@@ -14,6 +14,8 @@ class WeekTest {
     Day sampleDayWithDate = new Day(null, "2020-03-02");
 
     private static final String TEST_FILE_PATH = "import\\dailyElectricityUsage_2020_02_28.json";
+    private static final String UNIX_TEST_FILE_PATH = "import/dailyElectricityUsage_2020_02_28.json";
+    private static final String UNIX_TEST_FILE_PATH_SUMMER = "import/dailyElectricityUsage_2020_07_28.json";
     private static final int HOURS_IN_DAY = 24;
 
     @Test
@@ -28,7 +30,7 @@ class WeekTest {
         week.addDay(sampleDay);
         week.addDay(sampleDayWithDate);
 
-        String target = "2020-03-02";
+        String target = "03-02-2020";
         String fetch = week.getDay(target).getDateAsString();
 
         assertEquals(target, fetch);
@@ -45,6 +47,15 @@ class WeekTest {
     }
 
     @Test
+    void getDay_3() {
+        week.addDay(sampleDay);
+
+        String target = "2020-03-04";
+
+        assertNull(week.getDay(3));
+    }
+
+    @Test
     void addDay() {
         Day altDay = new Day(null, "2020-07-11");
 
@@ -55,10 +66,10 @@ class WeekTest {
 
     @Test
     void fetchDayFromFile() {
-        week.fetchDayFromFile(TEST_FILE_PATH);
+        week.fetchDayFromFile(UNIX_TEST_FILE_PATH);
 
         assertEquals(26.8152, week.calculateTotalUsage());
-        assertEquals("2020-02-28", week.getDay(0).getDateAsString());
+        assertEquals("02-28-2020", week.getDay(0).getDateAsString());
     }
 
     @Test
@@ -68,9 +79,13 @@ class WeekTest {
 
     @Test
     void getTotalCost() {
-        week.fetchDayFromFile(TEST_FILE_PATH);
+        week.fetchDayFromFile(UNIX_TEST_FILE_PATH);
 
         assertEquals(80.4456, week.calculateTotalCost());
+
+        week.fetchDayFromFile(UNIX_TEST_FILE_PATH_SUMMER);
+
+        assertEquals(134.076, week.calculateTotalCost());
     }
 
 
@@ -92,5 +107,23 @@ class WeekTest {
         }
 
         return rates;
+    }
+
+
+    @Test
+    void getNumOfDays() {
+        Week altWeek = new Week(getSampleSummerRates(), getSampleWinterRates());
+
+        assertEquals(0, altWeek.getNumOfDays());
+
+        altWeek.addDay(new Day(null, "2020-03-02"));
+        altWeek.addDay(new Day(null, "2020-02-14"));
+        altWeek.addDay(new Day(null, "2020-02-14"));
+
+        assertEquals(2, altWeek.getNumOfDays());
+
+        altWeek.removeDay("02-14-2020");
+
+        assertEquals(1, altWeek.getNumOfDays());
     }
 }

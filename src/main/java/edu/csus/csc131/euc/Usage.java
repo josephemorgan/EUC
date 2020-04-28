@@ -21,12 +21,27 @@ public class Usage {
     //Copy values from double array into usage map
     public void setUsage(double[] in) {
         for(int i = 0; i < in.length; i++){
+            if(in[i] < 0){
+                System.out.println("Error: usage at hour \"" + i + "\" cannot be below zero.");
+                this.usage = initMap();
+                System.out.println("Usage has been reset to 0 for all hours.");
+                return;
+            }
             this.usage.replace(i, in[i]);
         }
     }
 
     //Place one value r at the given key i
     public void setUsage(int i, double r) {
+        if(r < 0){
+            System.out.println("Error: usage entered at hour \"" + i + "\" cannot be below zero.");
+            System.out.println("Usage change not accepted.");
+            return;
+        }
+        else if(i < 0 || i > HOURS_IN_DAY - 1){
+            System.out.println("Error: hour cannot be less than 0 or greater than 23.");
+            return;
+        }
         usage.replace(i, r);
     }
 

@@ -12,28 +12,30 @@ class ParserTest {
 
     private static final int HOURS_IN_DAY = 24;
     private static final String TEST_FILE_PATH = "import\\dailyElectricityUsage_2020_02_28.json";
+    private static final String UNIX_TEST_FILE_PATH = "import/dailyElectricityUsage_2020_02_28.json";
 
     @Test
     void getUserId() {
-        parser.fetchData(TEST_FILE_PATH);
+        parser.fetchData(UNIX_TEST_FILE_PATH);
         assertEquals(1, parser.getUserId());
     }
 
     @Test
     void getUnit() {
-        parser.fetchData(TEST_FILE_PATH);
+        parser.fetchData(UNIX_TEST_FILE_PATH);
         assertEquals("KWH", parser.getUnit());
     }
 
     @Test
     void getSiteTimeZoneId() {
-        parser.fetchData(TEST_FILE_PATH);
+        parser.fetchData(UNIX_TEST_FILE_PATH);
         assertEquals("America/Los_Angeles", parser.getSiteTimeZoneId());
     }
 
     @Test
     void getValues() {
-        parser.fetchData(TEST_FILE_PATH);
+
+        parser.fetchData(UNIX_TEST_FILE_PATH);
 
         double[] expectedValues = {
                 0.4272,
@@ -70,7 +72,7 @@ class ParserTest {
 
     @Test
     void getDate() {
-        parser.fetchData(TEST_FILE_PATH);
+        parser.fetchData(UNIX_TEST_FILE_PATH);
         LocalDate date = parser.getDate();
 
         assertEquals(2020, date.getYear());
