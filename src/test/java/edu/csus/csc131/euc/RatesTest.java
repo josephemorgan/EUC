@@ -20,6 +20,13 @@ class RatesTest {
     }
 
     @Test
+    void getRate1() {
+        double[] d = {1};
+        Rates altRates = new Rates(d);
+        assertEquals(1, altRates.getRate(0));
+    }
+
+    @Test
     void setRates() {
         int tot = 0;
         for(int i = 0; i < HOURS_IN_DAY; i++){
@@ -43,5 +50,33 @@ class RatesTest {
             tot += rates.getRate(i);
         }
         assertEquals(HOURS_IN_DAY * 2, tot);
+    }
+
+    @Test
+    void setRates2() {
+        rates.setRates(1, -1);
+        assertEquals(0, rates.getRate(1));
+    }
+
+    @Test
+    void setRates3() {
+        rates.setRates(-1, 1);
+        rates.setRates(24, 1);
+        assertEquals(0, rates.getRate(0));
+    }
+
+    @Test
+    void setRates4() {
+        double[] hours = new double[HOURS_IN_DAY];
+        for(int i = 0; i < HOURS_IN_DAY; i++){
+            hours[i] = 2;
+        }
+        hours[5] = -1;
+        rates.setRates(hours);
+        int tot = 0;
+        for(int i = 0; i < HOURS_IN_DAY; i++){
+            tot += rates.getRate(i);
+        }
+        assertEquals(0, tot);
     }
 }

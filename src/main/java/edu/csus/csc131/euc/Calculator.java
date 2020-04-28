@@ -1,6 +1,6 @@
 package edu.csus.csc131.euc;
 
-public class unwillingComplianceCalculator {
+public class Calculator {
     private static final int HOURS_IN_DAY = 24;
 
 

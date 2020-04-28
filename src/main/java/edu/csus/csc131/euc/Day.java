@@ -15,6 +15,7 @@ public class Day {
 
     public Day(Rates r) {
         rates = r;
+        this.date = LocalDate.now();
     }
 
     // Sets date to today minus offset number of days.
@@ -40,7 +41,8 @@ public class Day {
             this.date = LocalDate.parse(dayString);
             this.usage = u;
         } catch (DateTimeParseException e) {
-            throw e;
+            //throw e;  //TODO: CHECK IF IT IS OKAY TO REMOVE THIS
+            e.printStackTrace();
         }
     }
 
@@ -84,12 +86,12 @@ public class Day {
 
     // Calculates total usage for the day in kW/h.
     public double getDailyUsage() {
-        return unwillingComplianceCalculator.calculateDailyUsage(this);
+        return Calculator.calculateDailyUsage(this);
     }
 
     // Calculates total cost for the day in $ based on associated hourly usage and hourly rates.
     public double getDailyCost() {
-        return unwillingComplianceCalculator.calculateDailyCost(this);
+        return Calculator.calculateDailyCost(this);
     }
 
     @Override

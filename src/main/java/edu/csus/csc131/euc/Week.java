@@ -89,11 +89,11 @@ public class Week {
     }
 
     public double calculateTotalUsage() {
-        return unwillingComplianceCalculator.calculateTotalUsage(this);
+        return Calculator.calculateTotalUsage(this);
     }
 
     public double calculateTotalCost() {
-        return unwillingComplianceCalculator.calculateTotalCost(this);
+        return Calculator.calculateTotalCost(this);
     }
 
     public String[] getListOfDaysAsStringArray() {
