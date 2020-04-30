@@ -16,6 +16,7 @@ public class RemoveDayDialog extends JFrame implements ActionListener {
     public RemoveDayDialog(Week wk) {
         super("Choose Day to Remove");
         this.week = wk;
+        this.setResizable(false);
     }
 
     @Override

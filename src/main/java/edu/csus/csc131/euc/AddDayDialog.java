@@ -48,6 +48,7 @@ public class AddDayDialog extends JDialog implements ActionListener {
     public AddDayDialog(Frame owner, Week wk) {
         super(owner, true);
         this.week = wk;
+        this.setResizable(false);
 
         setLayout(new BorderLayout());
         setLocationRelativeTo(null);
