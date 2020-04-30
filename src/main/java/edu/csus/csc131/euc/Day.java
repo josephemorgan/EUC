@@ -41,8 +41,7 @@ public class Day {
             this.date = LocalDate.parse(dayString);
             this.usage = u;
         } catch (DateTimeParseException e) {
-            //throw e;  //TODO: CHECK IF IT IS OKAY TO REMOVE THIS
-            e.printStackTrace();
+            throw e;
         }
     }
 
