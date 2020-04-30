@@ -64,6 +64,7 @@ public class MainWindow {
 		mainwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainwindow.setLayout(null);
 		mainwindow.setSize(400, 260);
+		mainwindow.setResizable(false);
 		mainwindow.setLocationRelativeTo(null);
 
 
@@ -131,9 +132,7 @@ public class MainWindow {
 		mainwindow.add(enterHourlyRatesB);//hourly rates button added
 		enterHourlyRatesB.addActionListener(new ActionListener() { //action listener for button being clicked
 			@Override
-			public void actionPerformed(ActionEvent actionEvent) {
-			    JDialog d = new EnterRatesDialog(mainwindow, listOfDays);
-			}
+			public void actionPerformed(ActionEvent actionEvent) {JDialog d = new EnterRatesDialog(mainwindow, listOfDays);d.setResizable(false);}
 		});
 
 		comboBoxActionListener = new ActionListener() {

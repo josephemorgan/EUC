@@ -25,6 +25,7 @@ public class EnterRatesDialog extends JDialog implements ActionListener {
         super(parent, true);
         this.listOfDays = listOfDays;
         setLayout(new BorderLayout());
+        this.setResizable(false);
 
         entryPanel = new JPanel();
         bottomPanel = new JPanel();
