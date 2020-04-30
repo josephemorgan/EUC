@@ -159,7 +159,7 @@ class DayTest {
     }
 
 
-    Rates getSampleRates(){
+    public static Rates getSampleRates(){
         Rates rates = new Rates();
 
         for(int i = 0; i < HOURS_IN_DAY; i++){
@@ -169,7 +169,7 @@ class DayTest {
         return rates;
     }
 
-    double[] getSampleUsage(){
+    public static double[] getSampleUsage(){
         double[] out = {
                 0.4272,
                 0.3768,

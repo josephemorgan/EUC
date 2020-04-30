@@ -89,7 +89,7 @@ class WeekTest {
     }
 
 
-    Rates getSampleSummerRates(){
+    public static Rates getSampleSummerRates(){
         Rates rates = new Rates();
 
         for(int i = 0; i < HOURS_IN_DAY; i++){
@@ -99,7 +99,7 @@ class WeekTest {
         return rates;
     }
 
-    Rates getSampleWinterRates(){
+    public static Rates getSampleWinterRates(){
         Rates rates = new Rates();
 
         for(int i = 0; i < HOURS_IN_DAY; i++){
